@@ -3,41 +3,64 @@ const { TOKEN, PREFIX } = require("./config");
 const client = new Client({ disableMentions: "everyone" });
 
 client.on("message", msg => {
+// Fonction permettant d'exécuter des commandes via le bot
+// La syntaxe d'une commande est : c?<commande> <argument>
+// Par exemple je veux m'ajouter le rôle test : c?role test
+
   if (msg.author.bot) return;
   if (msg.content.indexOf(PREFIX) !== 0) return;
+
   const args = msg.content.slice(PREFIX.length).trim().split(/ +/g);
   const cmd = args.shift().toLowerCase();
-  if (cmd === "coucou") msg.channel.send(`Coucou c'est moi, ${client.user.username} !`);
+
   if (cmd === "repeat") {
+    // Commande pour que le bot répète ce qu'on écrit
+    
     msg.delete();
     msg.channel.send(args.join(" "));
+
   }
+
   if (cmd === "role") {
+    // Commande pour s'ajouter soi-même un rôle
+
     const role = msg.guild.roles.cache.find(r => r.name === args[0]);
     if (!role) return msg.channel.send(`Le rôle ${args[0]} n'existe pas !`);
+
     const channel = client.channels.cache.find(r => r.name === "logs");
     if (msg.member.roles.cache.find(r => r.name === args[0])) {
+
       msg.member.roles.remove(role);
       msg.delete();
       channel.send(`Le rôle ${role} a été retiré de ${msg.author}`);
+
     } else {
+
       msg.member.roles.add(role);
       msg.delete();
       channel.send(`Le rôle ${role} a été ajouté à ${msg.author}`);
+
     }
   }
+
 });
 
 client.on("guildMemberAdd", member => {
+// Fonction permettant de notifier l'arrivée d'un membre sur le serveur
+
   member.send("Bienvenue parmis les Cats !");
   const channel = client.channels.cache.find(r => r.name === "bienvenue");
   channel.send(`Coucou ${member} Bienvenue parmis les Cats !`);
+
 });
 
 client.on("guildMemberRemove", member => {
+// Fonction permettant de notifier le départ d'un membre du serveur
+
   member.send("J'espère que tu as passé un bon moment avec nous au moins... Sniff :'(");
   const channel = client.channels.cache.find(r => r.name === "bienvenue");
   channel.send(`Bye bye ${member}, j'espère que tu seras heureux dans ta nouvelle vie :slight_smile:`);
+
 });
 
 client.login(TOKEN);
