@@ -8,5 +8,25 @@
   "main": "main.js",
   "repository": "https://github.com/LeGeRyChEeSe/Catsbot.git",
   "author": "LeGeRyChEeSe <kilian.douarinou41@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-aqua": "^7.2.3"
+  },
+  "eslintConfig": {
+    "extends": "aqua/node",
+    "rules": {
+      "linebreak-style": [
+        "error",
+        "windows"
+      ],
+      "quotes": [
+        "warn",
+        "double"
+      ],
+      "indent": [
+        "error",
+         2]
+    }
+  }
 }
