@@ -7,6 +7,10 @@ client.on("message", msg => {
   const args = msg.content.split(/ +/g);
   const cmd = args.shift().toLowerCase();
   if (cmd === `${PREFIX}coucou`) msg.channel.send(`Coucou c'est moi, ${client.user.username} !`);
+  if (cmd === `${PREFIX}repeat`) {
+    msg.delete();
+    msg.channel.send(args.join(" "));
+  }
 });
 
 client.on("guildMemberAdd", member => {
