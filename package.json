@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "discord.js": "discordjs/discord.js"
+  },
+  "name": "Catsbot",
+  "version": "1.0.0",
+  "description": "Bot pour les membres du crew Cats",
+  "main": "main.js",
+  "repository": "https://github.com/LeGeRyChEeSe/Catsbot.git",
+  "author": "LeGeRyChEeSe <kilian.douarinou41@gmail.com>",
+  "license": "MIT"
+}
