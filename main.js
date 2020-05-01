@@ -11,4 +11,4 @@ client.on('message', msg => {
   if (msg.content === 'noteveryone') msg.channel.send("@everyone, but not");
 });
 
-client.login('NzA1NzA0MTMzODc3MDM5MTI0.Xqv36A.r8MZfgXEPPNyALrR3cHg1C0wSQo');
+client.login('Placeholder');
