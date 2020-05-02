@@ -12,10 +12,9 @@ const commandFiles = fs
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   client.commands.set(command.name, command);
-  console.log(client.commands);
 }
 
-client.on("message", (msg) => {
+client.on("message", async (msg) => {
   // Fonction permettant d'exécuter des commandes via le bot
   // La syntaxe d'une commande est : c?<commande> <argument>
   // Par exemple je veux m'ajouter le rôle test : c?role test
@@ -50,11 +49,10 @@ client.on("guildMemberRemove", (member) => {
 client.login(TOKEN);
 
 client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  console.log("Je suis prêt !");
   const channel = client.channels.cache.find((r) => r.name === "test-catsbot");
-  channel.send(`:green_circle: ${client.user.username} est connecté !`);
+  channel.send(`${client.user.username} est connecté !`);
 });
 
 client.on("error", console.error);
 client.on("warn", console.warn);
-client.on("debug", console.log);

@@ -1,6 +1,10 @@
 {
   "dependencies": {
-    "discord.js": "discordjs/discord.js"
+    "discord.js": "github:discordjs/discord.js",
+    "ffmpeg-static": "^4.2.0",
+    "opusscript": "0.0.7",
+    "ytdl-core": "^2.1.1",
+    "ytdl-core-discord": "amishshah/ytdl-core-discord"
   },
   "name": "Catsbot",
   "version": "1.0.0",
@@ -28,7 +32,9 @@
         "error",
         2
       ],
-      "arrow-parens": "off"
+      "arrow-parens": "off",
+      "curly": "off",
+      "comma-dangle": "off"
     }
   }
 }

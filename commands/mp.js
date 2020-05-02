@@ -15,7 +15,7 @@ module.exports = {
           `${search_user} est demandé dans le canal **${channel}**`
         );
         search_user.send(
-          `Hello ${search_user} ! ${msg.author} te réclame sur le serveur __**${msg.guild.name}**__ dans le canal **${channel}** !`
+          `Hello ${search_user} ! ${msg.author} te réclame sur le serveur __**${msg.guild.name}**__ dans le canal **#${channel}** !`
         );
       }
     }
