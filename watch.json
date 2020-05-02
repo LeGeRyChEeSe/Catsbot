@@ -3,8 +3,8 @@
     "include": ["^package\\.json$", "^\\.env$"]
   },
   "restart": {
-    "exlude": ["^public/", "^dist/"],
-    "include": ["\\js$", "\\.json"]
+    "exclude": ["^public/", "^dist/"],
+    "include": ["\\.js$", "\\.json"]
   },
   "throttle": 900000
 }
