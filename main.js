@@ -44,10 +44,16 @@ client.on("message", msg => {
   }
 
   if (cmd === "mp") {
-    const user = msg.mentions.users.first();
     const channel = msg.channel.name;
-    msg.delete();
-    msg.channel.send(`${user.tag} est demandé dans le canal ${channel}`);
+    for (let mention = 0; mention < args.length; mention++) {
+      if (args[mention].startsWith("<@!")) {
+        const user = args[mention];
+        const search_user = msg.channel.members.get(user.substring(3, user.length - 1));
+        msg.delete();
+        msg.channel.send(`${search_user} est demandé dans le canal **${channel}**`);
+        search_user.send(`Hello ${search_user} ! ${msg.author} te réclame sur le serveur __**${msg.guild.name}**__ dans le canal **${channel}** !`);
+      }
+    }
   }
 
 });
