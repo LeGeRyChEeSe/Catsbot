@@ -1,5 +1,5 @@
 const { Client } = require("discord.js");
-const { TOKEN, PREFIX } = require("./config");
+const { TOKEN, PREFIX, BIENVENUE } = require("./config");
 const client = new Client({ disableMentions: "everyone" });
 
 client.on("message", msg => {
@@ -13,7 +13,7 @@ client.on("message", msg => {
   const args = msg.content.slice(PREFIX.length).trim().split(/ +/g);
   const cmd = args.shift().toLowerCase();
 
-  if (cmd === "repeat") {
+  if (cmd === "me") {
     // Commande pour que le bot répète ce qu'on écrit
     
     msg.delete();
@@ -27,7 +27,7 @@ client.on("message", msg => {
     const role = msg.guild.roles.cache.find(r => r.name === args[0]);
     if (!role) return msg.channel.send(`Le rôle ${args[0]} n'existe pas !`);
 
-    const channel = client.channels.cache.find(r => r.name === "logs");
+    const channel = client.channels.cache.find(r => r.name === "test-catsbot");
     if (msg.member.roles.cache.find(r => r.name === args[0])) {
 
       msg.member.roles.remove(role);
@@ -43,13 +43,20 @@ client.on("message", msg => {
     }
   }
 
+  if (cmd === "mp") {
+    const user = msg.mentions.users.first();
+    const channel = msg.channel.name;
+    msg.delete();
+    msg.channel.send(`${user.tag} est demandé dans le canal ${channel}`);
+  }
+
 });
 
 client.on("guildMemberAdd", member => {
 // Fonction permettant de notifier l'arrivée d'un membre sur le serveur
 
   member.send("Bienvenue parmis les Cats !");
-  const channel = client.channels.cache.find(r => r.name === "bienvenue");
+  const channel = client.channels.cache.find(r => r.name === BIENVENUE);
   channel.send(`Coucou ${member} Bienvenue parmis les Cats !`);
 
 });
@@ -57,15 +64,20 @@ client.on("guildMemberAdd", member => {
 client.on("guildMemberRemove", member => {
 // Fonction permettant de notifier le départ d'un membre du serveur
 
-  member.send("J'espère que tu as passé un bon moment avec nous au moins... Sniff :'(");
-  const channel = client.channels.cache.find(r => r.name === "bienvenue");
+  member.send("J'espère que tu as passé un bon moment avec nous au moins... Sniff :sob:");
+  const channel = client.channels.cache.find(r => r.name === BIENVENUE);
   channel.send(`Bye bye ${member}, j'espère que tu seras heureux dans ta nouvelle vie :slight_smile:`);
 
 });
 
 client.login(TOKEN);
 
-client.on("ready", () => console.log(`Logged in as ${client.user.tag}!`));
+client.on("ready", () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+  const channel = client.channels.cache.find(r => r.name === "test-catsbot");
+  channel.send(`:green_circle: ${client.user.username} est connecté !`);
+});
+
 client.on("error", console.error);
 client.on("warn", console.warn);
 client.on("debug", console.log);
