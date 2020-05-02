@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { Client, Collection } = require("discord.js");
 const PREFIX = process.env.PREFIX;
-const BIENVENUE = process.env.BIENVENU;
+const BIENVENUE = process.env.BIENVENUE;
 
 const client = new Client({ disableMentions: "everyone" });
 client.commands = new Collection();
