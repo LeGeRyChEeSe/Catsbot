@@ -27,7 +27,8 @@
       "indent": [
         "error",
         2
-      ]
+      ],
+      "arrow-parens": "off"
     }
   }
 }

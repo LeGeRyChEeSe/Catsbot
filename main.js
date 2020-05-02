@@ -5,7 +5,9 @@ const { TOKEN, PREFIX, BIENVENUE } = require("./config");
 const client = new Client({ disableMentions: "everyone" });
 client.commands = new Collection();
 
-const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
+const commandFiles = fs
+  .readdirSync("./commands")
+  .filter((file) => file.endsWith(".js"));
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
@@ -13,42 +15,43 @@ for (const file of commandFiles) {
   console.log(client.commands);
 }
 
-client.on("message", msg => {
-// Fonction permettant d'exécuter des commandes via le bot
-// La syntaxe d'une commande est : c?<commande> <argument>
-// Par exemple je veux m'ajouter le rôle test : c?role test
+client.on("message", (msg) => {
+  // Fonction permettant d'exécuter des commandes via le bot
+  // La syntaxe d'une commande est : c?<commande> <argument>
+  // Par exemple je veux m'ajouter le rôle test : c?role test
   if (!msg.content.startsWith(PREFIX) || msg.author.bot) return;
   const args = msg.content.slice(PREFIX.length).trim().split(/ +/g);
   const cmd = args.shift().toLowerCase();
 
   if (!client.commands.has(cmd)) return;
   client.commands.get(cmd).execute(msg, args, client);
-  
 });
 
-client.on("guildMemberAdd", member => {
-// Fonction permettant de notifier l'arrivée d'un membre sur le serveur
+client.on("guildMemberAdd", (member) => {
+  // Fonction permettant de notifier l'arrivée d'un membre sur le serveur
 
   member.send("Bienvenue parmis les Cats !");
-  const channel = client.channels.cache.find(r => r.name === BIENVENUE);
+  const channel = client.channels.cache.find((r) => r.name === BIENVENUE);
   channel.send(`Coucou ${member} Bienvenue parmis les Cats !`);
-
 });
 
-client.on("guildMemberRemove", member => {
-// Fonction permettant de notifier le départ d'un membre du serveur
+client.on("guildMemberRemove", (member) => {
+  // Fonction permettant de notifier le départ d'un membre du serveur
 
-  member.send("J'espère que tu as passé un bon moment avec nous au moins... Sniff :sob:");
-  const channel = client.channels.cache.find(r => r.name === BIENVENUE);
-  channel.send(`Bye bye ${member}, j'espère que tu seras heureux dans ta nouvelle vie :slight_smile:`);
-
+  member.send(
+    "J'espère que tu as passé un bon moment avec nous au moins... Sniff :sob:"
+  );
+  const channel = client.channels.cache.find((r) => r.name === BIENVENUE);
+  channel.send(
+    `Bye bye ${member}, j'espère que tu seras heureux dans ta nouvelle vie :slight_smile:`
+  );
 });
 
 client.login(TOKEN);
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  const channel = client.channels.cache.find(r => r.name === "test-catsbot");
+  const channel = client.channels.cache.find((r) => r.name === "test-catsbot");
   channel.send(`:green_circle: ${client.user.username} est connecté !`);
 });
 
