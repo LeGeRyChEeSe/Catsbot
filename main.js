@@ -10,7 +10,7 @@ const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith("
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   client.commands.set(command.name, command);
-  console.log(client.commands.get());
+  console.log(client.commands);
 }
 
 client.on("message", msg => {
@@ -22,7 +22,7 @@ client.on("message", msg => {
   const cmd = args.shift().toLowerCase();
 
   if (!client.commands.has(cmd)) return;
-  client.commands.get(cmd).execute(msg, args);
+  client.commands.get(cmd).execute(msg, args, client);
   
 });
 

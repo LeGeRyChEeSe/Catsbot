@@ -1,7 +1,7 @@
 module.exports = {
   name: "role",
   description: "Permet de s'attribuer un rôle ou de le retirer si on a déjà ce rôle.",
-  execute(msg, args) {
+  execute(msg, args, client) {
     const role = msg.guild.roles.cache.find(r => r.name === args[0]);
     if (!role) return msg.channel.send(`Le rôle ${args[0]} n'existe pas !`);
 
