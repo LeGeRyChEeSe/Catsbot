@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { Client, Collection } = require("discord.js");
-const { TOKEN, PREFIX, BIENVENUE } = require("./config");
+const PREFIX = process.env.PREFIX;
+const BIENVENUE = process.env.BIENVENU;
 
 const client = new Client({ disableMentions: "everyone" });
 client.commands = new Collection();
@@ -14,7 +15,7 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
 }
 
-client.on("message", async (msg) => {
+client.on("message", (msg) => {
   // Fonction permettant d'exécuter des commandes via le bot
   // La syntaxe d'une commande est : c?<commande> <argument>
   // Par exemple je veux m'ajouter le rôle test : c?role test
@@ -46,7 +47,7 @@ client.on("guildMemberRemove", (member) => {
   );
 });
 
-client.login(TOKEN);
+client.login(process.env.TOKEN);
 
 client.on("ready", () => {
   console.log("Je suis prêt !");
