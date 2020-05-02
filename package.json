@@ -4,13 +4,16 @@
     "ffmpeg-static": "^4.2.0",
     "opusscript": "0.0.7",
     "ytdl-core": "^2.1.1",
-    "ytdl-core-discord": "amishshah/ytdl-core-discord"
+    "ytdl-core-discord": "github:amishshah/ytdl-core-discord"
   },
   "name": "Catsbot",
   "version": "1.0.0",
   "description": "Bot pour les membres du crew Cats",
   "main": "main.js",
-  "repository": "https://github.com/LeGeRyChEeSe/Catsbot.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeGeRyChEeSe/Catsbot.git"
+  },
   "author": "LeGeRyChEeSe <kilian.douarinou41@gmail.com>",
   "license": "MIT",
   "devDependencies": {
@@ -36,5 +39,13 @@
       "curly": "off",
       "comma-dangle": "off"
     }
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/LeGeRyChEeSe/Catsbot/issues"
+  },
+  "homepage": "https://github.com/LeGeRyChEeSe/Catsbot#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": []
 }
