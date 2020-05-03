@@ -1,4 +1,4 @@
-const { Util } = require('discord.js');
+const { Util } = require("discord.js");
 const ytdl = require("ytdl-core");
 
 module.exports = {
