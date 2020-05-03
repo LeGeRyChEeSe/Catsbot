@@ -1,9 +1,11 @@
 const fs = require("fs");
-const { Client, Collection } = require("discord.js");
-const { TOKEN, PREFIX, BIENVENUE } = process.env;
-
-const client = new Client({ disableMentions: "everyone" });
-client.commands = new Collection();
+const { Collection } = require("discord.js");
+const { TOKEN, PREFIX, BIENVENUE } = "./config.js";
+const MusicClient = require("./assets/struct/Client");
+const client = new MusicClient({
+  token: process.env.TOKEN,
+  prefix: process.env.PREFIX,
+});
 
 const commandFiles = fs
   .readdirSync("./commands")
@@ -18,6 +20,7 @@ client.on("message", async (msg) => {
   // Fonction permettant d'exécuter des commandes via le bot
   // La syntaxe d'une commande est : c?<commande> <argument>
   // Par exemple je veux m'ajouter le rôle test : c?role test
+
   if (!msg.content.startsWith(PREFIX) || msg.author.bot) return;
   const args = msg.content.slice(PREFIX.length).trim().split(/ +/g);
   const cmd = args.shift().toLowerCase();
@@ -46,7 +49,7 @@ client.on("guildMemberRemove", (member) => {
   );
 });
 
-client.login(TOKEN);
+client.login(client.token);
 
 client.on("ready", () => {
   console.log("Je suis prêt !");
