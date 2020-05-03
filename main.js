@@ -1,7 +1,6 @@
 const fs = require("fs");
 const { Client, Collection } = require("discord.js");
-const PREFIX = process.env.PREFIX;
-const BIENVENUE = process.env.BIENVENUE;
+const { TOKEN, PREFIX, BIENVENUE } = process.env;
 
 const client = new Client({ disableMentions: "everyone" });
 client.commands = new Collection();
@@ -47,7 +46,7 @@ client.on("guildMemberRemove", (member) => {
   );
 });
 
-client.login(process.env.TOKEN);
+client.login(TOKEN);
 
 client.on("ready", () => {
   console.log("Je suis prêt !");

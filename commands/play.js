@@ -3,7 +3,7 @@ const ytdl = require("ytdl-core");
 module.exports = {
   name: "play",
   description: "Permet de lancer une musique sur YouTube via un lien",
-  async execute(msg, args) {
+  execute(msg, args) {
     if (!msg.member.voice.channel)
       return msg.channel.send("Connectez vous à un salon vocal !");
     if (msg.guild.me.voice.channel)
