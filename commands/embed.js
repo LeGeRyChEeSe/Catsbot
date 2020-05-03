@@ -18,7 +18,7 @@ module.exports = {
       .setThumbnail(user.displayAvatarURL())
       .addFields(
         {
-          name: "Date depuis que son compte fut créé :",
+          name: "Date de création du compte:",
           value: `${user.createdAt.getDate()}/${
             user.createdAt.getMonth() + 1
           }/${user.createdAt.getFullYear()}`,
