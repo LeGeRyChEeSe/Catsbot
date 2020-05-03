@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { Collection } = require("discord.js");
+const { TOKEN, PREFIX, BIENVENUE } = "./config.js";
 const MusicClient = require("./assets/struct/Client");
 const client = new MusicClient({
   token: process.env.TOKEN,
@@ -57,6 +58,7 @@ client.on("guildMemberRemove", (member) => {
 });
 
 client.login(client.config.token);
+
 
 client.on("ready", () => {
   console.log("Je suis prêt !");
