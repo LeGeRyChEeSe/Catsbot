@@ -14,7 +14,7 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
 }
 
-client.on("message", (msg) => {
+client.on("message", async (msg) => {
   // Fonction permettant d'exécuter des commandes via le bot
   // La syntaxe d'une commande est : c?<commande> <argument>
   // Par exemple je veux m'ajouter le rôle test : c?role test
