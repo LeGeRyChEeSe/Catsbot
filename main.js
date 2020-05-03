@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { Client, Collection } = require("discord.js");
 const { TOKEN, PREFIX, BIENVENUE } = process.env;
+const { join } = require('path');
 
 const client = new Client({ disableMentions: "everyone" });
 client.commands = new Collection();
