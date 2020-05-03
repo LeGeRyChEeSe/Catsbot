@@ -2,39 +2,38 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "embed",
-  description: "Renvoie un embed",
+  description: "Renvoie un embed d'une personne mentionnée",
+  help:
+    "Cet embed permet d'afficher un petit encadré décrivant plusieurs informations concernant la personne mentionnée",
+  syntaxe: "c?embed <mention>",
   execute(msg, args, client) {
-    const user = msg.mentions.users.first();
+    const user = msg.mentions.members.first();
     let status_user = "";
-    if (user.presence.status === "offline") {
-      status_user = " :red_circle: ";
-    } else {
+    if (user.presence.status === "offline") status_user = " :white_circle: ";
+    else if (user.presence.status === "online")
       status_user = " :green_circle: ";
-    }
+    else if (user.presence.status === "idle") status_user = " :orange_circle: ";
+    else if (user.presence.status === "dnd") status_user = " :red_circle: ";
     msg.delete();
     const embed = new MessageEmbed()
-      .setTitle(status_user + user.username + status_user)
-      .setDescription(user.tag)
-      .setThumbnail(user.displayAvatarURL())
+      .setTitle(status_user + user.user.username + status_user)
+      .setColor(user.displayHexColor)
+      .setDescription(user.user.tag)
+      .setThumbnail(user.user.displayAvatarURL())
       .addFields(
         {
-          name: "Date de création du compte:",
-          value: `${user.createdAt.getDate()}/${
-            user.createdAt.getMonth() + 1
-          }/${user.createdAt.getFullYear()}`,
-          inline: true,
+          name: `Date d'arrivée dans le serveur ${user.guild.name}:`,
+          value: `${user.joinedAt.getDate()}/${user.joinedAt.getMonth() +
+            1}/${user.joinedAt.getFullYear()}`
         },
         {
-          name: " soit",
-          value: `${Math.round(
-            (Date.now() - user.createdTimestamp) / 86400000
-          )} jours d'activité`,
-          inline: true,
+          name: "Son/Ses rôle(s) :",
+          value: user.roles.cache.array()
         }
       )
       .setTimestamp()
       .setFooter(user.presence.status);
 
     msg.channel.send(embed);
-  },
+  }
 };
