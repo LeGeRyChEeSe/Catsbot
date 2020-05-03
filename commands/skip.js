@@ -1,6 +1,9 @@
 module.exports = {
   name: "skip",
   description: "Permet de passer la piste actuelle.",
+  help:
+    "Joue la piste suivante en stoppant la piste actuelle. Celle-ci est donc supprimée de la liste d'attente.",
+  syntaxe: "c?skip",
   cooldown: 5,
   execute(message) {
     const { channel } = message.member.voice;
@@ -12,5 +15,5 @@ module.exports = {
     if (!serverQueue)
       return message.channel.send("Il n'y a aucune piste à passer.");
     serverQueue.connection.dispatcher.end("La piste suivante va être jouée.");
-  },
+  }
 };

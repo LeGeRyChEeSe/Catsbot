@@ -4,6 +4,9 @@ const ytdl = require("ytdl-core");
 module.exports = {
   name: "play",
   description: "Permet de lancer une musique sur YouTube via un lien",
+  help:
+    "Veuillez indiquer un lien YouTube valide vers une musique. Ne prend pour l'instant en compte que le flux audio.",
+  syntaxe: "c?play <URL>",
   async execute(msg, args) {
     const { channel } = msg.member.voice;
     if (!channel)
@@ -25,7 +28,7 @@ module.exports = {
     const song = {
       id: songInfo.video_id,
       title: Util.escapeMarkdown(songInfo.title),
-      url: songInfo.video_url,
+      url: songInfo.video_url
     };
 
     if (serverQueue) {
@@ -40,12 +43,12 @@ module.exports = {
       connection: null,
       songs: [],
       volume: 2,
-      playing: true,
+      playing: true
     };
     msg.client.queue.set(msg.guild.id, queueConstruct);
     queueConstruct.songs.push(song);
 
-    const play = async (song) => {
+    const play = async song => {
       const queue = msg.client.queue.get(msg.guild.id);
       if (!song) {
         queue.voiceChannel.leave();
@@ -59,7 +62,7 @@ module.exports = {
           queue.songs.shift();
           play(queue.songs[0]);
         })
-        .on("error", (error) => console.error(error));
+        .on("error", error => console.error(error));
       dispatcher.setVolumeLogarithmic(queue.volume / 5);
       queue.textChannel.send(`🎶 Début de la piste: **${song.title}**`);
     };
@@ -74,5 +77,5 @@ module.exports = {
       await channel.leave();
       return msg.channel.send(`Je ne peux pas rejoindre le canal: ${error}`);
     }
-  },
+  }
 };

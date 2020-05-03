@@ -1,6 +1,9 @@
 module.exports = {
   name: "stop",
   description: "Permet de stopper la musique.",
+  help:
+    "Arrête la piste actuelle, supprime toutes les musiques de la liste d'attente et déconnecte le bot du canal vocal.",
+  syntaxe: "c?stop",
   cooldown: 5,
   execute(message) {
     const { channel } = message.member.voice;
@@ -12,5 +15,5 @@ module.exports = {
     if (!serverQueue) return message.channel.send("Aucune musique en cours.");
     serverQueue.songs = [];
     serverQueue.connection.dispatcher.end("La musique a été coupée !");
-  },
+  }
 };
