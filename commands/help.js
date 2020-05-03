@@ -10,8 +10,6 @@ module.exports = {
       msg.delete();
       tableau.push(`***c?${cmd[0]}*** : *${cmd[1].description}*`);
     }
-    
     msg.channel.send(`${tableau.join("\n\n").concat(" :\n\t")}`);
-
   },
 };

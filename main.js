@@ -59,7 +59,6 @@ client.on("guildMemberRemove", (member) => {
 
 client.login(client.config.token);
 
-
 client.on("ready", () => {
   console.log("Je suis prêt !");
   const channel = client.channels.cache.find((r) => r.name === "test-catsbot");
