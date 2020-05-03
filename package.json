@@ -10,6 +10,7 @@
   "version": "1.0.0",
   "description": "Bot pour les membres du crew Cats",
   "main": "main.js",
+  "engines": { "node": "12.8.1" },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LeGeRyChEeSe/Catsbot.git"
@@ -45,7 +46,9 @@
   },
   "homepage": "https://github.com/LeGeRyChEeSe/Catsbot#readme",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+
   },
   "keywords": []
 }
