@@ -9,13 +9,11 @@ module.exports = {
     if (msg.guild.me.voice.channel)
       return msg.channel.send("Je ne suis pas connecté à un salon vocal !");
     if (!args[0]) return msg.channel.send("Merci de préciser un lien YouTube");
-    
+
     const connection = await msg.member.voice.channel.join();
-    const dispatcher = connection.play('./assets/musique/musique.mp3');
-      
-    
+    const dispatcher = connection.play("./assets/musiques/musique.mp3");
+
     //const dispatcher = connection.play(ytdl(args[0], { filter: 'audioonly' }));
     //msg.channel.send("Chanson ajoutée.");
-    }
-  }
-    
+  },
+};
