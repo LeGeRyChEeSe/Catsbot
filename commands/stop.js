@@ -3,7 +3,7 @@ module.exports = {
   description: "Permet de stopper la musique.",
   help:
     "Arrête la piste actuelle, supprime toutes les musiques de la liste d'attente et déconnecte le bot du canal vocal.",
-  syntaxe: "c?stop",
+  syntaxe: "stop",
   cooldown: 5,
   execute(message) {
     const { channel } = message.member.voice;

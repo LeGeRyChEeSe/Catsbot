@@ -5,7 +5,7 @@ module.exports = {
   description: "Renvoie un embed d'une personne mentionnée",
   help:
     "Cet embed permet d'afficher un petit encadré décrivant plusieurs informations concernant la personne mentionnée",
-  syntaxe: "c?embed <mention>",
+  syntaxe: "embed <mention>",
   execute(msg, args, client) {
     const user = msg.mentions.members.first();
     let status_user = "";

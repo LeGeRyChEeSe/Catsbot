@@ -3,7 +3,7 @@ module.exports = {
   description: "Permet de modifier le volume de la piste.",
   help:
     "Modifier le volume en passant en paramètre de la commande le volume entre 0 et 100",
-  syntaxe: "c?volume <volume>",
+  syntaxe: "volume <volume>",
   cooldown: 5,
   execute(message, args) {
     const { channel } = message.member.voice;
