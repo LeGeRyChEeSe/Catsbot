@@ -3,9 +3,9 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
   name: "help",
   description:
-    "Renvoie la liste de toutes les commandes disponibles sur le bot",
+    "Renvoi la liste de toutes les commandes disponibles sur le bot",
   help:
-    "c?help *<commande>* renvoie les informations supplémentaires de la commande passée en paramètre de c?help.",
+    "c?help *<commande>* renvoi les informations supplémentaires de la commande passée en paramètre de c?help.",
   syntaxe: "help <commande>",
   execute(msg, args, client) {
     const tableau = [];
@@ -28,25 +28,34 @@ module.exports = {
         }
       }
     }
-    for (const cmd of client.commands) {
-      msg.delete();
-      tableau.push(
-        `**\`${client.config.prefix}${cmd[1].name}\`** : *${cmd[1].description}*`
-      );
-    }
+
+    msg.delete();
 
     const embed = new MessageEmbed()
       .setTitle("__**HELP**__")
+      .setAuthor(client.user.username)
       .setColor("RANDOM")
-      .setDescription("*Liste non exhaustive des commandes du bot :*")
+      .setDescription("**Liste non exhaustive des commandes du bot :**")
       .setThumbnail(client.user.displayAvatarURL())
-      .addField("Différentes commandes :", tableau.join("\n\n").concat(" :"))
-      .addField(
-        "Pour plus d'informations sur une commande :",
-        `*Tapez par exemple* **\`${client.config.prefix}help play\`** *pour obtenir des informations supplémentaires sur la commande play.*`
-      )
       .setTimestamp()
-      .setFooter(client.user.username);
+      .setFooter(
+        `${msg.guild.members.resolve("440141443877830656").displayName} (${
+          msg.guild.members.resolve("440141443877830656").presence.status
+        })`
+      );
+
+    for (const cmd of client.commands) {
+      const commandName = client.config.prefix + cmd[1].name;
+      embed.addField(
+        `**${commandName}**`,
+        `*${cmd[1].description}*\n`
+      );
+    }
+
+    embed.addField(
+      "Pour plus d'informations sur une commande :",
+      `*Tapez par exemple* **\`${client.config.prefix}help play\`** *pour obtenir des informations supplémentaires sur la commande play.*`
+    );
 
     return msg.channel.send(embed);
   }

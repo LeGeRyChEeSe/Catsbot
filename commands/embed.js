@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "embed",
-  description: "Renvoie un embed d'une personne mentionnée",
+  description: "Renvoi un embed d'une personne mentionnée",
   help:
     "Cet embed permet d'afficher un petit encadré décrivant plusieurs informations concernant la personne mentionnée",
   syntaxe: "embed <mention>",
