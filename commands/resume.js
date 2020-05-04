@@ -3,7 +3,7 @@ module.exports = {
   description: "Permet de reprendre le lecture de la piste.",
   help:
     "Permet de relancer la lecture de la piste audio si le bot est présent dans votre canal vocal.",
-  syntaxe: "c?resume",
+  syntaxe: "resume",
   cooldown: 5,
   execute(message) {
     const serverQueue = message.client.queue.get(message.guild.id);

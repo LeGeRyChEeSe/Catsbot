@@ -3,7 +3,7 @@ module.exports = {
   description: "Permet d'afficher la liste d'attente des pistes",
   help:
     "Affiche la liste courante des prochaines pistes jouées dans le canal textuel. Affiche le lien YouTube de la piste en cours de lecture.",
-  syntaxe: "c?queue",
+  syntaxe: "queue",
   cooldown: 5,
   execute(message) {
     const serverQueue = message.client.queue.get(message.guild.id);

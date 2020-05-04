@@ -3,7 +3,7 @@ module.exports = {
   description: "Permet de passer la piste actuelle.",
   help:
     "Joue la piste suivante en stoppant la piste actuelle. Celle-ci est donc supprimée de la liste d'attente.",
-  syntaxe: "c?skip",
+  syntaxe: "skip",
   cooldown: 5,
   execute(message) {
     const { channel } = message.member.voice;

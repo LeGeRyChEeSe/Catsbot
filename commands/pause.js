@@ -3,7 +3,7 @@ module.exports = {
   description: "Permet de mettre en pause la piste actuelle.",
   help:
     "Permet de mettre en pause le lecteur sans que le bot ne quitte le canal.",
-  syntaxe: "c?pause",
+  syntaxe: "pause",
   cooldown: 5,
   execute(message) {
     const serverQueue = message.client.queue.get(message.guild.id);

@@ -6,7 +6,7 @@ module.exports = {
   description: "Permet de lancer une musique sur YouTube via un lien",
   help:
     "Veuillez indiquer un lien YouTube valide vers une musique. Ne prend pour l'instant en compte que le flux audio.",
-  syntaxe: "c?play <URL>",
+  syntaxe: "play <URL>",
   async execute(msg, args) {
     const { channel } = msg.member.voice;
     if (!channel)
