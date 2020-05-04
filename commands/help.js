@@ -32,10 +32,10 @@ module.exports = {
     msg.delete();
 
     const embed = new MessageEmbed()
-      .setTitle("__**HELP**__")
+      .setTitle("**HELP**")
       .setAuthor(client.user.username)
       .setColor("RANDOM")
-      .setDescription("**Liste non exhaustive des commandes du bot :**")
+      .setDescription("__**Liste non exhaustive des commandes du bot :**__")
       .setThumbnail(client.user.displayAvatarURL())
       .setTimestamp()
       .setFooter(
@@ -47,7 +47,7 @@ module.exports = {
     for (const cmd of client.commands) {
       const commandName = client.config.prefix + cmd[1].name;
       embed.addField(
-        `**${commandName}**`,
+        `**\`${commandName}\`**`,
         `*${cmd[1].description}*\n`
       );
     }

@@ -21,7 +21,7 @@ client.on("message", async msg => {
   // La syntaxe d'une commande est : c?<commande> <argument>
   // Par exemple je veux m'ajouter le rôle test : c?role test
 
-  if (!msg.content.startsWith(client.config.prefix) || msg.author.bot) return;
+  if (!msg.content.toLowerCase().startsWith(client.config.prefix) || msg.author.bot) return;
   const args = msg.content
     .slice(client.config.prefix.length)
     .trim()
@@ -62,8 +62,6 @@ client.login(client.config.token);
 
 client.on("ready", () => {
   console.log("Je suis prêt !");
-  const channel = client.channels.cache.find(r => r.name === "test-catsbot");
-  channel.send(`${client.user.username} est connecté !`);
 });
 
 client.on("error", console.error);

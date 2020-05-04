@@ -14,6 +14,8 @@ module.exports = {
     const serverQueue = message.client.queue.get(message.guild.id);
     if (!serverQueue)
       return message.channel.send("Il n'y a aucune piste à passer.");
-    serverQueue.connection.dispatcher.end("La piste suivante va être jouée.");
+    serverQueue.connection.dispatcher.end(
+      "🎶 La piste suivante va être jouée. 🎶"
+    );
   }
 };
