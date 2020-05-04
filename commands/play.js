@@ -2,11 +2,11 @@ const { Util } = require("discord.js");
 const ytdl = require("ytdl-core");
 
 module.exports = {
-  name: "play",
+  name: "p",
   description: "Permet de lancer une musique sur YouTube via un lien",
   help:
     "Veuillez indiquer un lien YouTube valide vers une musique. Ne prend pour l'instant en compte que le flux audio.",
-  syntaxe: "play <URL>",
+  syntaxe: "p <URL>",
   async execute(msg, args) {
     const { channel } = msg.member.voice;
     if (!channel)
@@ -27,14 +27,20 @@ module.exports = {
     const songInfo = await ytdl.getInfo(args[0].replace(/<(.+)>/g, "$1"));
     const song = {
       id: songInfo.video_id,
-      title: Util.escapeMarkdown(songInfo.title),
-      url: songInfo.video_url
+      title: songInfo.title,
+      url: songInfo.video_url,
+      image: songInfo.player_response.videoDetails.thumbnail.thumbnails,
+      description: songInfo.description,
+      title_url: songInfo.iv_invideo_url,
+      author: songInfo.author
     };
+    
+    console.log(song);
 
     if (serverQueue) {
       serverQueue.songs.push(song);
       console.log(serverQueue.songs);
-      return msg.channel.send(`✅ **${song.title}** a été ajouté à la liste !`);
+      return msg.channel.send(`✅🎶 **${song.title}** a été ajouté à la liste ! 🎶`);
     }
 
     const queueConstruct = {
@@ -64,7 +70,7 @@ module.exports = {
         })
         .on("error", error => console.error(error));
       dispatcher.setVolumeLogarithmic(queue.volume / 5);
-      queue.textChannel.send(`🎶 Début de la piste: **${song.title}**`);
+      queue.textChannel.send(`🎶 Début de la piste: **${song.title}** 🎶`);
     };
 
     try {

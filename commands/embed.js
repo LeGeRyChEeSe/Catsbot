@@ -2,9 +2,9 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "embed",
-  description: "Renvoi un embed d'une personne mentionnée",
+  description: "Renvoi la fiche d'une personne mentionnée",
   help:
-    "Cet embed permet d'afficher un petit encadré décrivant plusieurs informations concernant la personne mentionnée",
+    "Cette fiche permet d'afficher un petit encadré décrivant plusieurs informations concernant la personne mentionnée",
   syntaxe: "embed <mention>",
   execute(msg, args, client) {
     const user = msg.mentions.members.first();

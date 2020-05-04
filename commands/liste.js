@@ -1,9 +1,9 @@
 module.exports = {
-  name: "queue",
+  name: "liste",
   description: "Permet d'afficher la liste d'attente des pistes",
   help:
     "Affiche la liste courante des prochaines pistes jouées dans le canal textuel. Affiche le lien YouTube de la piste en cours de lecture.",
-  syntaxe: "queue",
+  syntaxe: "liste",
   cooldown: 5,
   execute(message) {
     const serverQueue = message.client.queue.get(message.guild.id);
@@ -11,7 +11,7 @@ module.exports = {
     return message.channel.send(`
 __**Liste d'attente des pistes:**__
 ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
-**Piste en cours:** ${serverQueue.songs[0].url}
+**Piste en cours:** ${serverQueue.songs[0].title}
 		`);
   }
 };
