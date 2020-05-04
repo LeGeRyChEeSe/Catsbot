@@ -1,13 +1,18 @@
-const { Util } = require("discord.js");
+const { Util, MessageEmbed } = require("discord.js");
 const ytdl = require("ytdl-core");
+const ytsr = require("ytsr");
 
 module.exports = {
   name: "p",
-  description: "Permet de lancer une musique sur YouTube via un lien",
+  description: "Permet de lancer une musique sur YouTube soit via un lien, soit par recherche.",
   help:
-    "Veuillez indiquer un lien YouTube valide vers une musique. Ne prend pour l'instant en compte que le flux audio.",
-  syntaxe: "p <URL>",
-  async execute(msg, args) {
+    `Veuillez indiquer un lien YouTube valide vers une musique, ou indiquez simplement le contenu de votre recherche YouTube de cette manière :\n\`c?p snoop dog\`
+puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` pour la 1ère piste de la liste, \`c?p 2\` pour la 2e, etc.`,
+  syntaxe: "p <URL> ou <search>",
+  async execute(msg, args, client) {
+    msg.delete();
+    let choix = "";
+    let songInfo = null;
     const { channel } = msg.member.voice;
     if (!channel)
       return msg.channel.send(
@@ -22,9 +27,37 @@ module.exports = {
       return msg.channel.send(
         "Je n'ai pas la permission de parler dans ce canal."
       );
-
     const serverQueue = msg.client.queue.get(msg.guild.id);
-    const songInfo = await ytdl.getInfo(args[0].replace(/<(.+)>/g, "$1"));
+
+    if (!(await ytdl.validateURL(args.join(" ")))) {
+      songInfo = await ytsr(args.join(" "), { limit: 5 });
+
+      const embed = new MessageEmbed()
+        .setAuthor("Playlist")
+        .setTitle(songInfo.query)
+        .setThumbnail(client.user.displayAvatarURL())
+        .setColor("RANDOM")
+        .setTimestamp()
+        .setFooter(client.user.username);
+
+      for (let video = 0; video < 5; video++) {
+        if (!songInfo.items[video]) return;
+        embed.addField(
+          `**${video + 1}** - ${songInfo.items[video].title}`,
+          songInfo.items[video].link
+        );
+        if (msg.client.user.lastMessage && args[0] === (video + 1).toString()) {
+          choix = msg.client.user.lastMessage.embeds[0].fields[video].value;
+          msg.client.user.lastMessage.delete();
+        }
+      }
+
+      if (!choix) return msg.channel.send(embed);
+    }
+
+    if (!choix) songInfo = await ytdl.getInfo(args[0].replace(/<(.+)>/g, "$1"));
+    else songInfo = await ytdl.getInfo(choix.replace(/<(.+)>/g, "$1"));
+
     const song = {
       id: songInfo.video_id,
       title: songInfo.title,
@@ -34,13 +67,12 @@ module.exports = {
       title_url: songInfo.iv_invideo_url,
       author: songInfo.author
     };
-    
-    console.log(song);
 
     if (serverQueue) {
       serverQueue.songs.push(song);
-      console.log(serverQueue.songs);
-      return msg.channel.send(`✅🎶 **${song.title}** a été ajouté à la liste ! 🎶`);
+      return msg.channel.send(
+        `✅🎶 **${song.title}** a été ajouté à la liste ! 🎶`
+      );
     }
 
     const queueConstruct = {

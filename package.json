@@ -7,7 +7,8 @@
     "opusscript": "0.0.7",
     "ws": "^7.2.5",
     "ytdl-core": "^2.1.1",
-    "ytdl-core-discord": "github:amishshah/ytdl-core-discord"
+    "ytdl-core-discord": "github:amishshah/ytdl-core-discord",
+    "ytsr": "^0.1.13"
   },
   "name": "Catsbot",
   "version": "1.0.0",
