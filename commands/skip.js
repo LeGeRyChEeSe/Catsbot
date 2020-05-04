@@ -17,5 +17,5 @@ module.exports = {
     serverQueue.connection.dispatcher.end(
       "🎶 La piste suivante va être jouée. 🎶"
     );
-  }
+  },
 };

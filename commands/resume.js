@@ -13,5 +13,5 @@ module.exports = {
       return message.channel.send("▶ La piste va reprendre !");
     }
     return message.channel.send("Aucune piste n'est jouée actuellement.");
-  }
+  },
 };

@@ -10,8 +10,8 @@ module.exports = {
     if (!serverQueue) return message.channel.send("Aucune piste en cours.");
     return message.channel.send(`
 __**Liste d'attente des pistes:**__
-${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
+${serverQueue.songs.map((song) => `**-** ${song.title}`).join("\n")}
 **Piste en cours:** ${serverQueue.songs[0].title}
 		`);
-  }
+  },
 };

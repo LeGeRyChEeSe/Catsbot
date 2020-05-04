@@ -17,7 +17,7 @@ module.exports = {
         );
         tableau.push(
           `${search_user} est demandé dans le canal **${client.channels.cache.find(
-            r => r.id === channel
+            (r) => r.id === channel
           )}**`
         );
         search_user.send(
@@ -26,7 +26,7 @@ module.exports = {
           } te réclame sur le serveur __**${
             msg.guild.name
           }**__ dans le canal **${client.channels.cache.find(
-            r => r.id === channel
+            (r) => r.id === channel
           )}** !`
         );
       } else if (args[mention].startsWith("<@")) {
@@ -36,7 +36,7 @@ module.exports = {
         );
         tableau.push(
           `${search_user} est demandé dans le canal **${client.channels.cache.find(
-            r => r.id === channel
+            (r) => r.id === channel
           )}**`
         );
         search_user.send(
@@ -45,7 +45,7 @@ module.exports = {
           } t'a mentionné sur le serveur __**${
             msg.guild.name
           }**__ dans le canal **${client.channels.cache.find(
-            r => r.id === channel
+            (r) => r.id === channel
           )}** !`
         );
       } else {
@@ -54,5 +54,5 @@ module.exports = {
     }
     msg.channel.send(`${tableau.join("\n")}\n${argument.join(" ")}`);
     msg.delete();
-  }
+  },
 };

@@ -17,5 +17,5 @@ module.exports = {
     serverQueue.connection.dispatcher.end();
     message.channel.send("🎶 La musique a été coupée ! 🎶");
     message.delete();
-  }
+  },
 };

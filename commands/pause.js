@@ -13,5 +13,5 @@ module.exports = {
       return message.channel.send("⏸ La musique est en pause !");
     }
     return message.channel.send("Aucune piste en cours.");
-  }
+  },
 };

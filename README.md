@@ -12,14 +12,14 @@ c?help : Renvoi la liste de toutes les commandes disponibles sur le bot
 
 c?me : Renvoi le message envoyé par l'utilisateur sur le canal en tant que Catsbot
 
-c?mp : Mentionne toutes les personnes mentionnées par l'utilisateur et envoi un message privé à chacune d'entre elles pour les informer 
+c?mp : Mentionne toutes les personnes mentionnées par l'utilisateur et envoi un message privé à chacune d'entre elles pour les informer
 de la mention, et où se situe la mention.
 
 c?np : Affiche la piste en cours.
 
 c?pause : Permet de mettre en pause la piste actuelle.
 
-c?play : Permet de lancer une musique sur YouTube via un lien
+c?p : Permet de lancer une musique sur YouTube soit via un lien, soit par recherche.
 
 c?queue : Permet d'afficher la liste d'attente des pistes
 

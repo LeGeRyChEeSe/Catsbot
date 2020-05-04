@@ -27,7 +27,9 @@ module.exports = {
       .setThumbnail(serverQueue.songs[0].author.avatar)
       .setTimestamp()
       .setFooter(client.user.username)
-      .setImage(serverQueue.songs[0].image[serverQueue.songs[0].image.length - 1].url);
+      .setImage(
+        serverQueue.songs[0].image[serverQueue.songs[0].image.length - 1].url
+      );
     message.channel.send(embed);
-  }
+  },
 };

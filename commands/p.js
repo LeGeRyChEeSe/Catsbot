@@ -1,12 +1,12 @@
-const { Util, MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const ytdl = require("ytdl-core");
 const ytsr = require("ytsr");
 
 module.exports = {
   name: "p",
-  description: "Permet de lancer une musique sur YouTube soit via un lien, soit par recherche.",
-  help:
-    `Veuillez indiquer un lien YouTube valide vers une musique, ou indiquez simplement le contenu de votre recherche YouTube de cette manière :\n\`c?p snoop dog\`
+  description:
+    "Permet de lancer une musique sur YouTube soit via un lien, soit par recherche.",
+  help: `Veuillez indiquer un lien YouTube valide vers une musique, ou indiquez simplement le contenu de votre recherche YouTube de cette manière :\n\`c?p snoop dog\`
 puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` pour la 1ère piste de la liste, \`c?p 2\` pour la 2e, etc.`,
   syntaxe: "p <URL> ou <search>",
   async execute(msg, args, client) {
@@ -29,7 +29,7 @@ puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` p
       );
     const serverQueue = msg.client.queue.get(msg.guild.id);
 
-    if (!(await ytdl.validateURL(args.join(" ")))) {
+    if (!ytdl.validateURL(args.join(" "))) {
       songInfo = await ytsr(args.join(" "), { limit: 5 });
 
       const embed = new MessageEmbed()
@@ -55,7 +55,8 @@ puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` p
       if (!choix) return msg.channel.send(embed);
     }
 
-    if (!choix) songInfo = await ytdl.getInfo(args[0].replace(/<(.+)>/g, "$1"));
+    if (choix === "")
+      songInfo = await ytdl.getInfo(args[0].replace(/<(.+)>/g, "$1"));
     else songInfo = await ytdl.getInfo(choix.replace(/<(.+)>/g, "$1"));
 
     const song = {
@@ -65,7 +66,7 @@ puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` p
       image: songInfo.player_response.videoDetails.thumbnail.thumbnails,
       description: songInfo.description,
       title_url: songInfo.iv_invideo_url,
-      author: songInfo.author
+      author: songInfo.author,
     };
 
     if (serverQueue) {
@@ -81,12 +82,12 @@ puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` p
       connection: null,
       songs: [],
       volume: 2,
-      playing: true
+      playing: true,
     };
     msg.client.queue.set(msg.guild.id, queueConstruct);
     queueConstruct.songs.push(song);
 
-    const play = async song => {
+    const play = async (song) => {
       const queue = msg.client.queue.get(msg.guild.id);
       if (!song) {
         queue.voiceChannel.leave();
@@ -100,7 +101,7 @@ puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` p
           queue.songs.shift();
           play(queue.songs[0]);
         })
-        .on("error", error => console.error(error));
+        .on("error", (error) => console.error(error));
       dispatcher.setVolumeLogarithmic(queue.volume / 5);
       queue.textChannel.send(`🎶 Début de la piste: **${song.title}** 🎶`);
     };
@@ -115,5 +116,5 @@ puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` p
       await channel.leave();
       return msg.channel.send(`Je ne peux pas rejoindre le canal: ${error}`);
     }
-  }
+  },
 };

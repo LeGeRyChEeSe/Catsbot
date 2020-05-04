@@ -6,7 +6,7 @@ module.exports = {
   help:
     "Cette fiche permet d'afficher un petit encadré décrivant plusieurs informations concernant la personne mentionnée",
   syntaxe: "embed <mention>",
-  execute(msg, args, client) {
+  execute(msg) {
     const user = msg.mentions.members.first();
     let status_user = "";
     if (user.presence.status === "offline") status_user = " :white_circle: ";
@@ -23,17 +23,18 @@ module.exports = {
       .addFields(
         {
           name: `Date d'arrivée dans le serveur ${user.guild.name}:`,
-          value: `${user.joinedAt.getDate()}/${user.joinedAt.getMonth() +
-            1}/${user.joinedAt.getFullYear()}`
+          value: `${user.joinedAt.getDate()}/${
+            user.joinedAt.getMonth() + 1
+          }/${user.joinedAt.getFullYear()}`,
         },
         {
           name: "Son/Ses rôle(s) :",
-          value: user.roles.cache.array()
+          value: user.roles.cache.array(),
         }
       )
       .setTimestamp()
       .setFooter(user.presence.status);
 
     msg.channel.send(embed);
-  }
+  },
 };

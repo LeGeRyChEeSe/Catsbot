@@ -9,7 +9,7 @@ module.exports = {
     if (
       !msg.member
         .permissionsIn(
-          client.channels.cache.find(r => r.id === "679425098767269897")
+          client.channels.cache.find((r) => r.id === "679425098767269897")
         )
         .has(["VIEW_CHANNEL", "SEND_MESSAGES"])
     )
@@ -19,7 +19,7 @@ module.exports = {
     if (msg.channel.id !== "679425098767269897")
       return msg.channel.send(
         `Vous devez être dans le canal #${client.channels.cache.find(
-          r => r.id === "679425098767269897"
+          (r) => r.id === "679425098767269897"
         )}`
       );
 
@@ -35,5 +35,5 @@ module.exports = {
       `Un message privé contenant le fichier vous a été envoyé ${msg.author}`
     );
     msg.delete();
-  }
+  },
 };
