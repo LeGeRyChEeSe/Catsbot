@@ -2,13 +2,18 @@
 
 # Bot exclusivement réservé à l'usage des membres des CATS
 
-c?embed : Renvoie un embed d'une personne mentionnée
+Liste non exhaustive des commandes du bot :
 
-c?help : Renvoie la liste de toutes les commandes disponibles sur le bot
+c?download : Télécharge un fichier contenu dans le bot.
 
-c?me : Renvoie le message envoyé par l'utilisateur sur le canal en tant que Catsbot
+c?embed : Renvoi un embed d'une personne mentionnée
 
-c?mp : Mentionne toutes les personnes mentionnées par l'utilisateur et envoie un message privé à chacune d'entre elles pour les informer de la mention, et où se situe la mention.
+c?help : Renvoi la liste de toutes les commandes disponibles sur le bot
+
+c?me : Renvoi le message envoyé par l'utilisateur sur le canal en tant que Catsbot
+
+c?mp : Mentionne toutes les personnes mentionnées par l'utilisateur et envoi un message privé à chacune d'entre elles pour les informer 
+de la mention, et où se situe la mention.
 
 c?np : Affiche la piste en cours.
 
@@ -26,4 +31,7 @@ c?skip : Permet de passer la piste actuelle.
 
 c?stop : Permet de stopper la musique.
 
-c?volume : Permet de modifier le volume de la piste. :
+c?volume : Permet de modifier le volume de la piste.
+
+Pour plus d'informations sur une commande :
+Tapez par exemple c?help play pour obtenir des informations supplémentaires sur la commande play.
