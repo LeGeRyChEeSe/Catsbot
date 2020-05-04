@@ -27,12 +27,12 @@ client.on("message", async msg => {
     .trim()
     .split(/ +/g);
   const cmd = args.shift().toLowerCase();
-  
 
   if (!client.commands.has(cmd)) return;
   client.commands.get(cmd).execute(msg, args, client);
 });
 
+/*
 client.on("guildMemberAdd", member => {
   // Fonction permettant de notifier l'arrivée d'un membre sur le serveur
 
@@ -42,6 +42,7 @@ client.on("guildMemberAdd", member => {
   );
   channel.send(`Coucou ${member} Bienvenue parmis les Cats !`);
 });
+*/
 
 client.on("guildMemberRemove", member => {
   // Fonction permettant de notifier le départ d'un membre du serveur

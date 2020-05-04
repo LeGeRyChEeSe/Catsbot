@@ -3,7 +3,7 @@ const { MessageAttachment } = require("discord.js");
 module.exports = {
   name: "download",
   description: "Télécharge un fichier contenu dans le bot.",
-  help: "Envoie en MP le fichier/dossier spécifié à l'utilisateur.",
+  help: "Envoi en MP le fichier/dossier spécifié à l'utilisateur.",
   syntaxe: "download <fichier>",
   execute(msg, args, client) {
     if (
