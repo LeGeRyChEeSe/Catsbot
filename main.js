@@ -27,6 +27,7 @@ client.on("message", async msg => {
     .trim()
     .split(/ +/g);
   const cmd = args.shift().toLowerCase();
+  
 
   if (!client.commands.has(cmd)) return;
   client.commands.get(cmd).execute(msg, args, client);
