@@ -7,8 +7,6 @@ const client = new MusicClient({
   bienvenue: process.env.BIENVENUE
 });
 
-client.commands = new Collection();
-
 const loadCommands = (dir = "./commands") => {
   readdirSync(dir).forEach(dirs => {
     const commands = readdirSync(`${dir}/${dirs}/`).filter(files =>
