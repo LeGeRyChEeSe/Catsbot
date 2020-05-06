@@ -1,4 +1,4 @@
-module.exports.run = (msg, args, client) {
+module.exports.run = (msg, args, client) => {
     const channel = msg.channel.id;
     const tableau = [];
     const argument = [];
