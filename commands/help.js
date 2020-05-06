@@ -2,17 +2,15 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "help",
-  description:
-    "Renvoi la liste de toutes les commandes disponibles sur le bot",
+  description: "Renvoi la liste de toutes les commandes disponibles sur le bot",
   help:
     "c?help *<commande>* renvoi les informations supplémentaires de la commande passée en paramètre de c?help.",
   syntaxe: "help <commande>",
   execute(msg, args, client) {
-    const tableau = [];
     if (args.length !== 0) {
       for (const help of client.commands) {
         if (args[0] === help[1].name || args[0] === `c?${help[1].name}`) {
-          let info = help[1];
+          const info = help[1];
           msg.delete();
           const embed = new MessageEmbed()
             .setTitle(`${client.config.prefix}${info.name}`)
@@ -46,10 +44,7 @@ module.exports = {
 
     for (const cmd of client.commands) {
       const commandName = client.config.prefix + cmd[1].name;
-      embed.addField(
-        `**\`${commandName}\`**`,
-        `*${cmd[1].description}*\n`
-      );
+      embed.addField(`**\`${commandName}\`**`, `*${cmd[1].description}*\n`);
     }
 
     embed.addField(
@@ -58,5 +53,5 @@ module.exports = {
     );
 
     return msg.channel.send(embed);
-  }
+  },
 };

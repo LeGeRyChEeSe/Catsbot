@@ -6,6 +6,7 @@ module.exports = {
   syntaxe: "skip",
   cooldown: 5,
   execute(message) {
+    message.delete();
     const { channel } = message.member.voice;
     if (!channel)
       return message.channel.send(
@@ -14,6 +15,8 @@ module.exports = {
     const serverQueue = message.client.queue.get(message.guild.id);
     if (!serverQueue)
       return message.channel.send("Il n'y a aucune piste à passer.");
+    console.log(serverQueue);
+    serverQueue.playing = false;
     serverQueue.connection.dispatcher.end(
       "🎶 La piste suivante va être jouée. 🎶"
     );

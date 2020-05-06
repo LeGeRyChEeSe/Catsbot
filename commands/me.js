@@ -8,5 +8,5 @@ module.exports = {
   execute(msg, args) {
     msg.channel.send(args.join(" "));
     msg.delete({ timeout: 5 });
-  }
+  },
 };
