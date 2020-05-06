@@ -22,5 +22,5 @@ module.exports = {
     serverQueue.volume = args[0]; // eslint-disable-line
     serverQueue.connection.dispatcher.setVolumeLogarithmic(args[0] / 5);
     return message.channel.send(`A présent le volume est à : **${args[0]}**`);
-  }
+  },
 };
