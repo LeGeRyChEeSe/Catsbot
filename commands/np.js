@@ -31,5 +31,6 @@ module.exports = {
         serverQueue.songs[0].image[serverQueue.songs[0].image.length - 1].url
       );
     message.channel.send(embed);
+    message.delete();
   },
 };

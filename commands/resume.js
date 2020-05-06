@@ -6,6 +6,7 @@ module.exports = {
   syntaxe: "resume",
   cooldown: 5,
   execute(message) {
+    message.delete();
     const serverQueue = message.client.queue.get(message.guild.id);
     if (serverQueue && !serverQueue.playing) {
       serverQueue.playing = true;

@@ -1,4 +1,4 @@
-const fs = require("fs");
+const { readdirSync } = require("fs");
 const { Collection } = require("discord.js");
 const MusicClient = require("./assets/struct/Client");
 const client = new MusicClient({
@@ -7,21 +7,33 @@ const client = new MusicClient({
   bienvenue: process.env.BIENVENUE
 });
 
-const commandFiles = fs
-  .readdirSync("./commands")
-  .filter(file => file.endsWith(".js"));
+client.commands = new Collection();
 
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  client.commands.set(command.name, command);
-}
+const loadCommands = (dir = "./commands") => {
+  readdirSync(dir).forEach(dirs => {
+    const commands = readdirSync(`${dir}/${dirs}/`).filter(files =>
+      files.endsWith(".js")
+    );
+
+    for (const file of commands) {
+      const getFileName = require(`${dir}/${dirs}/${file}`);
+      client.commands.set(getFileName.help.name, getFileName);
+    }
+  });
+};
+
+loadCommands();
 
 client.on("message", async msg => {
   // Fonction permettant d'exécuter des commandes via le bot
   // La syntaxe d'une commande est : c?<commande> <argument>
   // Par exemple je veux m'ajouter le rôle test : c?role test
 
-  if (!msg.content.toLowerCase().startsWith(client.config.prefix) || msg.author.bot) return;
+  if (
+    !msg.content.toLowerCase().startsWith(client.config.prefix) ||
+    msg.author.bot
+  )
+    return;
   const args = msg.content
     .slice(client.config.prefix.length)
     .trim()
@@ -29,7 +41,7 @@ client.on("message", async msg => {
   const cmd = args.shift().toLowerCase();
 
   if (!client.commands.has(cmd)) return;
-  client.commands.get(cmd).execute(msg, args, client);
+  client.commands.get(cmd).run(msg, args, client);
 });
 
 /*

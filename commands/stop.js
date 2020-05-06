@@ -6,6 +6,7 @@ module.exports = {
   syntaxe: "stop",
   cooldown: 5,
   execute(message) {
+    message.delete();
     const { channel } = message.member.voice;
     if (!channel)
       return message.channel.send(
@@ -16,6 +17,5 @@ module.exports = {
     serverQueue.songs = [];
     serverQueue.connection.dispatcher.end();
     message.channel.send("🎶 La musique a été coupée ! 🎶");
-    message.delete();
-  },
+  }
 };

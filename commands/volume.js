@@ -6,6 +6,7 @@ module.exports = {
   syntaxe: "volume <volume>",
   cooldown: 5,
   execute(message, args) {
+    message.delete();
     const { channel } = message.member.voice;
     if (!channel)
       return message.channel.send(
