@@ -1,16 +1,9 @@
 const { MessageEmbed } = require("discord.js");
 
-module.exports = {
-  name: "np",
-  description: "Affiche la piste en cours.",
-  help:
-    "Permet d'afficher dans le canal de texte le nom de la piste, sa description, et son URL qui est jouée actuellement dans votre canal vocal.",
-  syntaxe: "np",
-  cooldown: 5,
-  execute(message, args, client) {
-    const serverQueue = message.client.queue.get(message.guild.id);
+module.exports.run = (msg, args, client) => {
+    const serverQueue = msg.client.queue.get(msg.guild.id);
     if (!serverQueue)
-      return message.channel.send(
+      return msg.channel.send(
         ":no_entry_sign: Aucune piste n'est en cours :no_entry_sign:"
       );
     console.log(serverQueue);
@@ -30,7 +23,15 @@ module.exports = {
       .setImage(
         serverQueue.songs[0].image[serverQueue.songs[0].image.length - 1].url
       );
-    message.channel.send(embed);
-    message.delete();
-  },
+    msg.channel.send(embed);
+    msg.delete();
 };
+
+module.exports.help = {
+  name: "np",
+  description: "Affiche la piste en cours.",
+  help:
+    "Permet d'afficher dans le canal de texte le nom de la piste, sa description, et son URL qui est jouée actuellement dans votre canal vocal.",
+  syntaxe: "np",
+  cooldown: 5,
+}

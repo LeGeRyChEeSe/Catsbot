@@ -2,14 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const ytdl = require("ytdl-core");
 const ytsr = require("ytsr");
 
-module.exports = {
-  name: "p",
-  description:
-    "Permet de lancer une musique sur YouTube soit via un lien, soit par recherche.",
-  help: `Veuillez indiquer un lien YouTube valide vers une musique, ou indiquez simplement le contenu de votre recherche YouTube de cette manière :\n\`c?p snoop dog\`
-puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` pour la 1ère piste de la liste, \`c?p 2\` pour la 2e, etc.`,
-  syntaxe: "p <URL> ou <search>",
-  async execute(msg, args, client) {
+module.exports.run = async (msg, args, client) => {
     msg.delete();
     let choix = "";
     let songInfo = null;
@@ -118,5 +111,13 @@ puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` p
       await channel.leave();
       return msg.channel.send(`Je ne peux pas rejoindre le canal: ${error}`);
     }
-  },
 };
+
+module.exports.help = {
+  name: "p",
+  description:
+    "Permet de lancer une musique sur YouTube soit via un lien, soit par recherche.",
+  help: `Veuillez indiquer un lien YouTube valide vers une musique, ou indiquez simplement le contenu de votre recherche YouTube de cette manière :\n\`c?p snoop dog\`
+puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` pour la 1ère piste de la liste, \`c?p 2\` pour la 2e, etc.`,
+  syntaxe: "p <URL> ou <search>",
+}

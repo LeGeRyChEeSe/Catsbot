@@ -1,15 +1,14 @@
-const { readdirSync } = require("fs");
-const { Collection } = require("discord.js");
+const { readdirSync, readFileSync } = require("fs");
+const { Collection, MessageAttachment } = require("discord.js");
 const MusicClient = require("./assets/struct/Client");
 const client = new MusicClient({
   token: process.env.TOKEN,
   prefix: process.env.PREFIX,
   bienvenue: process.env.BIENVENUE
 });
+client.files = new Collection();
 
-client.commands = new Collection();
-
-const loadCommands = (dir = "./commands") => {
+const loadCommands = (dir = "./commands/") => {
   readdirSync(dir).forEach(dirs => {
     const commands = readdirSync(`${dir}/${dirs}/`).filter(files =>
       files.endsWith(".js")
@@ -22,7 +21,22 @@ const loadCommands = (dir = "./commands") => {
   });
 };
 
+const loadFiles = (dir = "./assets/downloads/hacks/") => {
+  readdirSync(dir).forEach(dirfiles => {
+    const commands = readdirSync(`${dir}/`).filter(files =>
+      files.endsWith(".zip")
+    );
+
+    for (const file of commands) {
+      const buffer = readFileSync(`${dir}/${file}`);
+      const attachment = new MessageAttachment(buffer, file);
+      client.files.set(attachment.name, attachment);
+    }
+  });
+};
+
 loadCommands();
+loadFiles();
 
 client.on("message", async msg => {
   // Fonction permettant d'exécuter des commandes via le bot
@@ -40,7 +54,8 @@ client.on("message", async msg => {
     .split(/ +/g);
   const cmd = args.shift().toLowerCase();
 
-  if (!client.commands.has(cmd)) return;
+  if (!client.commands.has(cmd))
+    return console.log(`La commande ${msg.content} n'existe pas.`);
   client.commands.get(cmd).run(msg, args, client);
 });
 
