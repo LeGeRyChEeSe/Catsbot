@@ -13,6 +13,7 @@ const loadCommands = (dir = "./commands/") => {
     const commands = readdirSync(`${dir}/${dirs}/`).filter(files =>
       files.endsWith(".js")
     );
+    console.log(commands);
 
     for (const file of commands) {
       const getFileName = require(`${dir}/${dirs}/${file}`);

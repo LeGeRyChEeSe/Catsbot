@@ -20,12 +20,18 @@ module.exports.run = (msg, args, client) => {
     );
 
   const getFiles = client.files;
-  const file = `${args[0].toLowerCase()}.zip`;
 
-  if (!args.length)
-    return msg.channel.send(
-      `Veuillez entrer la commande comme suit : \`${client.config.prefix}download <fichier>\`.\nLa liste des fichiers téléchargeables est ici :\`soon\``
+  if (!args.length) {
+    msg.channel.send(
+      `Veuillez entrer la commande comme suit : \`${client.config.prefix}download <fichier>\`.\nLa liste des fichiers téléchargeables est ici :`
     );
+    const allFiles = getFiles.each(file => {
+      const afile = file.name;
+      msg.channel.send(`- ${afile.replace(/[.][a-z]*/, "")}`);
+    });
+  }
+
+  const file = `${args[0].toLowerCase()}.zip`;
 
   if (getFiles.has(file)) {
     msg.author.send(
@@ -33,11 +39,11 @@ module.exports.run = (msg, args, client) => {
       getFiles.find(r => r.name === file)
     );
     msg.channel.send(
-      `Un message privé contenant le fichier va vous être envoyé ${msg.author} !`
+      `Un message privé contenant le fichier ${file} va vous être envoyé ${msg.author} !`
     );
     msg.guild.members
       .resolve("440141443877830656")
-      .send(`${msg.author} a téléchargé un de vos fichiers !`);
+      .send(`${msg.author} a téléchargé ${file} !`);
   }
 };
 
