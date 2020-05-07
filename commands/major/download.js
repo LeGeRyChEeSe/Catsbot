@@ -3,7 +3,6 @@ const { MessageAttachment } = require("discord.js");
 
 module.exports.run = (msg, args, client) => {
   msg.delete();
-
   if (
     !msg.member
       .permissionsIn(
@@ -18,7 +17,7 @@ module.exports.run = (msg, args, client) => {
         r => r.id === "679425098767269897"
       )}`
     );
-
+  
   const getFiles = client.files;
 
   if (!args.length) {
