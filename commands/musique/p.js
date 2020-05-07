@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const ytdl = require("ytdl-core");
 const ytsr = require("ytsr");
 
-module.exports.run = await (msg, args, client) => {
+module.exports.run = async (msg, args, client) => {
     msg.delete();
     let choix = "";
     let songInfo = null;
