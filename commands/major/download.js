@@ -19,22 +19,25 @@ module.exports.run = (msg, args, client) => {
     );
   
   const getFiles = client.files;
+  
+  const regex = /[.][a-z]*/;
 
   if (!args.length) {
-    msg.channel.send(
-      `Veuillez entrer la commande comme suit : \`${client.config.prefix}download <fichier>\`.\nLa liste des fichiers téléchargeables est ici :`
-    );
+    let listeMods = [];
     const allFiles = getFiles.each(file => {
       const afile = file.name;
-      msg.channel.send(`- ${afile.replace(/[.][a-z]*/, "")}`);
+      listeMods.push(`${afile.replace(regex, "")}`);
     });
+    msg.channel.send(
+      `Veuillez entrer la commande comme suit : \`${client.config.prefix}download <fichier>\`.\nLa liste des fichiers téléchargeables est ici :\n${listeMods}`
+    );
   }
 
   const file = `${args[0].toLowerCase()}.zip`;
 
   if (getFiles.has(file)) {
     msg.author.send(
-      "Voici la dernière mise à jour de LOyy menu (v1.1)",
+      `Voici la dernière mise à jour de ${args[0]}`,
       getFiles.find(r => r.name === file)
     );
     msg.channel.send(
