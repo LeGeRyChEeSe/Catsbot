@@ -9,7 +9,7 @@ module.exports.run = (msg) => {
   else if (user.presence.status === "dnd") status_user = " :red_circle: ";
   msg.delete();
   const embed = new MessageEmbed()
-    .setTitle(status_user + user.user.username + status_user)
+    .setTitle(`${status_user} ${user.user.username} ${status_user}`)
     .setColor(user.displayHexColor)
     .setDescription(user.user.tag)
     .setThumbnail(user.user.displayAvatarURL())
