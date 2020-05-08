@@ -1,4 +1,4 @@
-const { readdirSync, readFileSync } = require("fs");
+const { readdirSync, readFileSync, readFile } = require("fs");
 const { Collection, MessageAttachment } = require("discord.js");
 const MusicClient = require("./assets/struct/Client");
 const client = new MusicClient({
@@ -7,13 +7,13 @@ const client = new MusicClient({
   bienvenue: process.env.BIENVENUE
 });
 client.files = new Collection();
+let nouveau_membre = "";
 
 const loadCommands = (dir = "./commands/") => {
   readdirSync(dir).forEach(dirs => {
     const commands = readdirSync(`${dir}/${dirs}/`).filter(files =>
       files.endsWith(".js")
     );
-    console.log(commands);
 
     for (const file of commands) {
       const getFileName = require(`${dir}/${dirs}/${file}`);
@@ -35,6 +35,26 @@ const loadFiles = (dir = "./assets/downloads/hacks/") => {
     }
   });
 };
+
+function loadMessages(dir = "./assets/struct/") {
+  let random = 0;
+  const message_onadd = readdirSync(dir).filter(file => file.endsWith(".json"));
+  readFile(`${dir}/${message_onadd}`, (error, message_onadd) => {
+    const messages = JSON.parse(message_onadd);
+
+    for (const message in messages) {
+      random++;
+    }
+    const message_alea = Math.floor(Math.random() * random) + 1;
+
+    for (const message in messages) {
+      if (message_alea.toString() === message) {
+        nouveau_membre = messages[message];
+      }
+    }
+    console.log(nouveau_membre);
+  });
+}
 
 loadCommands();
 loadFiles();
@@ -60,17 +80,25 @@ client.on("message", async msg => {
   client.commands.get(cmd).run(msg, args, client);
 });
 
-/*
 client.on("guildMemberAdd", member => {
   // Fonction permettant de notifier l'arrivée d'un membre sur le serveur
+  
+  loadMessages();
 
-  member.send("Bienvenue parmis les Cats !");
+  member.send(`Hey ${member.displayName}, bienvenue sur World War Of Cats :tada::smirk_cat: ! 
+
+Pour des raisons de sécurité, merci d'indiquer ton pseudo via GTA, merkiii !
+**:point_right: Sans réponses de ta part dans les 48h, nous serons contraint de t'expulser de notre serveur, merci d'avance pour ta compréhension.**
+
+Hey ${member.displayName}, welcome to World War Of Cats :tada::smirk_cat: !
+
+For security reasons, thanks to write here your GTA nickname ty!
+**:point_right:  Without answers from you within 48 hours, we'll be forced to expel you from our server, thank you in advance for your understanding.**`);
   const channel = client.channels.cache.find(
     r => r.name === client.config.bienvenue
   );
-  channel.send(`Coucou ${member} Bienvenue parmis les Cats !`);
+  channel.send(nouveau_membre);
 });
-*/
 
 client.on("guildMemberRemove", member => {
   // Fonction permettant de notifier le départ d'un membre du serveur
@@ -82,7 +110,7 @@ client.on("guildMemberRemove", member => {
     r => r.name === client.config.bienvenue
   );
   channel.send(
-    `Bye bye ${member}, j'espère que tu seras heureux dans ta nouvelle vie :slight_smile:`
+    `Bye bye ${member.displayName}, j'espère que tu seras heureux dans ta nouvelle vie :slight_smile:`
   );
 });
 

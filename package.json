@@ -1,9 +1,11 @@
 {
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
+    "@types/mathjs": "^6.0.5",
     "bufferutil": "^4.0.1",
     "discord.js": "github:discordjs/discord.js",
     "ffmpeg-static": "^4.2.0",
+    "mathjs": "^7.0.0",
     "opusscript": "0.0.7",
     "ws": "^7.2.5",
     "ytdl-core": "^2.1.1",
