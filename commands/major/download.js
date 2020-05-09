@@ -10,6 +10,7 @@ module.exports.run = (msg, args, client) => {
     vpn: "679427469228638220"
   };
 
+  // Si l'auteur du message est dans le canal💫modsrockstar-accounts
   if (msg.channel.id === canals.modrockstar) {
     const getFiles = client.files.hacks;
     console.log(getFiles);
@@ -45,6 +46,7 @@ module.exports.run = (msg, args, client) => {
     }
   }
 
+  // Si l'auteur du message est dans le canal💫vpn
   if (msg.channel.id === canals.vpn) {
     const getFiles = client.files.vpn;
     if (!args.length) {
@@ -78,6 +80,7 @@ module.exports.run = (msg, args, client) => {
     }
   }
 
+  // Si l'auteur du message est dans aucun des canals nécessaires au téléchargement
   if (!Object.values(canals).find(r => r === msg.channel.id)) {
     let canals_on = new Object();
 
