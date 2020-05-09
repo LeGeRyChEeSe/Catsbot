@@ -7,7 +7,7 @@ module.exports.run = (msg, args, client) => {
   const regex = /[.][a-z]*/;
   const canals = {
     modrockstar: "679425098767269897",
-    vpn: "679427469228638220"
+    vpn: "679427469228638220",
   };
 
   // Si l'auteur du message est dans le canal💫modsrockstar-accounts
@@ -17,7 +17,7 @@ module.exports.run = (msg, args, client) => {
 
     if (!args.length) {
       let listeMods = [];
-      const allFiles = getFiles.each(file => {
+      const allFiles = getFiles.each((file) => {
         const afile = file.name;
         listeMods.push(`${afile.replace(regex, "")}`);
       });
@@ -35,7 +35,7 @@ module.exports.run = (msg, args, client) => {
     if (getFiles.has(file)) {
       msg.author.send(
         `Voici la dernière mise à jour de ${args[0]}`,
-        getFiles.find(r => r.name === file)
+        getFiles.find((r) => r.name === file)
       );
       msg.channel.send(
         `Un message privé contenant le fichier ${file} va vous être envoyé ${msg.author} !`
@@ -51,7 +51,7 @@ module.exports.run = (msg, args, client) => {
     const getFiles = client.files.vpn;
     if (!args.length) {
       let listeVPNs = [];
-      const allFiles = getFiles.each(file => {
+      const allFiles = getFiles.each((file) => {
         const afile = file.name;
         listeVPNs.push(`${afile.replace(regex, "")}`);
       });
@@ -69,7 +69,7 @@ module.exports.run = (msg, args, client) => {
     if (getFiles.has(file)) {
       msg.author.send(
         `Voici la dernière mise à jour de ${args[0]}`,
-        getFiles.find(r => r.name === file)
+        getFiles.find((r) => r.name === file)
       );
       msg.channel.send(
         `Un message privé contenant le fichier ${file} va vous être envoyé ${msg.author} !`
@@ -81,19 +81,19 @@ module.exports.run = (msg, args, client) => {
   }
 
   // Si l'auteur du message est dans aucun des canals nécessaires au téléchargement
-  if (!Object.values(canals).find(r => r === msg.channel.id)) {
+  if (!Object.values(canals).find((r) => r === msg.channel.id)) {
     let canals_on = new Object();
 
     for (const canal in canals) {
       if (
         msg.member
           .permissionsIn(
-            client.channels.cache.find(r => r.id === canals[canal])
+            client.channels.cache.find((r) => r.id === canals[canal])
           )
           .has(["VIEW_CHANNEL", "SEND_MESSAGES"])
       )
         canals_on[canal] = client.channels.cache.find(
-          r => r.id === canals[canal]
+          (r) => r.id === canals[canal]
         );
     }
 
@@ -109,5 +109,5 @@ module.exports.help = {
   name: "download",
   description: "Télécharge un fichier contenu dans le bot.",
   help: "Envoi en MP le fichier/dossier spécifié à l'utilisateur.",
-  syntaxe: "download <fichier>"
+  syntaxe: "download <fichier>",
 };

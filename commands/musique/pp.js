@@ -50,7 +50,7 @@ module.exports.run = async (msg, args, client) => {
         image: songInfo.player_response.videoDetails.thumbnail.thumbnails,
         description: songInfo.description,
         title_url: songInfo.iv_invideo_url,
-        author: songInfo.author
+        author: songInfo.author,
       });
       serverQueue.songs.push(song[arg]);
     }
@@ -87,7 +87,7 @@ module.exports.run = async (msg, args, client) => {
       image: songInfo.player_response.videoDetails.thumbnail.thumbnails,
       description: songInfo.description,
       title_url: songInfo.iv_invideo_url,
-      author: songInfo.author
+      author: songInfo.author,
     });
     serverQueue.songs.push(song[0]);
   }
@@ -111,7 +111,7 @@ module.exports.run = async (msg, args, client) => {
     connection: null,
     songs: [],
     volume: 2,
-    playing: false
+    playing: false,
   };
   msg.client.queue.set(msg.guild.id, queueConstruct);
 
@@ -122,7 +122,7 @@ module.exports.run = async (msg, args, client) => {
   queueConstruct.songs.push(serverQueue.songs.values());
   for (const arg of queueConstruct.songs) console.log(arg);
 
-  const play = async song => {
+  const play = async (song) => {
     const queue = msg.client.queue.get(msg.guild.id);
     if (!queueConstruct.playing) return;
     if (!song) {
@@ -137,7 +137,7 @@ module.exports.run = async (msg, args, client) => {
         queue.songs.shift();
         play(queue.songs[0]);
       })
-      .on("error", error => console.error(error));
+      .on("error", (error) => console.error(error));
     dispatcher.setVolumeLogarithmic(queue.volume / 5);
     queue.textChannel.send(
       `🎶 Début de la piste: **${queue.songs[0].title}** 🎶`
@@ -162,5 +162,5 @@ module.exports.help = {
     "Permet de lancer une musique sur YouTube soit via un lien, soit par recherche.",
   help: `Veuillez indiquer un lien YouTube valide vers une musique, ou indiquez simplement le contenu de votre recherche YouTube de cette manière :\n\`c?p snoop dog\`
 puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` pour la 1ère piste de la liste, \`c?p 2\` pour la 2e, etc.`,
-  syntaxe: "p <URL> ou <search>"
+  syntaxe: "p <URL> ou <search>",
 };

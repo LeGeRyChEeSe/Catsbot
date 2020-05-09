@@ -3,7 +3,10 @@ const { MessageEmbed } = require("discord.js");
 module.exports.run = (msg, args, client) => {
   if (args.length !== 0) {
     for (const help of client.commands) {
-      if (args[0] === help[1].help.name || args[0] === `c?${help[1].help.name}`) {
+      if (
+        args[0] === help[1].help.name ||
+        args[0] === `c?${help[1].help.name}`
+      ) {
         const info = help[1].help;
         console.log(info);
         msg.delete();
@@ -56,5 +59,5 @@ module.exports.help = {
   description: "Renvoi la liste de toutes les commandes disponibles sur le bot",
   help:
     "c?help *<commande>* renvoi les informations supplémentaires de la commande passée en paramètre de c?help.",
-  syntaxe: "help <commande>"
+  syntaxe: "help <commande>",
 };

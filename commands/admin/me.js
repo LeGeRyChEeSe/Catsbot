@@ -1,6 +1,6 @@
 module.exports.run = (msg, args) => {
-    msg.channel.send(args.join(" "));
-    msg.delete({ timeout: 5 });
+  msg.channel.send(args.join(" "));
+  msg.delete({ timeout: 5 });
 };
 
 module.exports.help = {
@@ -10,4 +10,4 @@ module.exports.help = {
   help:
     "Il suffit de taper la commande c?me puis de taper votre texte (tous les formatages Markdown sont disponibles) pour que Catsbot écrive ce message à votre place, anonymement.",
   syntaxe: "me <texte>",
-}
+};

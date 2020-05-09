@@ -16,12 +16,13 @@ module.exports.run = (msg) => {
     .addFields(
       {
         name: `Date d'arrivée dans le serveur ${user.guild.name}:`,
-        value: `${user.joinedAt.getDate()}/${user.joinedAt.getMonth() +
-          1}/${user.joinedAt.getFullYear()}`
+        value: `${user.joinedAt.getDate()}/${
+          user.joinedAt.getMonth() + 1
+        }/${user.joinedAt.getFullYear()}`,
       },
       {
         name: "Son/Ses rôle(s) :",
-        value: user.roles.cache.array()
+        value: user.roles.cache.array(),
       }
     )
     .setTimestamp()
@@ -35,5 +36,5 @@ module.exports.help = {
   description: "Renvoi la fiche d'une personne mentionnée",
   help:
     "Cette fiche permet d'afficher un petit encadré décrivant plusieurs informations concernant la personne mentionnée",
-  syntaxe: "embed <mention>"
+  syntaxe: "embed <mention>",
 };
