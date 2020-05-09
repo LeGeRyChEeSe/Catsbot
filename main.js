@@ -126,6 +126,7 @@ client.on("guildMemberRemove", member => {
 client.login(client.config.token);
 
 client.on("ready", () => {
+  client.user.setActivity("chat | ?help");
   console.log("Je suis prêt !");
 });
 
