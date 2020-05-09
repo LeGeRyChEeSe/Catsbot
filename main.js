@@ -22,17 +22,27 @@ const loadCommands = (dir = "./commands/") => {
   });
 };
 
-const loadFiles = (dir = "./assets/downloads/hacks/") => {
-  readdirSync(dir).forEach(() => {
-    const commands = readdirSync(`${dir}/`).filter((files) =>
+const loadFiles = (dir = "./assets/downloads/") => {
+  readdirSync(dir).forEach(dirs => {
+    const files = readdirSync(`${dir}/${dirs}`).filter(files =>
       files.endsWith(".zip")
     );
 
-    for (const file of commands) {
-      const buffer = readFileSync(`${dir}/${file}`);
-      const attachment = new MessageAttachment(buffer, file);
-      client.files.set(attachment.name, attachment);
+    for (const file of files) {
+      console.log(file);
+      if (dirs === "hacks") {
+        const buffer = readFileSync(`${dir}/${dirs}/${file}`);
+        const attachment = new MessageAttachment(buffer, file);
+        client.files.set(attachment.name, attachment);
+        client.files.set("type", dirs);
+      } else if (dirs === "vpn") {
+        const buffer = readFileSync(`${dir}/${dirs}/${file}`);
+        const attachment = new MessageAttachment(buffer, file);
+        client.files.set(attachment.name, attachment);
+        client.files.set("type", dirs);
+      }
     }
+    console.log(client.files);
   });
 };
 
