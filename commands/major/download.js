@@ -4,14 +4,16 @@ const { MessageAttachment } = require("discord.js");
 module.exports.run = (msg, args, client) => {
   msg.delete();
 
+  const regex = /[.][a-z]*/;
   const canals = {
     modrockstar: "679425098767269897",
     vpn: "679427469228638220"
   };
 
+  // Si l'auteur du message est dans le canal💫modsrockstar-accounts
   if (msg.channel.id === canals.modrockstar) {
-    const getFiles = client.files;
-    const regex = /[.][a-z]*/;
+    const getFiles = client.files.hacks;
+    console.log(getFiles);
 
     if (!args.length) {
       let listeMods = [];
@@ -20,11 +22,11 @@ module.exports.run = (msg, args, client) => {
         listeMods.push(`${afile.replace(regex, "")}`);
       });
       msg.channel.send(
-        `Veuillez entrer la commande comme suit : \`${
+        `La liste des fichiers téléchargeables est ici :\n\`${
           client.config.prefix
-        }download <fichier>\`.\nLa liste des fichiers téléchargeables est ici :\n${listeMods.join(
-          "\n"
-        )}`
+        }download ${listeMods.join(
+          "\n" + `${client.config.prefix}download `
+        )}\``
       );
     }
 
@@ -38,18 +40,48 @@ module.exports.run = (msg, args, client) => {
       msg.channel.send(
         `Un message privé contenant le fichier ${file} va vous être envoyé ${msg.author} !`
       );
-      msg.guild.members
+      return msg.guild.members
         .resolve("440141443877830656")
         .send(`${msg.author} a téléchargé ${file} !`);
     }
   }
 
+  // Si l'auteur du message est dans le canal💫vpn
   if (msg.channel.id === canals.vpn) {
-    const getFiles = client.files;
-    if (getFiles.get("type") === "vpn") return
+    const getFiles = client.files.vpn;
+    if (!args.length) {
+      let listeVPNs = [];
+      const allFiles = getFiles.each(file => {
+        const afile = file.name;
+        listeVPNs.push(`${afile.replace(regex, "")}`);
+      });
+      msg.channel.send(
+        `La liste des fichiers téléchargeables est ici :\n\`${
+          client.config.prefix
+        }download ${listeVPNs.join(
+          "\n" + `${client.config.prefix}download `
+        )}\``
+      );
+    }
+
+    const file = `${args[0].toLowerCase()}.zip`;
+
+    if (getFiles.has(file)) {
+      msg.author.send(
+        `Voici la dernière mise à jour de ${args[0]}`,
+        getFiles.find(r => r.name === file)
+      );
+      msg.channel.send(
+        `Un message privé contenant le fichier ${file} va vous être envoyé ${msg.author} !`
+      );
+      return msg.guild.members
+        .resolve("440141443877830656")
+        .send(`${msg.author} a téléchargé ${file} !`);
+    }
   }
 
-  if (!args.length) {
+  // Si l'auteur du message est dans aucun des canals nécessaires au téléchargement
+  if (!Object.values(canals).find(r => r === msg.channel.id)) {
     let canals_on = new Object();
 
     for (const canal in canals) {

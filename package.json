@@ -4,51 +4,23 @@
     "@types/mathjs": "^6.0.5",
     "bufferutil": "^4.0.1",
     "discord.js": "github:discordjs/discord.js",
-    "ffmpeg-static": "^4.2.0",
+    "ffmpeg-static": "^4.2.1",
     "mathjs": "^7.0.0",
     "opusscript": "0.0.7",
     "ws": "^7.2.5",
-    "ytdl-core": "^2.1.1",
-    "ytdl-core-discord": "github:amishshah/ytdl-core-discord",
+    "ytdl-core": "^2.1.2",
     "ytsr": "^0.1.13"
   },
   "name": "Catsbot",
   "version": "1.0.0",
   "description": "Bot pour les membres du crew Cats",
   "main": "main.js",
-  "engines": {
-    "node": "12.8.1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LeGeRyChEeSe/Catsbot.git"
   },
   "author": "LeGeRyChEeSe <kilian.douarinou41@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-aqua": "^7.2.3"
-  },
-  "eslintConfig": {
-    "extends": "aqua/node",
-    "rules": {
-      "linebreak-style": [
-        "error",
-        "windows"
-      ],
-      "quotes": [
-        "warn",
-        "double"
-      ],
-      "indent": [
-        "error",
-        2
-      ],
-      "arrow-parens": "off",
-      "curly": "off",
-      "comma-dangle": "off"
-    }
-  },
   "bugs": {
     "url": "https://github.com/LeGeRyChEeSe/Catsbot/issues"
   },
