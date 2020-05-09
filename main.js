@@ -42,7 +42,6 @@ const loadFiles = (dir = "./assets/downloads/") => {
       }
     }
   });
-  console.log(client.files);
 };
 
 function loadMessages(dir = "./assets/struct/") {

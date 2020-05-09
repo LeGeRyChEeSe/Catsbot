@@ -8,7 +8,6 @@ module.exports.run = (msg, args, client) => {
         args[0] === `c?${help[1].help.name}`
       ) {
         const info = help[1].help;
-        console.log(info);
         msg.delete();
         const embed = new MessageEmbed()
           .setTitle(`${client.config.prefix}${info.name}`)
@@ -41,7 +40,6 @@ module.exports.run = (msg, args, client) => {
     );
 
   for (const cmd of client.commands) {
-    console.log(cmd[1]);
     const commandName = client.config.prefix + cmd[1].help.name;
     embed.addField(`**\`${commandName}\`**`, `*${cmd[1].help.description}*\n`);
   }
