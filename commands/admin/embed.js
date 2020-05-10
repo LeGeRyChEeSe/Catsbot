@@ -33,6 +33,7 @@ module.exports.run = (msg) => {
 
 module.exports.help = {
   name: "embed",
+  title: "Fiche Descriptive",
   description: "Renvoi la fiche d'une personne mentionnée",
   help:
     "Cette fiche permet d'afficher un petit encadré décrivant plusieurs informations concernant la personne mentionnée",

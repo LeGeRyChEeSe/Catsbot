@@ -16,6 +16,7 @@ module.exports.run = (msg, args, client) => {
 
 module.exports.help = {
   name: "role",
+  title: "S'assigner un rôle",
   description:
     "Permet de s'attribuer un rôle ou de le retirer si on a déjà ce rôle.",
   help:

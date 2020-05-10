@@ -16,6 +16,7 @@ module.exports.run = (msg) => {
 
 module.exports.help = {
   name: "skip",
+  title: "Jouer la piste suivante",
   description: "Permet de passer la piste actuelle.",
   help:
     "Joue la piste suivante en stoppant la piste actuelle. Celle-ci est donc supprimée de la liste d'attente.",

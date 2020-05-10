@@ -134,6 +134,7 @@ module.exports.run = async (msg, args, client) => {
 
 module.exports.help = {
   name: "p",
+  title: "Jouer une musique YouTube",
   description:
     "Permet de lancer une musique sur YouTube soit via un lien, soit par recherche.",
   help: `Veuillez indiquer un lien YouTube valide vers une musique, ou indiquez simplement le contenu de votre recherche YouTube de cette manière :\n\`c?p snoop dog\`

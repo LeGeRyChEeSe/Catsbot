@@ -3,12 +3,12 @@ const { MessageEmbed } = require("discord.js");
 module.exports.run = (msg, args, client) => {
   if (args.length !== 0) {
     for (const help of client.commands) {
+      console.log(help);
       if (
         args[0] === help[1].help.name ||
-        args[0] === `c?${help[1].help.name}`
+        args[0] === `${client.config.prefix}${help[1].help.name}`
       ) {
         const info = help[1].help;
-        console.log(info);
         msg.delete();
         const embed = new MessageEmbed()
           .setTitle(`${client.config.prefix}${info.name}`)
@@ -27,37 +27,45 @@ module.exports.run = (msg, args, client) => {
 
   msg.delete();
 
+  const dev = msg.guild.members.resolve("440141443877830656");
+
   const embed = new MessageEmbed()
     .setTitle("**HELP**")
     .setAuthor(client.user.username)
     .setColor("RANDOM")
-    .setDescription("__**Liste non exhaustive des commandes du bot :**__")
     .setThumbnail(client.user.displayAvatarURL())
     .setTimestamp()
     .setFooter(
-      `${msg.guild.members.resolve("440141443877830656").displayName} (${
-        msg.guild.members.resolve("440141443877830656").presence.status
+      `Dev : ${dev.user.tag} (${
+        dev.presence.status
       })`
     );
+  client.commands.each(category => {
+    console.log(category);
+    embed.addField(
+      category.help.title,
+      `${client.config.prefix}${category.help.name}`,
+      true
+    );
+  });
 
-  for (const cmd of client.commands) {
-    console.log(cmd[1]);
-    const commandName = client.config.prefix + cmd[1].help.name;
-    embed.addField(`**\`${commandName}\`**`, `*${cmd[1].help.description}*\n`);
-  }
-
-  embed.addField(
-    "Pour plus d'informations sur une commande :",
-    `*Tapez par exemple* **\`${client.config.prefix}help play\`** *pour obtenir des informations supplémentaires sur la commande play.*`
-  );
-
+  /*
+    cmd.each(commande => {
+      embed.addField(
+        commande.help.title,
+        `\`${commandName} ${commande.help.name}\``,
+        true
+      );
+    });
+    */
   return msg.channel.send(embed);
 };
 
 module.exports.help = {
   name: "help",
+  title: "Afficher l'aide",
   description: "Renvoi la liste de toutes les commandes disponibles sur le bot",
   help:
     "c?help *<commande>* renvoi les informations supplémentaires de la commande passée en paramètre de c?help.",
-  syntaxe: "help <commande>",
+  syntaxe: "help <commande>"
 };

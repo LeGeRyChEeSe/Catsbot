@@ -11,6 +11,7 @@ module.exports.run = (msg) => {
 
 module.exports.help = {
   name: "resume",
+  title: "Relancer la musique",
   description: "Permet de reprendre le lecture de la piste.",
   help:
     "Permet de relancer la lecture de la piste audio si le bot est présent dans votre canal vocal.",
