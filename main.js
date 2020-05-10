@@ -16,11 +16,13 @@ const loadCommands = (dir = "./commands/") => {
     const commands = readdirSync(`${dir}/${dirs}/`).filter(files =>
       files.endsWith(".js")
     );
+    let commandes = new Array();
 
     for (const file of commands) {
       const getFileName = require(`${dir}/${dirs}/${file}`);
-      client.commands.set(getFileName.help.name, getFileName);
+      commandes.push(getFileName);
     }
+    client.commands.set(dirs, commandes);
   });
 };
 
@@ -66,30 +68,46 @@ function loadMessages(dir = "./assets/struct/") {
 
 loadCommands();
 loadFiles();
-console.log(client.commands);
 
 client.on("message", async msg => {
   // Fonction permettant d'exécuter des commandes via le bot
   // La syntaxe d'une commande est : c?<commande> <argument>
   // Par exemple je veux m'ajouter le rôle test : c?role test
-
+  
   if (
     !msg.content.toLowerCase().startsWith(client.config.prefix) ||
     msg.author.bot
   )
     return;
+
+  let user_permissions = "";
+
+  if (msg.member.hasPermission("ADMINISTRATOR")) user_permissions = "admin";
+  else if (msg.member.roles.cache.find(r => r.id === "642256556402016256"))
+    user_permissions = "lieutenants";
+  else if (msg.member.roles.cache.find(r => r.id === "692058184893857792"))
+    user_permissions = "major";
+  else user_permissions = "membres";
+
   const args = msg.content
     .slice(client.config.prefix.length)
     .trim()
     .split(/ +/g);
   const cmd = args.shift().toLowerCase();
 
-  /*
-  if (!client.commands.has(cmd))
-    return console.log(`La commande ${msg.content} n'existe pas.`);
-  */
-
-  client.commands.get(cmd).run(msg, args, client);
+  client.commands.each(category => {
+    category.forEach(commande => {
+      if (commande.help.name === cmd) {
+        for (let [key, value] of Object.entries(commande.help.permissions)) {
+          if (key === user_permissions && value === true)
+            return commande.run(msg, args, client);
+        }
+        return msg.channel.send(
+          `Vous n'avez pas les droits pour exécuter la commande \`${client.config.prefix}${cmd}\``
+        );
+      }
+    });
+  });
 });
 
 client.on("guildMemberAdd", member => {

@@ -17,4 +17,10 @@ module.exports.help = {
     "Permet de mettre en pause le lecteur sans que le bot ne quitte le canal.",
   syntaxe: "pause",
   cooldown: 5,
+  permissions: {
+    "admin": true,
+    "lieutenants": true,
+    "major": true,
+    "membres": true
+  }
 };

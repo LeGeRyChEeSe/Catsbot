@@ -20,4 +20,10 @@ module.exports.help = {
     "Arrête la piste actuelle, supprime toutes les musiques de la liste d'attente, mais le bot reste connecté.",
   syntaxe: "stop",
   cooldown: 5,
+  permissions: {
+    "admin": true,
+    "lieutenants": true,
+    "major": true,
+    "membres": true
+  }
 };

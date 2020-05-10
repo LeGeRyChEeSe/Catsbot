@@ -111,4 +111,10 @@ module.exports.help = {
   description: "Télécharge un fichier contenu dans le bot.",
   help: "Envoi en MP le fichier/dossier spécifié à l'utilisateur.",
   syntaxe: "dl <fichier>",
+  permissions: {
+    "admin": true,
+    "lieutenants": true,
+    "major": true,
+    "membres": false
+  }
 };

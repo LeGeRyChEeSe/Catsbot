@@ -16,4 +16,10 @@ module.exports.help = {
     "Affiche la liste courante des prochaines pistes jouées dans le canal textuel. Affiche le lien YouTube de la piste en cours de lecture.",
   syntaxe: "liste",
   cooldown: 5,
+  permissions: {
+    "admin": true,
+    "lieutenants": true,
+    "major": true,
+    "membres": true
+  }
 };
