@@ -140,4 +140,10 @@ module.exports.help = {
   help: `Veuillez indiquer un lien YouTube valide vers une musique, ou indiquez simplement le contenu de votre recherche YouTube de cette manière :\n\`c?p snoop dog\`
 puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` pour la 1ère piste de la liste, \`c?p 2\` pour la 2e, etc.`,
   syntaxe: "p <URL> ou <search>",
+  permissions: {
+    "admin": true,
+    "lieutenants": true,
+    "major": true,
+    "membres": true
+  }
 };

@@ -22,4 +22,10 @@ module.exports.help = {
     "Joue la piste suivante en stoppant la piste actuelle. Celle-ci est donc supprimée de la liste d'attente.",
   syntaxe: "skip",
   cooldown: 5,
+  permissions: {
+    "admin": true,
+    "lieutenants": true,
+    "major": true,
+    "membres": true
+  }
 };

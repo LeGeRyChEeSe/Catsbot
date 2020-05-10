@@ -17,4 +17,10 @@ module.exports.help = {
     "Permet de relancer la lecture de la piste audio si le bot est présent dans votre canal vocal.",
   syntaxe: "resume",
   cooldown: 5,
+  permissions: {
+    "admin": true,
+    "lieutenants": true,
+    "major": true,
+    "membres": true
+  }
 };

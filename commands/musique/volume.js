@@ -23,4 +23,10 @@ module.exports.help = {
     "Modifier le volume en passant en paramètre de la commande le volume entre 0 et 100",
   syntaxe: "volume <volume>",
   cooldown: 5,
+  permissions: {
+    "admin": true,
+    "lieutenants": true,
+    "major": false,
+    "membres": false
+  }
 };

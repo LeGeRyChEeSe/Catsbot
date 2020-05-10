@@ -35,4 +35,10 @@ module.exports.help = {
     "Permet d'afficher dans le canal de texte le nom de la piste, sa description, et son URL qui est jouée actuellement dans votre canal vocal.",
   syntaxe: "np",
   cooldown: 5,
+  permissions: {
+    "admin": true,
+    "lieutenants": true,
+    "major": true,
+    "membres": true
+  }
 };

@@ -56,5 +56,11 @@ module.exports.help = {
     "Mentionne toutes les personnes mentionnées par l'utilisateur et envoi un message privé à chacune d'entre elles pour les informer de la mention, et où se situe la mention.",
   help:
     "Nécessite de mentionner quelqu'un via **@** suivi de son nom d'utilisateur.\nPar exemple : c?mp @LeGeRyChEeSe\n\nIl est aussi possible de mentionner plusieurs personnes à la fois en mettant les mentions à la suite les unes des autres.",
-  syntaxe: "mp <mention>"
+  syntaxe: "mp <mention>",
+  permissions: {
+    "admin": true,
+    "lieutenants": true,
+    "major": false,
+    "membres": false
+  }
 };
