@@ -4,65 +4,34 @@
 
 Liste non exhaustive des commandes du bot :
 
-Fiche Descriptive
+c?download : Télécharge un fichier contenu dans le bot.
 
-?embed
+c?embed : Renvoi un embed d'une personne mentionnée
 
-Faire parler Catsbot
+c?help : Renvoi la liste de toutes les commandes disponibles sur le bot
 
-?me
+c?me : Renvoi le message envoyé par l'utilisateur sur le canal en tant que Catsbot
 
-Mentionner un membre v2.0
+c?mp : Mentionne toutes les personnes mentionnées par l'utilisateur et envoi un message privé à chacune d'entre elles pour les informer
+de la mention, et où se situe la mention.
 
-?mp
+c?np : Affiche la piste en cours.
 
-S'assigner un rôle
+c?pause : Permet de mettre en pause la piste actuelle.
 
-?role
+c?p : Permet de lancer une musique sur YouTube soit via un lien, soit par recherche.
 
-Télécharger un fichier
+c?queue : Permet d'afficher la liste d'attente des pistes
 
-?dl
+c?resume : Permet de reprendre le lecture de la piste.
 
-Afficher l'aide
+c?role : Permet de s'attribuer un rôle ou de le retirer si on a déjà ce rôle.
 
-?help
+c?skip : Permet de passer la piste actuelle.
 
-Liste des pistes
+c?stop : Permet de stopper la musique.
 
-?liste
-
-Piste actuelle
-
-?np
-
-Jouer une musique YouTube
-
-?p
-
-Mettre en pause la musique
-
-?pause
-
-Commande en développement (inachevée, p v2.0)
-
-?pp
-
-Relancer la musique
-
-?resume
-
-Jouer la piste suivante
-
-?skip
-
-Arrêter la piste
-
-?stop
-
-Modifier le volume
-
-?volume
+c?volume : Permet de modifier le volume de la piste.
 
 Pour plus d'informations sur une commande :
-Tapez par exemple ?help play pour obtenir des informations supplémentaires sur la commande play.
+Tapez par exemple c?help play pour obtenir des informations supplémentaires sur la commande play.
