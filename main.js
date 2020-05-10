@@ -66,6 +66,7 @@ function loadMessages(dir = "./assets/struct/") {
 
 loadCommands();
 loadFiles();
+console.log(client.commands);
 
 client.on("message", async msg => {
   // Fonction permettant d'exécuter des commandes via le bot
@@ -83,8 +84,11 @@ client.on("message", async msg => {
     .split(/ +/g);
   const cmd = args.shift().toLowerCase();
 
+  /*
   if (!client.commands.has(cmd))
     return console.log(`La commande ${msg.content} n'existe pas.`);
+  */
+
   client.commands.get(cmd).run(msg, args, client);
 });
 

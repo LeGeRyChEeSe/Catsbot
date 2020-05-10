@@ -14,6 +14,7 @@ module.exports.run = (msg) => {
 
 module.exports.help = {
   name: "stop",
+  title: "Arrêter la piste",
   description: "Permet de stopper la musique.",
   help:
     "Arrête la piste actuelle, supprime toutes les musiques de la liste d'attente, mais le bot reste connecté.",

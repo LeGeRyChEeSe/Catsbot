@@ -24,8 +24,8 @@ module.exports.run = (msg, args, client) => {
       msg.channel.send(
         `La liste des fichiers téléchargeables est ici :\n\`${
           client.config.prefix
-        }download ${listeMods.join(
-          "\n" + `${client.config.prefix}download `
+        }dl ${listeMods.join(
+          "\n" + `${client.config.prefix}dl `
         )}\``
       );
     }
@@ -58,8 +58,8 @@ module.exports.run = (msg, args, client) => {
       msg.channel.send(
         `La liste des fichiers téléchargeables est ici :\n\`${
           client.config.prefix
-        }download ${listeVPNs.join(
-          "\n" + `${client.config.prefix}download `
+        }dl ${listeVPNs.join(
+          "\n" + `${client.config.prefix}dl `
         )}\``
       );
     }
@@ -100,14 +100,15 @@ module.exports.run = (msg, args, client) => {
     msg.author.send(
       `Vous devez être dans l'un des canals textuels suivants pour pouvoir exécuter la commande \`${
         client.config.prefix
-      }download\` :\n${Object.values(canals_on).join("\n")}`
+      }dl\` :\n${Object.values(canals_on).join("\n")}`
     );
   }
 };
 
 module.exports.help = {
-  name: "download",
+  name: "dl",
+  title: "Télécharger un fichier",
   description: "Télécharge un fichier contenu dans le bot.",
   help: "Envoi en MP le fichier/dossier spécifié à l'utilisateur.",
-  syntaxe: "download <fichier>",
+  syntaxe: "dl <fichier>",
 };

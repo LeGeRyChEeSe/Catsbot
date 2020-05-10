@@ -29,6 +29,7 @@ module.exports.run = (msg, args, client) => {
 
 module.exports.help = {
   name: "np",
+  title: "Piste actuelle",
   description: "Affiche la piste en cours.",
   help:
     "Permet d'afficher dans le canal de texte le nom de la piste, sa description, et son URL qui est jouée actuellement dans votre canal vocal.",

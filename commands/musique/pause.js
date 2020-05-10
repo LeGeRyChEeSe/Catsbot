@@ -11,6 +11,7 @@ module.exports.run = (msg) => {
 
 module.exports.help = {
   name: "pause",
+  title: "Mettre en pause la musique",
   description: "Permet de mettre en pause la piste actuelle.",
   help:
     "Permet de mettre en pause le lecteur sans que le bot ne quitte le canal.",

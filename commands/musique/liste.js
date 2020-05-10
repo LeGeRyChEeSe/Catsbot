@@ -10,6 +10,7 @@ ${serverQueue.songs.map((song) => `**-** ${song.title}`).join("\n")}
 
 module.exports.help = {
   name: "liste",
+  title: "Liste des pistes",
   description: "Permet d'afficher la liste d'attente des pistes",
   help:
     "Affiche la liste courante des prochaines pistes jouées dans le canal textuel. Affiche le lien YouTube de la piste en cours de lecture.",
