@@ -47,7 +47,7 @@ module.exports.run = (msg, args, client) => {
       );
     });
   });
-  embed.addField("Pour plus d'informations sur une commande :", `Tapez par exemple ${client.config.prefix}help play pour obtenir des informations supplémentaires sur la commande play.`)
+  embed.addField("Pour plus d'informations sur une commande :", `Tapez par exemple ${client.config.prefix}help play pour obtenir des informations supplémentaires sur la commande play.`);
   return msg.channel.send(embed);
 };
 
