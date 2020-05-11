@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports.run = (msg, args, client) => {
   if (args.length !== 0) {
-              const embed = new MessageEmbed()
+    const embed = new MessageEmbed();
 
     client.commands.each(category => {
       category.forEach(help => {
@@ -12,17 +12,24 @@ module.exports.run = (msg, args, client) => {
         ) {
           const info = help.help;
           msg.delete();
-            embed.setTitle(`${client.config.prefix}${info.name}`)
-            embed.setColor("RANDOM")
-            embed.setDescription(info.description)
-            embed.setThumbnail(client.user.displayAvatarURL())
-            embed.addField("Informations supplémentaires :", info.help)
-            embed.addField("Syntaxe :", `\`${client.config.prefix}${info.syntaxe}\``)
-            embed.setTimestamp()
-            embed.setFooter(client.user.username);
+          embed.setTitle(`${client.config.prefix}${info.name}`);
+          embed.setColor("RANDOM");
+          embed.setDescription(info.description);
+          embed.setThumbnail(client.user.displayAvatarURL());
+          embed.addField("Informations supplémentaires :", info.help);
+          embed.addField(
+            "Syntaxe :",
+            `\`${client.config.prefix}${info.syntaxe}\``
+          );
+          embed.setTimestamp();
+          embed.setFooter(client.user.username);
         }
       });
     });
+    embed.addField(
+      "Pour plus d'informations sur une commande :",
+      `Tapez par exemple ${client.config.prefix}help play pour obtenir des informations supplémentaires sur la commande play.`
+    );
     return msg.channel.send(embed);
   }
 
@@ -47,6 +54,10 @@ module.exports.run = (msg, args, client) => {
       );
     });
   });
+  embed.addField(
+    "Pour plus d'informations sur une commande :",
+    `Tapez par exemple ${client.config.prefix}help play pour obtenir des informations supplémentaires sur la commande play.`
+  );
   return msg.channel.send(embed);
 };
 
@@ -58,9 +69,9 @@ module.exports.help = {
     "c?help *<commande>* renvoi les informations supplémentaires de la commande passée en paramètre de c?help.",
   syntaxe: "help <commande>",
   permissions: {
-    "admin": true,
-    "lieutenants": true,
-    "major": true,
-    "membres": true
+    admin: true,
+    lieutenants: true,
+    major: true,
+    membres: true
   }
 };
