@@ -4,6 +4,7 @@ module.exports.run = (msg, args, client) => {
   if (args.length !== 0) {
     const embed = new MessageEmbed();
 
+    // Aide d'une commmande spécifique
     client.commands.each(category => {
       category.forEach(help => {
         if (
@@ -26,10 +27,6 @@ module.exports.run = (msg, args, client) => {
         }
       });
     });
-    embed.addField(
-      "Pour plus d'informations sur une commande :",
-      `Tapez par exemple ${client.config.prefix}help play pour obtenir des informations supplémentaires sur la commande play.`
-    );
     return msg.channel.send(embed);
   }
 
@@ -45,6 +42,7 @@ module.exports.run = (msg, args, client) => {
     .setTimestamp()
     .setFooter(`Dev : ${dev.user.tag} (${dev.presence.status})`);
 
+  // Aide sur l'ensemble des commandes
   client.commands.each(category => {
     category.forEach(commande => {
       embed.addField(
@@ -66,7 +64,7 @@ module.exports.help = {
   title: "Afficher l'aide",
   description: "Renvoi la liste de toutes les commandes disponibles sur le bot",
   help:
-    "c?help *<commande>* renvoi les informations supplémentaires de la commande passée en paramètre de c?help.",
+    "?help *<commande>* renvoi les informations supplémentaires de la commande passée en paramètre de ?help.",
   syntaxe: "help <commande>",
   permissions: {
     admin: true,
