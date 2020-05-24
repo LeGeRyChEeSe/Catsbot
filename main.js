@@ -70,9 +70,9 @@ loadCommands();
 loadFiles();
 
 client.on("message", async msg => {
-  // Fonction permettant d'exécuter des commandes via le bot
+  // Fonction permettant d'exÃ©cuter des commandes via le bot
   // La syntaxe d'une commande est : c?<commande> <argument>
-  // Par exemple je veux m'ajouter le rôle test : c?role test
+  // Par exemple je veux m'ajouter le rÃ´le test : c?role test
   
   if (
     !msg.content.toLowerCase().startsWith(client.config.prefix) ||
@@ -103,7 +103,7 @@ client.on("message", async msg => {
             return commande.run(msg, args, client);
         }
         return msg.channel.send(
-          `Vous n'avez pas les droits pour exécuter la commande \`${client.config.prefix}${cmd}\``
+          `Vous n'avez pas les droits pour exÃ©cuter la commande \`${client.config.prefix}${cmd}\``
         );
       }
     });
@@ -111,14 +111,14 @@ client.on("message", async msg => {
 });
 
 client.on("guildMemberAdd", member => {
-  // Fonction permettant de notifier l'arrivée d'un membre sur le serveur
+  // Fonction permettant de notifier l'arrivÃ©e d'un membre sur le serveur
 
-  loadMessages();
+  //loadMessages();
 
   member.send(`Hey ${member.displayName}, bienvenue sur World War Of Cats :tada::smirk_cat: ! 
 
-Pour des raisons de sécurité, merci d'indiquer ton pseudo via GTA, merkiii !
-**:point_right: Sans réponses de ta part dans les 48h, nous serons contraint de t'expulser de notre serveur, merci d'avance pour ta compréhension.**
+Pour des raisons de sÃ©curitÃ©, merci d'indiquer ton pseudo via GTA, merkiii !
+**:point_right: Sans rÃ©ponses de ta part dans les 48h, nous serons contraint de t'expulser de notre serveur, merci d'avance pour ta comprÃ©hension.**
 
 Hey ${member.displayName}, welcome to World War Of Cats :tada::smirk_cat: !
 
@@ -127,20 +127,20 @@ For security reasons, thanks to write here your GTA nickname ty!
   const channel = client.channels.cache.find(
     r => r.name === client.config.bienvenue
   );
-  channel.send(nouveau_membre);
+  //channel.send(nouveau_membre);
 });
 
 client.on("guildMemberRemove", member => {
-  // Fonction permettant de notifier le départ d'un membre du serveur
+  // Fonction permettant de notifier le dÃ©part d'un membre du serveur
 
   member.send(
-    "J'espère que tu as passé un bon moment avec nous au moins... Sniff :sob:"
+    "J'espÃ¨re que tu as passÃ© un bon moment avec nous au moins... Sniff :sob:"
   );
   const channel = client.channels.cache.find(
     r => r.name === client.config.bienvenue
   );
   channel.send(
-    `Bye bye ${member.displayName}, j'espère que tu seras heureux dans ta nouvelle vie :slight_smile:`
+    `Bye bye ${member.displayName}, j'espÃ¨re que tu seras heureux dans ta nouvelle vie :slight_smile:`
   );
 });
 
@@ -148,7 +148,7 @@ client.login(client.config.token);
 
 client.on("ready", () => {
   client.user.setActivity("chat | ?help");
-  console.log("Je suis prêt !");
+  console.log("Je suis prÃªt !");
 });
 
 client.on("error", console.error);
