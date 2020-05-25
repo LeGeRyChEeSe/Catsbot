@@ -21,7 +21,7 @@ module.exports.run = (msg, args, client) => {
         const afile = file.name;
         listeMods.push(`${afile.replace(regex, "")}`);
       });
-      msg.channel.send(
+      return msg.channel.send(
         `La liste des fichiers téléchargeables est ici :\n\`${
           client.config.prefix
         }dl ${listeMods.join(
@@ -39,7 +39,7 @@ module.exports.run = (msg, args, client) => {
       );
       msg.channel.send(
         `Un message privé contenant le fichier ${file} va vous être envoyé ${msg.author} !`
-      );
+      ).then(message => message.delete({timeout : 5000}));
       return msg.guild.members
         .resolve("440141443877830656")
         .send(`${msg.author} a téléchargé ${file} !`);
@@ -55,7 +55,7 @@ module.exports.run = (msg, args, client) => {
         const afile = file.name;
         listeVPNs.push(`${afile.replace(regex, "")}`);
       });
-      msg.channel.send(
+      return msg.channel.send(
         `La liste des fichiers téléchargeables est ici :\n\`${
           client.config.prefix
         }dl ${listeVPNs.join(
@@ -73,7 +73,7 @@ module.exports.run = (msg, args, client) => {
       );
       msg.channel.send(
         `Un message privé contenant le fichier ${file} va vous être envoyé ${msg.author} !`
-      );
+      ).then(message => message.delete({timeout : 5000}));
       return msg.guild.members
         .resolve("440141443877830656")
         .send(`${msg.author} a téléchargé ${file} !`);
