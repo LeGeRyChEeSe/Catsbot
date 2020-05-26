@@ -134,13 +134,13 @@ client.on("guildMemberRemove", member => {
   // Fonction permettant de notifier le dÃ©part d'un membre du serveur
 
   member.send(
-    "J'espÃ¨re que tu as passÃ© un bon moment avec nous au moins... Sniff :sob:"
+    "J'espère que tu as passé un bon moment avec nous au moins... Sniff :sob:"
   );
   const channel = client.channels.cache.find(
     r => r.name === client.config.bienvenue
   );
   channel.send(
-    `Bye bye ${member.displayName}, j'espÃ¨re que tu seras heureux dans ta nouvelle vie :slight_smile:`
+    `Bye bye ${member.displayName}, j'espère que tu seras heureux dans ta nouvelle vie :slight_smile:`
   );
 });
 
@@ -148,7 +148,7 @@ client.login(client.config.token);
 
 client.on("ready", () => {
   client.user.setActivity("chat | ?help");
-  console.log("Je suis prÃªt !");
+  console.log("Je suis prêt !");
 });
 
 client.on("error", console.error);
