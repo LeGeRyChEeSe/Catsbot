@@ -24,9 +24,7 @@ module.exports.run = (msg, args, client) => {
       msg.channel.send(
         `La liste des fichiers téléchargeables est ici :\n\`${
           client.config.prefix
-        }dl ${listeMods.join(
-          "\n" + `${client.config.prefix}dl `
-        )}\``
+        }dl ${listeMods.join("\n" + `${client.config.prefix}dl `)}\``
       );
     }
 
@@ -58,9 +56,7 @@ module.exports.run = (msg, args, client) => {
       msg.channel.send(
         `La liste des fichiers téléchargeables est ici :\n\`${
           client.config.prefix
-        }dl ${listeVPNs.join(
-          "\n" + `${client.config.prefix}dl `
-        )}\``
+        }dl ${listeVPNs.join("\n" + `${client.config.prefix}dl `)}\``
       );
     }
 
@@ -112,9 +108,9 @@ module.exports.help = {
   help: "Envoi en MP le fichier/dossier spécifié à l'utilisateur.",
   syntaxe: "dl <fichier>",
   permissions: {
-    "admin": true,
-    "lieutenants": true,
-    "major": true,
-    "membres": false
-  }
+    admin: true,
+    lieutenants: true,
+    major: true,
+    membres: false,
+  },
 };

@@ -5,8 +5,8 @@ module.exports.run = (msg, args, client) => {
     const embed = new MessageEmbed();
 
     // Aide d'une commmande spécifique
-    client.commands.each(category => {
-      category.forEach(help => {
+    client.commands.each((category) => {
+      category.forEach((help) => {
         if (
           args[0] === help.help.name ||
           args[0] === `${client.config.prefix}${help.help.name}`
@@ -43,8 +43,8 @@ module.exports.run = (msg, args, client) => {
     .setFooter(`Dev : ${dev.user.tag} (${dev.presence.status})`);
 
   // Aide sur l'ensemble des commandes
-  client.commands.each(category => {
-    category.forEach(commande => {
+  client.commands.each((category) => {
+    category.forEach((commande) => {
       embed.addField(
         commande.help.title,
         `${client.config.prefix}${commande.help.name}`,
@@ -70,6 +70,6 @@ module.exports.help = {
     admin: true,
     lieutenants: true,
     major: true,
-    membres: true
-  }
+    membres: true,
+  },
 };

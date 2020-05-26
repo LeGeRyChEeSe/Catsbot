@@ -10,7 +10,7 @@ module.exports.run = (msg, args, client) => {
       );
       tableau.push(
         `${search_user} est demandé dans le canal **${client.channels.cache.find(
-          r => r.id === channel
+          (r) => r.id === channel
         )}**`
       );
       search_user.send(
@@ -19,7 +19,7 @@ module.exports.run = (msg, args, client) => {
         } te réclame sur le serveur __**${
           msg.guild.name
         }**__ dans le canal **${client.channels.cache.find(
-          r => r.id === channel
+          (r) => r.id === channel
         )}** !`
       );
     } else if (args[mention].startsWith("<@")) {
@@ -29,7 +29,7 @@ module.exports.run = (msg, args, client) => {
       );
       tableau.push(
         `${search_user} est demandé dans le canal **${client.channels.cache.find(
-          r => r.id === channel
+          (r) => r.id === channel
         )}**`
       );
       search_user.send(
@@ -38,7 +38,7 @@ module.exports.run = (msg, args, client) => {
         } t'a mentionné sur le serveur __**${
           msg.guild.name
         }**__ dans le canal **${client.channels.cache.find(
-          r => r.id === channel
+          (r) => r.id === channel
         )}** !`
       );
     } else {
@@ -58,9 +58,9 @@ module.exports.help = {
     "Nécessite de mentionner quelqu'un via **@** suivi de son nom d'utilisateur.\nPar exemple : c?mp @LeGeRyChEeSe\n\nIl est aussi possible de mentionner plusieurs personnes à la fois en mettant les mentions à la suite les unes des autres.",
   syntaxe: "mp <mention>",
   permissions: {
-    "admin": true,
-    "lieutenants": true,
-    "major": false,
-    "membres": false
-  }
+    admin: true,
+    lieutenants: true,
+    major: false,
+    membres: false,
+  },
 };

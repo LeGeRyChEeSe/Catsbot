@@ -12,9 +12,9 @@ module.exports.help = {
     "Il suffit de taper la commande c?me puis de taper votre texte (tous les formatages Markdown sont disponibles) pour que Catsbot écrive ce message à votre place, anonymement.",
   syntaxe: "me <texte>",
   permissions: {
-    "admin": true,
-    "lieutenants": true,
-    "major": false,
-    "membres": false
-  }
+    admin: true,
+    lieutenants: true,
+    major: false,
+    membres: false,
+  },
 };

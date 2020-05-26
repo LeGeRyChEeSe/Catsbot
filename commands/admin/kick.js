@@ -16,13 +16,21 @@ module.exports.run = (msg, args, client) => {
       argument.push(`**${args[mention]}**`);
     }
   }
-  
+
   for (const user of search_user) {
     user.kick(argument.join(" "));
-    user.send(`Vous avez été kick par ${msg.author} vous les raisons suivantes : ${argument.join(" ")}`);
+    user.send(
+      `Vous avez été kick par ${
+        msg.author
+      } vous les raisons suivantes : ${argument.join(" ")}`
+    );
   }
-  
-  msg.channel.send(`Le(s) membre(s) suivants ont été expulsés :\n${search_user.join("\n")}\n\n**Cause(s) :** ${argument.join(" ")}`);
+
+  msg.channel.send(
+    `Le(s) membre(s) suivants ont été expulsés :\n${search_user.join(
+      "\n"
+    )}\n\n**Cause(s) :** ${argument.join(" ")}`
+  );
   msg.delete();
 };
 
@@ -37,6 +45,6 @@ module.exports.help = {
     admin: true,
     lieutenants: false,
     major: false,
-    membres: false
-  }
+    membres: false,
+  },
 };

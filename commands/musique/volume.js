@@ -24,9 +24,9 @@ module.exports.help = {
   syntaxe: "volume <volume>",
   cooldown: 5,
   permissions: {
-    "admin": true,
-    "lieutenants": true,
-    "major": false,
-    "membres": false
-  }
+    admin: true,
+    lieutenants: true,
+    major: false,
+    membres: false,
+  },
 };

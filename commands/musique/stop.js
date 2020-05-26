@@ -21,9 +21,9 @@ module.exports.help = {
   syntaxe: "stop",
   cooldown: 5,
   permissions: {
-    "admin": true,
-    "lieutenants": true,
-    "major": true,
-    "membres": true
-  }
+    admin: true,
+    lieutenants: true,
+    major: true,
+    membres: true,
+  },
 };

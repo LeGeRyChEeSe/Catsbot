@@ -36,9 +36,9 @@ module.exports.help = {
   syntaxe: "np",
   cooldown: 5,
   permissions: {
-    "admin": true,
-    "lieutenants": true,
-    "major": true,
-    "membres": true
-  }
+    admin: true,
+    lieutenants: true,
+    major: true,
+    membres: true,
+  },
 };

@@ -4,7 +4,7 @@ const MusicClient = require("./assets/struct/Client");
 const client = new MusicClient({
   token: process.env.TOKEN,
   prefix: process.env.PREFIX,
-  bienvenue: process.env.BIENVENUE
+  bienvenue: process.env.BIENVENUE,
 });
 client.files = new Collection();
 client.files.hacks = new Collection();
@@ -12,8 +12,8 @@ client.files.vpn = new Collection();
 let nouveau_membre = "";
 
 const loadCommands = (dir = "./commands/") => {
-  readdirSync(dir).forEach(dirs => {
-    const commands = readdirSync(`${dir}/${dirs}/`).filter(files =>
+  readdirSync(dir).forEach((dirs) => {
+    const commands = readdirSync(`${dir}/${dirs}/`).filter((files) =>
       files.endsWith(".js")
     );
     let commandes = new Array();
@@ -27,8 +27,8 @@ const loadCommands = (dir = "./commands/") => {
 };
 
 const loadFiles = (dir = "./assets/downloads/") => {
-  readdirSync(dir).forEach(dirs => {
-    const files = readdirSync(`${dir}/${dirs}`).filter(files =>
+  readdirSync(dir).forEach((dirs) => {
+    const files = readdirSync(`${dir}/${dirs}`).filter((files) =>
       files.endsWith(".zip")
     );
 
@@ -48,7 +48,9 @@ const loadFiles = (dir = "./assets/downloads/") => {
 
 function loadMessages(dir = "./assets/struct/") {
   let random = 0;
-  const message_onadd = readdirSync(dir).filter(file => file.endsWith(".json"));
+  const message_onadd = readdirSync(dir).filter((file) =>
+    file.endsWith(".json")
+  );
   readFile(`${dir}/${message_onadd}`, (error, message_onadd) => {
     const messages = JSON.parse(message_onadd);
 
@@ -69,11 +71,11 @@ function loadMessages(dir = "./assets/struct/") {
 loadCommands();
 loadFiles();
 
-client.on("message", async msg => {
+client.on("message", async (msg) => {
   // Fonction permettant d'exÃ©cuter des commandes via le bot
   // La syntaxe d'une commande est : c?<commande> <argument>
   // Par exemple je veux m'ajouter le rÃ´le test : c?role test
-  
+
   if (
     !msg.content.toLowerCase().startsWith(client.config.prefix) ||
     msg.author.bot
@@ -83,9 +85,9 @@ client.on("message", async msg => {
   let user_permissions = "";
 
   if (msg.member.hasPermission("ADMINISTRATOR")) user_permissions = "admin";
-  else if (msg.member.roles.cache.find(r => r.id === "642256556402016256"))
+  else if (msg.member.roles.cache.find((r) => r.id === "642256556402016256"))
     user_permissions = "lieutenants";
-  else if (msg.member.roles.cache.find(r => r.id === "692058184893857792"))
+  else if (msg.member.roles.cache.find((r) => r.id === "692058184893857792"))
     user_permissions = "major";
   else user_permissions = "membres";
 
@@ -95,8 +97,8 @@ client.on("message", async msg => {
     .split(/ +/g);
   const cmd = args.shift().toLowerCase();
 
-  client.commands.each(category => {
-    category.forEach(commande => {
+  client.commands.each((category) => {
+    category.forEach((commande) => {
       if (commande.help.name === cmd) {
         for (let [key, value] of Object.entries(commande.help.permissions)) {
           if (key === user_permissions && value === true)
@@ -110,7 +112,7 @@ client.on("message", async msg => {
   });
 });
 
-client.on("guildMemberAdd", member => {
+client.on("guildMemberAdd", (member) => {
   // Fonction permettant de notifier l'arrivÃ©e d'un membre sur le serveur
 
   //loadMessages();
@@ -125,19 +127,19 @@ Hey ${member.displayName}, welcome to World War Of Cats :tada::smirk_cat: !
 For security reasons, thanks to write here your GTA nickname ty!
 **:point_right:  Without answers from you within 48 hours, we'll be forced to expel you from our server, thank you in advance for your understanding.**`);
   const channel = client.channels.cache.find(
-    r => r.name === client.config.bienvenue
+    (r) => r.name === client.config.bienvenue
   );
   //channel.send(nouveau_membre);
 });
 
-client.on("guildMemberRemove", member => {
+client.on("guildMemberRemove", (member) => {
   // Fonction permettant de notifier le dÃ©part d'un membre du serveur
 
   member.send(
     "J'espÃ¨re que tu as passÃ© un bon moment avec nous au moins... Sniff :sob:"
   );
   const channel = client.channels.cache.find(
-    r => r.name === client.config.bienvenue
+    (r) => r.name === client.config.bienvenue
   );
   channel.send(
     `Bye bye ${member.displayName}, j'espÃ¨re que tu seras heureux dans ta nouvelle vie :slight_smile:`
