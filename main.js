@@ -1,14 +1,14 @@
-const { readdirSync, readFileSync, readFile } = require("fs");
+const { readdirSync, readFileSync, readFile, writeFile } = require("fs");
 const { Collection, MessageAttachment } = require("discord.js");
 const MusicClient = require("./assets/struct/Client");
 const client = new MusicClient({
-  token: process.env.TOKEN,
-  prefix: process.env.PREFIX,
-  bienvenue: process.env.BIENVENUE
+  token: process.env.TOKEN
 });
 client.files = new Collection();
 client.files.hacks = new Collection();
 client.files.vpn = new Collection();
+client.env = new Collection();
+
 let nouveau_membre = "";
 
 const loadCommands = (dir = "./commands/") => {
@@ -70,15 +70,30 @@ loadCommands();
 loadFiles();
 
 client.on("message", async msg => {
-  // Fonction permettant d'exÃ©cuter des commandes via le bot
-  // La syntaxe d'une commande est : c?<commande> <argument>
-  // Par exemple je veux m'ajouter le rÃ´le test : c?role test
-  
-  if (
-    !msg.content.toLowerCase().startsWith(client.config.prefix) ||
-    msg.author.bot
-  )
-    return;
+  // Fonction permettant d'exécuter des commandes via le bot
+  // La syntaxe d'une commande est : ?<commande> <argument>
+  // Par exemple je veux m'ajouter le rôle test : ?role test
+
+  if (!client.env.has(msg.guild.id)) {
+    const variablesEnv = new Collection();
+    variablesEnv.set("prefix", "?");
+    variablesEnv.set("welcome", "<Put Canal ID here>");
+    variablesEnv.set("modcanal", "<Put Canal ID here>");
+    variablesEnv.set("vpncanal", "<Put Canal ID here>");
+    variablesEnv.set("logUser", "<Put User ID here>");
+
+    client.env.set(msg.guild.id, variablesEnv);
+  }
+
+  writeFile("./assets/struct/config.json", [client.env.get(msg.guild.id).keyArray().toString(), client.env.get(msg.guild.id).array().toString()], err => {
+    if (err) throw err;
+    console.log("Le fichier a été sauvegardé !");
+  });
+  console.log(client.env);
+
+  const prefix = client.env.get(msg.guild.id).get("prefix");
+
+  if (!msg.content.toLowerCase().startsWith(prefix) || msg.author.bot) return;
 
   let user_permissions = "";
 
@@ -90,7 +105,7 @@ client.on("message", async msg => {
   else user_permissions = "membres";
 
   const args = msg.content
-    .slice(client.config.prefix.length)
+    .slice(prefix.length)
     .trim()
     .split(/ +/g);
   const cmd = args.shift().toLowerCase();
@@ -103,7 +118,7 @@ client.on("message", async msg => {
             return commande.run(msg, args, client);
         }
         return msg.channel.send(
-          `Vous n'avez pas les droits pour exÃ©cuter la commande \`${client.config.prefix}${cmd}\``
+          `Vous n'avez pas les droits pour exécuter la commande \`${prefix}${cmd}\``
         );
       }
     });
@@ -111,33 +126,33 @@ client.on("message", async msg => {
 });
 
 client.on("guildMemberAdd", member => {
-  // Fonction permettant de notifier l'arrivÃ©e d'un membre sur le serveur
+  // Fonction permettant de notifier l'arrivée d'un membre sur le serveur
 
   //loadMessages();
 
   member.send(`Hey ${member.displayName}, bienvenue sur World War Of Cats :tada::smirk_cat: ! 
 
-Pour des raisons de sÃ©curitÃ©, merci d'indiquer ton pseudo via GTA, merkiii !
-**:point_right: Sans rÃ©ponses de ta part dans les 48h, nous serons contraint de t'expulser de notre serveur, merci d'avance pour ta comprÃ©hension.**
+Pour des raisons de sécurité, merci d'indiquer ton pseudo via GTA, merkiii !
+**:point_right: Sans réponses de ta part dans les 48h, nous serons contraint de t'expulser de notre serveur, merci d'avance pour ta compréhension.**
 
 Hey ${member.displayName}, welcome to World War Of Cats :tada::smirk_cat: !
 
 For security reasons, thanks to write here your GTA nickname ty!
 **:point_right:  Without answers from you within 48 hours, we'll be forced to expel you from our server, thank you in advance for your understanding.**`);
   const channel = client.channels.cache.find(
-    r => r.name === client.config.bienvenue
+    r => r.name === client.env.get("welcome")
   );
   //channel.send(nouveau_membre);
 });
 
 client.on("guildMemberRemove", member => {
-  // Fonction permettant de notifier le dÃ©part d'un membre du serveur
+  // Fonction permettant de notifier le départ d'un membre du serveur
 
   member.send(
     "J'espère que tu as passé un bon moment avec nous au moins... Sniff :sob:"
   );
   const channel = client.channels.cache.find(
-    r => r.name === client.config.bienvenue
+    r => r.name === client.env.get("welcome")
   );
   channel.send(
     `Bye bye ${member.displayName}, j'espère que tu seras heureux dans ta nouvelle vie :slight_smile:`
@@ -147,7 +162,7 @@ client.on("guildMemberRemove", member => {
 client.login(client.config.token);
 
 client.on("ready", () => {
-  client.user.setActivity("chat | ?help");
+  client.user.setActivity(`chat | ?help`);
   console.log("Je suis prêt !");
 });
 

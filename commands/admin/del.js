@@ -1,17 +1,15 @@
-const { MessageEmbed } = require("discord.js");
-
 module.exports.run = (msg, args) => {
   let nb_messages = parseInt(args, 10) + 1;
   if (nb_messages >= 100) nb_messages = 99;
   msg.channel
-    .bulkDelete(nb_messages, true)
-    .then(messages => {
+    .bulkDelete(nb_messages)
+    .then((messages) => {
       console.log(`Vous avez supprimé ${messages.size - 1} messages.`);
       msg.channel
         .send(`Vous avez supprimé ${messages.size - 1} messages.`)
-        .then(message => message.delete({timeout: 5000}))
+        .then((message) => message.delete({ timeout: 5000 }));
     })
-    .catch(console.error)
+    .catch(console.error);
 };
 
 module.exports.help = {
@@ -25,6 +23,6 @@ module.exports.help = {
     admin: true,
     lieutenants: true,
     major: false,
-    membres: false
-  }
+    membres: false,
+  },
 };

@@ -3,15 +3,17 @@ const { MessageAttachment } = require("discord.js");
 
 module.exports.run = (msg, args, client) => {
   msg.delete();
+  
+  const guild = client.env.get(msg.guild.id);
 
   const regex = /[.][a-z]*/;
   const canals = {
-    modrockstar: "679425098767269897",
-    vpn: "679427469228638220",
+    mod: guild.get("modcanal"),
+    vpn: guild.get("vpncanal"),
   };
 
   // Si l'auteur du message est dans le canal💫modsrockstar-accounts
-  if (msg.channel.id === canals.modrockstar) {
+  if (msg.channel.id === canals.mod) {
     const getFiles = client.files.hacks;
     console.log(getFiles);
 
@@ -21,12 +23,10 @@ module.exports.run = (msg, args, client) => {
         const afile = file.name;
         listeMods.push(`${afile.replace(regex, "")}`);
       });
-      return msg.channel.send(
+      msg.channel.send(
         `La liste des fichiers téléchargeables est ici :\n\`${
-          client.config.prefix
-        }dl ${listeMods.join(
-          "\n" + `${client.config.prefix}dl `
-        )}\``
+          guild.get("prefix")
+        }dl ${listeMods.join("\n" + `${guild.get("prefix")}dl `)}\``
       );
     }
 
@@ -41,7 +41,7 @@ module.exports.run = (msg, args, client) => {
         `Un message privé contenant le fichier ${file} va vous être envoyé ${msg.author} !`
       ).then(message => message.delete({timeout : 5000}));
       return msg.guild.members
-        .resolve("440141443877830656")
+        .resolve(guild.get("logUser"))
         .send(`${msg.author} a téléchargé ${file} !`);
     }
   }
@@ -55,12 +55,10 @@ module.exports.run = (msg, args, client) => {
         const afile = file.name;
         listeVPNs.push(`${afile.replace(regex, "")}`);
       });
-      return msg.channel.send(
+      msg.channel.send(
         `La liste des fichiers téléchargeables est ici :\n\`${
-          client.config.prefix
-        }dl ${listeVPNs.join(
-          "\n" + `${client.config.prefix}dl `
-        )}\``
+          guild.get("prefix")
+        }dl ${listeVPNs.join("\n" + `${guild.get("prefix")}dl `)}\``
       );
     }
 
@@ -75,7 +73,7 @@ module.exports.run = (msg, args, client) => {
         `Un message privé contenant le fichier ${file} va vous être envoyé ${msg.author} !`
       ).then(message => message.delete({timeout : 5000}));
       return msg.guild.members
-        .resolve("440141443877830656")
+        .resolve(guild.get("logUser"))
         .send(`${msg.author} a téléchargé ${file} !`);
     }
   }
@@ -99,7 +97,7 @@ module.exports.run = (msg, args, client) => {
 
     msg.author.send(
       `Vous devez être dans l'un des canals textuels suivants pour pouvoir exécuter la commande \`${
-        client.config.prefix
+        guild.get("prefix")
       }dl\` :\n${Object.values(canals_on).join("\n")}`
     );
   }
@@ -112,9 +110,9 @@ module.exports.help = {
   help: "Envoi en MP le fichier/dossier spécifié à l'utilisateur.",
   syntaxe: "dl <fichier>",
   permissions: {
-    "admin": true,
-    "lieutenants": true,
-    "major": true,
-    "membres": false
-  }
+    admin: true,
+    lieutenants: true,
+    major: true,
+    membres: false,
+  },
 };

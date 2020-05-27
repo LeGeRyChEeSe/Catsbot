@@ -17,9 +17,9 @@ module.exports.help = {
   syntaxe: "liste",
   cooldown: 5,
   permissions: {
-    "admin": true,
-    "lieutenants": true,
-    "major": true,
-    "membres": true
-  }
+    admin: true,
+    lieutenants: true,
+    major: true,
+    membres: true,
+  },
 };

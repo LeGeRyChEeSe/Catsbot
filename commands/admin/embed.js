@@ -39,9 +39,9 @@ module.exports.help = {
     "Cette fiche permet d'afficher un petit encadré décrivant plusieurs informations concernant la personne mentionnée",
   syntaxe: "embed <mention>",
   permissions: {
-    "admin": true,
-    "lieutenants": true,
-    "major": false,
-    "membres": false
-  }
+    admin: true,
+    lieutenants: true,
+    major: false,
+    membres: false,
+  },
 };

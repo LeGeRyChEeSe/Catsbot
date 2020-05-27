@@ -141,9 +141,9 @@ module.exports.help = {
 puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` pour la 1ère piste de la liste, \`c?p 2\` pour la 2e, etc.`,
   syntaxe: "p <URL> ou <search>",
   permissions: {
-    "admin": true,
-    "lieutenants": true,
-    "major": true,
-    "membres": true
-  }
+    admin: true,
+    lieutenants: true,
+    major: true,
+    membres: true,
+  },
 };

@@ -16,13 +16,21 @@ module.exports.run = (msg, args, client) => {
       argument.push(`**${args[mention]}**`);
     }
   }
-  
+
   for (const user of search_user) {
     user.kick(argument.join(" "));
-    user.send(`Vous avez été kick par ${msg.author} vous les raisons suivantes : ${argument.join(" ")}`);
+    user.send(
+      `Vous avez été kick par ${
+        msg.author
+      } vous les raisons suivantes : ${argument.join(" ")}`
+    );
   }
-  
-  msg.channel.send(`Le(s) membre(s) suivants ont été expulsés :\n${search_user.join("\n")}\n\n**Cause(s) :** ${argument.join(" ")}`);
+
+  msg.channel.send(
+    `Le(s) membre(s) suivants ont été expulsés :\n${search_user.join(
+      "\n"
+    )}\n\n**Cause(s) :** ${argument.join(" ")}`
+  );
   msg.delete();
 };
 
@@ -32,11 +40,11 @@ module.exports.help = {
   description: "Permet d'expulser un membre en le mentionnant",
   help:
     "Expulser un membre en entrant comme argument de la commande le nom du membre en le mentionnant. Le message sera automatiquement supprimé, et un message d'alerte vous sera envoyé ainsi qu'au membre expulsé.",
-  syntaxe: "kick <membre>",
+  syntaxe: "kick <membre> <raison>",
   permissions: {
     admin: true,
     lieutenants: false,
     major: false,
-    membres: false
-  }
+    membres: false,
+  },
 };

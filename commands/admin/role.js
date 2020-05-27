@@ -23,9 +23,9 @@ module.exports.help = {
     "Un membre peut s'attribuer un rôle auquel il a les droits d'attribution.",
   syntaxe: "role <role>",
   permissions: {
-    "admin": true,
-    "lieutenants": true,
-    "major": false,
-    "membres": false
-  }
+    admin: true,
+    lieutenants: true,
+    major: false,
+    membres: false,
+  },
 };

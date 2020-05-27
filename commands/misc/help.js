@@ -1,26 +1,28 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = (msg, args, client) => {
+  const prefix = client.env.get(msg.guild.id).get("prefix");
+  
   if (args.length !== 0) {
     const embed = new MessageEmbed();
 
     // Aide d'une commmande spécifique
-    client.commands.each(category => {
-      category.forEach(help => {
+    client.commands.each((category) => {
+      category.forEach((help) => {
         if (
           args[0] === help.help.name ||
-          args[0] === `${client.config.prefix}${help.help.name}`
+          args[0] === `${prefix}${help.help.name}`
         ) {
           const info = help.help;
           msg.delete();
-          embed.setTitle(`${client.config.prefix}${info.name}`);
+          embed.setTitle(`${prefix}${info.name}`);
           embed.setColor("RANDOM");
           embed.setDescription(info.description);
           embed.setThumbnail(client.user.displayAvatarURL());
           embed.addField("Informations supplémentaires :", info.help);
           embed.addField(
             "Syntaxe :",
-            `\`${client.config.prefix}${info.syntaxe}\``
+            `\`${prefix}${info.syntaxe}\``
           );
           embed.setTimestamp();
           embed.setFooter(client.user.username);
@@ -43,18 +45,18 @@ module.exports.run = (msg, args, client) => {
     .setFooter(`Dev : ${dev.user.tag} (${dev.presence.status})`);
 
   // Aide sur l'ensemble des commandes
-  client.commands.each(category => {
-    category.forEach(commande => {
+  client.commands.each((category) => {
+    category.forEach((commande) => {
       embed.addField(
         commande.help.title,
-        `${client.config.prefix}${commande.help.name}`,
+        `${prefix}${commande.help.name}`,
         true
       );
     });
   });
   embed.addField(
     "Pour plus d'informations sur une commande :",
-    `Tapez par exemple ${client.config.prefix}help p pour obtenir des informations supplémentaires sur la commande play.`
+    `Tapez par exemple ${prefix}help p pour obtenir des informations supplémentaires sur la commande play.`
   );
   return msg.channel.send(embed);
 };
@@ -70,6 +72,6 @@ module.exports.help = {
     admin: true,
     lieutenants: true,
     major: true,
-    membres: true
-  }
+    membres: true,
+  },
 };
