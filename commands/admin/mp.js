@@ -51,7 +51,7 @@ module.exports.run = (msg, args, client) => {
 
 module.exports.help = {
   name: "mp",
-  title: "Mentionner un membre v2.0",
+  title: "Mentionner un membre",
   description:
     "Mentionne toutes les personnes mentionnées par l'utilisateur et envoi un message privé à chacune d'entre elles pour les informer de la mention, et où se situe la mention.",
   help:

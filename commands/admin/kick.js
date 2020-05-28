@@ -40,7 +40,7 @@ module.exports.help = {
   description: "Permet d'expulser un membre en le mentionnant",
   help:
     "Expulser un membre en entrant comme argument de la commande le nom du membre en le mentionnant. Le message sera automatiquement supprimé, et un message d'alerte vous sera envoyé ainsi qu'au membre expulsé.",
-  syntaxe: "kick <membre>",
+  syntaxe: "kick <membre> <raison>",
   permissions: {
     admin: true,
     lieutenants: false,
