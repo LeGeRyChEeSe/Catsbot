@@ -12,8 +12,8 @@ client.env = new Collection();
 let nouveau_membre = "";
 
 const loadCommands = (dir = "./commands/") => {
-  readdirSync(dir).forEach(dirs => {
-    const commands = readdirSync(`${dir}/${dirs}/`).filter(files =>
+  readdirSync(dir).forEach((dirs) => {
+    const commands = readdirSync(`${dir}/${dirs}/`).filter((files) =>
       files.endsWith(".js")
     );
     let commandes = new Array();
@@ -27,8 +27,8 @@ const loadCommands = (dir = "./commands/") => {
 };
 
 const loadFiles = (dir = "./assets/downloads/") => {
-  readdirSync(dir).forEach(dirs => {
-    const files = readdirSync(`${dir}/${dirs}`).filter(files =>
+  readdirSync(dir).forEach((dirs) => {
+    const files = readdirSync(`${dir}/${dirs}`).filter((files) =>
       files.endsWith(".zip")
     );
 
@@ -48,7 +48,9 @@ const loadFiles = (dir = "./assets/downloads/") => {
 
 function loadMessages(dir = "./assets/struct/") {
   let random = 0;
-  const message_onadd = readdirSync(dir).filter(file => file.endsWith(".json"));
+  const message_onadd = readdirSync(dir).filter((file) =>
+    file.endsWith(".json")
+  );
   readFile(`${dir}/${message_onadd}`, (error, message_onadd) => {
     const messages = JSON.parse(message_onadd);
 
@@ -119,9 +121,9 @@ client.on("message", async msg => {
   let user_permissions = "";
 
   if (msg.member.hasPermission("ADMINISTRATOR")) user_permissions = "admin";
-  else if (msg.member.roles.cache.find(r => r.id === "642256556402016256"))
+  else if (msg.member.roles.cache.find((r) => r.id === "642256556402016256"))
     user_permissions = "lieutenants";
-  else if (msg.member.roles.cache.find(r => r.id === "692058184893857792"))
+  else if (msg.member.roles.cache.find((r) => r.id === "692058184893857792"))
     user_permissions = "major";
   else user_permissions = "membres";
 
@@ -131,8 +133,8 @@ client.on("message", async msg => {
     .split(/ +/g);
   const cmd = args.shift().toLowerCase();
 
-  client.commands.each(category => {
-    category.forEach(commande => {
+  client.commands.each((category) => {
+    category.forEach((commande) => {
       if (commande.help.name === cmd) {
         for (let [key, value] of Object.entries(commande.help.permissions)) {
           if (key === user_permissions && value === true)
