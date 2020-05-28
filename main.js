@@ -74,8 +74,9 @@ client.on("message", async msg => {
   // La syntaxe d'une commande est : ?<commande> <argument>
   // Par exemple je veux m'ajouter le rôle test : ?role test
 
+  const variablesEnv = new Collection();
+
   if (!client.env.has(msg.guild.id)) {
-    const variablesEnv = new Collection();
     variablesEnv.set("prefix", "?");
     variablesEnv.set("welcome", "<Put Canal ID here>");
     variablesEnv.set("modcanal", "<Put Canal ID here>");
@@ -84,12 +85,32 @@ client.on("message", async msg => {
 
     client.env.set(msg.guild.id, variablesEnv);
   }
+  
+  console.log(client.env);
 
-  writeFile("./assets/struct/config.json", [client.env.get(msg.guild.id).keyArray().toString(), client.env.get(msg.guild.id).array().toString()], err => {
+  const guild = client.env.get(msg.guild.id);
+  
+  console.log(guild);
+
+  let guildConfig = {
+    prefix: "a"
+  };
+
+  guild.each((value, key) => {
+    Object.defineProperty(guildConfig, guild, {
+      key: value
+    })
+    console.log(guildConfig);
+  });
+
+  let configJSON = JSON.stringify(guildConfig);
+
+  writeFile("./assets/struct/config.json", configJSON, err => {
     if (err) throw err;
     console.log("Le fichier a été sauvegardé !");
   });
-  console.log(client.env);
+
+  console.log(require("./assets/struct/config.json"));
 
   const prefix = client.env.get(msg.guild.id).get("prefix");
 
@@ -152,7 +173,7 @@ client.on("guildMemberRemove", member => {
     "J'espère que tu as passé un bon moment avec nous au moins... Sniff :sob:"
   );
   const channel = client.channels.cache.find(
-    r => r.name === client.env.get("welcome")
+    r => r.name === client.env.get(member.guild.id).get("welcome")
   );
   channel.send(
     `Bye bye ${member.displayName}, j'espère que tu seras heureux dans ta nouvelle vie :slight_smile:`
