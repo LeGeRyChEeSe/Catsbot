@@ -91,8 +91,9 @@ client.on("message", async msg => {
   // Fonction permettant d'exécuter des commandes via le bot
   // La syntaxe d'une commande est : ?<commande> <argument>
   // Par exemple je veux m'ajouter le rôle test : ?role test
+  let prefix;
 
-  const prefix = client.env.get(msg.guild.id).get("prefix");
+  if (msg.guild) prefix = client.env.get(msg.guild.id).get("prefix");
 
   if (!msg.content.toLowerCase().startsWith(prefix) || msg.author.bot) return;
 
@@ -114,9 +115,11 @@ client.on("message", async msg => {
   const envVariables = client.env.get(msg.guild.id);
 
   if (msg.member.hasPermission("ADMINISTRATOR")) user_permissions = "admin";
-  else if (msg.member.roles.cache.find(r => r.id === envVariables.lieutenants))
+  else if (
+    msg.member.roles.cache.find(r => r.id === envVariables.get("lieutenants"))
+  )
     user_permissions = "lieutenants";
-  else if (msg.member.roles.cache.find(r => r.id === envVariables.major))
+  else if (msg.member.roles.cache.find(r => r.id === envVariables.get("major")))
     user_permissions = "major";
   else user_permissions = "membres";
 

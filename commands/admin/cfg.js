@@ -28,9 +28,9 @@ module.exports.run = (msg, args, client) => {
 
   let toJSON = new Array();
 
-  function envConfig(guildID, envVariables2) {
+  function envConfig(guildID, envVariables) {
     this.guildID = guildID;
-    this.envVariables = envVariables2;
+    this.envVariables = envVariables;
   }
 
   client.env.each((collec, guildID) => {
