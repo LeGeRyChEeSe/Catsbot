@@ -35,14 +35,14 @@ module.exports.run = (msg, args, client) => {
 
   let toJSON = new Array();
 
-  function envConfig(guildID, envVariables) {
+  function envConfig(guildID, envVariables2) {
     this.guildID = guildID;
-    this.envVariables = envVariables;
+    this.envVariables = envVariables2;
   }
 
   client.env.each((collec, guildID) => {
     
-    console.log(collec);
+    console.log(`collec (${guildID}): `, collec);
     
     let envCfg = new envConfig(guildID, {
         prefix: collec.get("prefix"),
@@ -55,11 +55,11 @@ module.exports.run = (msg, args, client) => {
     toJSON.push(envCfg);
   });
 
-  if (!msg.author.bot) console.log(toJSON);
+  if (!msg.author.bot) console.log("toJSON : ", toJSON);
 
   let configJSON = JSON.stringify(toJSON);
   
-  console.log(configJSON);
+  console.log("configJSON : ", configJSON);
 
   writeFile("./assets/struct/config.json", configJSON, err => {
     if (err) throw err;
