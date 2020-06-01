@@ -1,4 +1,5 @@
 const { MessageEmbed } = require("discord.js");
+const { writeFile } = require("fs");
 
 module.exports.run = (msg, args, client) => {
   const guild = client.env.get(msg.guild.id);
@@ -7,21 +8,62 @@ module.exports.run = (msg, args, client) => {
   let valeur = guild.get(args[0]);
 
   if (!args.length) {
-    return msg.channel.send(
-      `La liste des variables d'environnement modifiables est ici :\n\n${guild
-        .keyArray()
-        .join(
-          "\n"
-        )}\n\nPour connaître le contenu d'une variable veuillez taper la commande ?cfg <variable> en remplacant <variable> par le nom de la variable. Par exemple ${prefix}cfg prefix renvoi par défaut la valeur "${prefix}".`
+    let envVariables = "La liste des variables d'environnement modifiables est ici :\n\n";
+    guild.each((value, key) => {
+      envVariables = envVariables.concat(key," : ", value, "\n");
+    })
+    
+    msg.channel.send(
+      `${envVariables}\n\nPour connaître le contenu d'une variable veuillez taper la commande ?cfg <variable> en remplacant <variable> par le nom de la variable. Par exemple ${prefix}cfg prefix renvoi par défaut la valeur "${prefix}".`
     );
   } else if (args.length === 1 && guild.has(args[0])) {
-    return msg.channel.send(
+    msg.channel.send(
       `${variable} : ${valeur}\n\nPour modifier cette variable, tapez ${prefix}cfg ${variable} <nouvelle valeur>`
     );
   } else if (args.length > 1 && guild.has(args[0])) {
     guild.set(args[0], args[1]);
-    return msg.channel.send(`${variable} : ${args[1]}`);
+    msg.channel.send(`${variable} : ${args[1]}`);
   }
+
+  let envVariables = {
+    prefix: "?",
+    welcome: "",
+    modcanal: "",
+    vpncanal: "",
+    logUser: ""
+  };
+
+  let toJSON = new Array();
+
+  function envConfig(guildID, envVariables) {
+    this.guildID = guildID;
+    this.envVariables = envVariables;
+  }
+
+  client.env.each((collec, guildID) => {
+    
+    console.log(collec);
+    
+    let envCfg = new envConfig(guildID, {
+        prefix: collec.get("prefix"),
+        welcome: collec.get("welcome"),
+        modcanal: collec.get("modcanal"),
+        vpncanal: collec.get("vpncanal"),
+        logUser: collec.get("logUser")
+      });
+    
+    toJSON.push(envCfg);
+  });
+
+  if (!msg.author.bot) console.log(toJSON);
+
+  let configJSON = JSON.stringify(toJSON);
+  
+  console.log(configJSON);
+
+  writeFile("./assets/struct/config.json", configJSON, err => {
+    if (err) throw err;
+  });
 };
 
 module.exports.help = {

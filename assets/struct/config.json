@@ -1,1 +1,22 @@
-{"prefix":"a"}
+[
+  {
+    "guildID": "642254995923927040",
+    "envVariables": {
+      "prefix": "?",
+      "welcome": "<Put Canal ID here>",
+      "modcanal": "<Put Canal ID here>",
+      "vpncanal": "<Put Canal ID here>",
+      "logUser": "<Put User ID here>"
+    }
+  },
+  {
+    "guildID": "709180675218997331",
+    "envVariables": {
+      "prefix": "?",
+      "welcome": "<Put Canal ID here>",
+      "modcanal": "<Put Canal ID here>",
+      "vpncanal": "<Put Canal ID here>",
+      "logUser": "<Put User ID here>"
+    }
+  }
+]
