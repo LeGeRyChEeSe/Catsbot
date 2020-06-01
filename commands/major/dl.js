@@ -23,7 +23,7 @@ module.exports.run = (msg, args, client) => {
         const afile = file.name;
         listeMods.push(`${afile.replace(regex, "")}`);
       });
-      msg.channel.send(
+      return msg.channel.send(
         `La liste des fichiers téléchargeables est ici :\n\`${
           guild.get("prefix")
         }dl ${listeMods.join("\n" + `${guild.get("prefix")}dl `)}\``
@@ -55,7 +55,7 @@ module.exports.run = (msg, args, client) => {
         const afile = file.name;
         listeVPNs.push(`${afile.replace(regex, "")}`);
       });
-      msg.channel.send(
+      return msg.channel.send(
         `La liste des fichiers téléchargeables est ici :\n\`${
           guild.get("prefix")
         }dl ${listeVPNs.join("\n" + `${guild.get("prefix")}dl `)}\``
