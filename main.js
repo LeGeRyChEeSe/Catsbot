@@ -66,8 +66,28 @@ function loadMessages(dir = "./assets/struct/") {
   });
 }
 
+function loadEnvVariables(JSONsave = require("./assets/struct/config.json")) {
+  console.log("JSONsave : ", JSONsave);
+
+  JSONsave.forEach(object => {
+    const envVariables = object.envVariables;
+    const variablesEnv = new Collection();
+
+    variablesEnv.set("prefix", envVariables.prefix);
+    variablesEnv.set("welcome", envVariables.welcome);
+    variablesEnv.set("modcanal", envVariables.modcanal);
+    variablesEnv.set("vpncanal", envVariables.vpncanal);
+    variablesEnv.set("logUser", envVariables.logUser);
+
+    client.env.set(object.guildID, variablesEnv);
+  });
+  
+  console.log("client.env : ", client.env);
+}
+
 loadCommands();
 loadFiles();
+loadEnvVariables();
 
 client.on("message", async msg => {
   // Fonction permettant d'exécuter des commandes via le bot
@@ -75,23 +95,7 @@ client.on("message", async msg => {
   // Par exemple je veux m'ajouter le rôle test : ?role test
 
   const variablesEnv = new Collection();
-  let Config;
-
-  try {
-    Config = require("./assets/struct/config.json");
-    Config.forEach((object, index) => {
-      const envVariables = object.envVariables;
-
-      variablesEnv.set("prefix", envVariables.prefix);
-      variablesEnv.set("welcome", envVariables.welcome);
-      variablesEnv.set("modcanal", envVariables.modcanal);
-      variablesEnv.set("vpncanal", envVariables.vpncanal);
-      variablesEnv.set("logUser", envVariables.logUser);
-
-      client.env.set(object.guildID, variablesEnv);
-    });
-  } catch (err) {}
-
+  
   if (!client.env.has(msg.guild.id)) {
     variablesEnv.set("prefix", "?");
     variablesEnv.set("welcome", "<Put Canal ID here>");
