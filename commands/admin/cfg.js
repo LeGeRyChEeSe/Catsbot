@@ -8,11 +8,12 @@ module.exports.run = (msg, args, client) => {
   let valeur = guild.get(args[0]);
 
   if (!args.length) {
-    let envVariables = "La liste des variables d'environnement modifiables est ici :\n\n";
+    let envVariables =
+      "La liste des variables d'environnement modifiables est ici :\n\n";
     guild.each((value, key) => {
-      envVariables = envVariables.concat(key," : ", value, "\n");
-    })
-    
+      envVariables = envVariables.concat(key, " : ", value, "\n");
+    });
+
     msg.channel.send(
       `${envVariables}\n\nPour connaître le contenu d'une variable veuillez taper la commande ?cfg <variable> en remplacant <variable> par le nom de la variable. Par exemple ${prefix}cfg prefix renvoi par défaut la valeur "${prefix}".`
     );
@@ -25,14 +26,6 @@ module.exports.run = (msg, args, client) => {
     msg.channel.send(`${variable} : ${args[1]}`);
   }
 
-  let envVariables = {
-    prefix: "?",
-    welcome: "",
-    modcanal: "",
-    vpncanal: "",
-    logUser: ""
-  };
-
   let toJSON = new Array();
 
   function envConfig(guildID, envVariables2) {
@@ -41,25 +34,20 @@ module.exports.run = (msg, args, client) => {
   }
 
   client.env.each((collec, guildID) => {
-    
-    console.log(`collec (${guildID}): `, collec);
-    
     let envCfg = new envConfig(guildID, {
-        prefix: collec.get("prefix"),
-        welcome: collec.get("welcome"),
-        modcanal: collec.get("modcanal"),
-        vpncanal: collec.get("vpncanal"),
-        logUser: collec.get("logUser")
-      });
-    
+      prefix: collec.get("prefix"),
+      welcome: collec.get("welcome"),
+      modcanal: collec.get("modcanal"),
+      vpncanal: collec.get("vpncanal"),
+      logUser: collec.get("logUser"),
+      lieutenants: collec.get("lieutenants"),
+      major: collec.get("major")
+    });
+
     toJSON.push(envCfg);
   });
 
-  if (!msg.author.bot) console.log("toJSON : ", toJSON);
-
   let configJSON = JSON.stringify(toJSON);
-  
-  console.log("configJSON : ", configJSON);
 
   writeFile("./assets/struct/config.json", configJSON, err => {
     if (err) throw err;
@@ -75,7 +63,7 @@ module.exports.help = {
   syntaxe: 'cfg <variable> "<valeur>"',
   permissions: {
     admin: true,
-    lieutenants: true,
+    lieutenants: false,
     major: false,
     membres: false
   }

@@ -67,8 +67,6 @@ function loadMessages(dir = "./assets/struct/") {
 }
 
 function loadEnvVariables(JSONsave = require("./assets/struct/config.json")) {
-  console.log("JSONsave : ", JSONsave);
-
   JSONsave.forEach(object => {
     const envVariables = object.envVariables;
     const variablesEnv = new Collection();
@@ -78,11 +76,11 @@ function loadEnvVariables(JSONsave = require("./assets/struct/config.json")) {
     variablesEnv.set("modcanal", envVariables.modcanal);
     variablesEnv.set("vpncanal", envVariables.vpncanal);
     variablesEnv.set("logUser", envVariables.logUser);
+    variablesEnv.set("lieutenants", envVariables.lieutenants);
+    variablesEnv.set("major", envVariables.major);
 
     client.env.set(object.guildID, variablesEnv);
   });
-  
-  console.log("client.env : ", client.env);
 }
 
 loadCommands();
@@ -94,28 +92,31 @@ client.on("message", async msg => {
   // La syntaxe d'une commande est : ?<commande> <argument>
   // Par exemple je veux m'ajouter le rôle test : ?role test
 
+  const prefix = client.env.get(msg.guild.id).get("prefix");
+
+  if (!msg.content.toLowerCase().startsWith(prefix) || msg.author.bot) return;
+
   const variablesEnv = new Collection();
-  
+
   if (!client.env.has(msg.guild.id)) {
     variablesEnv.set("prefix", "?");
     variablesEnv.set("welcome", "<Put Canal ID here>");
     variablesEnv.set("modcanal", "<Put Canal ID here>");
     variablesEnv.set("vpncanal", "<Put Canal ID here>");
     variablesEnv.set("logUser", "<Put User ID here>");
+    variablesEnv.set("lieutenants", "<Put Role ID here>");
+    variablesEnv.set("major", "<Put Role ID here>");
 
     client.env.set(msg.guild.id, variablesEnv);
   }
 
-  const prefix = client.env.get(msg.guild.id).get("prefix");
-
-  if (!msg.content.toLowerCase().startsWith(prefix) || msg.author.bot) return;
-
   let user_permissions = "";
+  const envVariables = client.env.get(msg.guild.id);
 
   if (msg.member.hasPermission("ADMINISTRATOR")) user_permissions = "admin";
-  else if (msg.member.roles.cache.find(r => r.id === "642256556402016256"))
+  else if (msg.member.roles.cache.find(r => r.id === envVariables.lieutenants))
     user_permissions = "lieutenants";
-  else if (msg.member.roles.cache.find(r => r.id === "692058184893857792"))
+  else if (msg.member.roles.cache.find(r => r.id === envVariables.major))
     user_permissions = "major";
   else user_permissions = "membres";
 
@@ -130,13 +131,13 @@ client.on("message", async msg => {
       if (commande.help.name === cmd) {
         for (let [key, value] of Object.entries(commande.help.permissions)) {
           if (key === user_permissions && value === true) {
-            commande.run(msg, args, client);
-            break;
-          } else
-            msg.channel.send(
-              `Vous n'avez pas les droits ${key} pour exécuter la commande \`${prefix}${cmd}\``
-            );
+            msg.delete();
+            return commande.run(msg, args, client);
+          }
         }
+        msg.channel.send(
+          `Vous n'avez pas les droits nécessaires pour exécuter la commande \`${prefix}${cmd}\` ${msg.author}`
+        );
       }
     });
   });

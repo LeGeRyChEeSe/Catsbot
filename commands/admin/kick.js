@@ -22,7 +22,7 @@ module.exports.run = (msg, args, client) => {
     user.send(
       `Vous avez été kick par ${
         msg.author
-      } vous les raisons suivantes : ${argument.join(" ")}`
+      } du serveur ${msg.guild} vous les raisons suivantes : ${argument.join(" ")}`
     );
   }
 
