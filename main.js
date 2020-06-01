@@ -12,8 +12,8 @@ client.env = new Collection();
 let nouveau_membre = "";
 
 const loadCommands = (dir = "./commands/") => {
-  readdirSync(dir).forEach((dirs) => {
-    const commands = readdirSync(`${dir}/${dirs}/`).filter((files) =>
+  readdirSync(dir).forEach(dirs => {
+    const commands = readdirSync(`${dir}/${dirs}/`).filter(files =>
       files.endsWith(".js")
     );
     let commandes = new Array();
@@ -27,8 +27,8 @@ const loadCommands = (dir = "./commands/") => {
 };
 
 const loadFiles = (dir = "./assets/downloads/") => {
-  readdirSync(dir).forEach((dirs) => {
-    const files = readdirSync(`${dir}/${dirs}`).filter((files) =>
+  readdirSync(dir).forEach(dirs => {
+    const files = readdirSync(`${dir}/${dirs}`).filter(files =>
       files.endsWith(".zip")
     );
 
@@ -48,9 +48,7 @@ const loadFiles = (dir = "./assets/downloads/") => {
 
 function loadMessages(dir = "./assets/struct/") {
   let random = 0;
-  const message_onadd = readdirSync(dir).filter((file) =>
-    file.endsWith(".json")
-  );
+  const message_onadd = readdirSync(dir).filter(file => file.endsWith(".json"));
   readFile(`${dir}/${message_onadd}`, (error, message_onadd) => {
     const messages = JSON.parse(message_onadd);
 
@@ -77,6 +75,22 @@ client.on("message", async msg => {
   // Par exemple je veux m'ajouter le rôle test : ?role test
 
   const variablesEnv = new Collection();
+  let Config;
+
+  try {
+    Config = require("./assets/struct/config.json");
+    Config.forEach((object, index) => {
+      const envVariables = object.envVariables;
+
+      variablesEnv.set("prefix", envVariables.prefix);
+      variablesEnv.set("welcome", envVariables.welcome);
+      variablesEnv.set("modcanal", envVariables.modcanal);
+      variablesEnv.set("vpncanal", envVariables.vpncanal);
+      variablesEnv.set("logUser", envVariables.logUser);
+
+      client.env.set(object.guildID, variablesEnv);
+    });
+  } catch (err) {}
 
   if (!client.env.has(msg.guild.id)) {
     variablesEnv.set("prefix", "?");
@@ -87,32 +101,6 @@ client.on("message", async msg => {
 
     client.env.set(msg.guild.id, variablesEnv);
   }
-  
-  console.log(client.env);
-
-  const guild = client.env.get(msg.guild.id);
-  
-  console.log(guild);
-
-  let guildConfig = {
-    prefix: "a"
-  };
-
-  guild.each((value, key) => {
-    Object.defineProperty(guildConfig, guild, {
-      key: value
-    })
-    console.log(guildConfig);
-  });
-
-  let configJSON = JSON.stringify(guildConfig);
-
-  writeFile("./assets/struct/config.json", configJSON, err => {
-    if (err) throw err;
-    console.log("Le fichier a été sauvegardé !");
-  });
-
-  console.log(require("./assets/struct/config.json"));
 
   const prefix = client.env.get(msg.guild.id).get("prefix");
 
@@ -121,9 +109,9 @@ client.on("message", async msg => {
   let user_permissions = "";
 
   if (msg.member.hasPermission("ADMINISTRATOR")) user_permissions = "admin";
-  else if (msg.member.roles.cache.find((r) => r.id === "642256556402016256"))
+  else if (msg.member.roles.cache.find(r => r.id === "642256556402016256"))
     user_permissions = "lieutenants";
-  else if (msg.member.roles.cache.find((r) => r.id === "692058184893857792"))
+  else if (msg.member.roles.cache.find(r => r.id === "692058184893857792"))
     user_permissions = "major";
   else user_permissions = "membres";
 
@@ -133,16 +121,18 @@ client.on("message", async msg => {
     .split(/ +/g);
   const cmd = args.shift().toLowerCase();
 
-  client.commands.each((category) => {
-    category.forEach((commande) => {
+  client.commands.each(category => {
+    category.forEach(commande => {
       if (commande.help.name === cmd) {
         for (let [key, value] of Object.entries(commande.help.permissions)) {
-          if (key === user_permissions && value === true)
-            return commande.run(msg, args, client);
+          if (key === user_permissions && value === true) {
+            commande.run(msg, args, client);
+            break;
+          } else
+            msg.channel.send(
+              `Vous n'avez pas les droits ${key} pour exécuter la commande \`${prefix}${cmd}\``
+            );
         }
-        return msg.channel.send(
-          `Vous n'avez pas les droits pour exécuter la commande \`${prefix}${cmd}\``
-        );
       }
     });
   });
