@@ -24,7 +24,6 @@ module.exports.run = (msg, args, client) => {
       serverQueue.songs[0].image[serverQueue.songs[0].image.length - 1].url
     );
   msg.channel.send(embed);
-  msg.delete();
 };
 
 module.exports.help = {

@@ -1,5 +1,4 @@
 module.exports.run = (msg) => {
-  msg.delete();
   const serverQueue = msg.client.queue.get(msg.guild.id);
   if (serverQueue && !serverQueue.playing) {
     serverQueue.playing = true;

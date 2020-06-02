@@ -7,7 +7,6 @@ module.exports.run = (msg) => {
   else if (user.presence.status === "online") status_user = " :green_circle: ";
   else if (user.presence.status === "idle") status_user = " :orange_circle: ";
   else if (user.presence.status === "dnd") status_user = " :red_circle: ";
-  msg.delete();
   const embed = new MessageEmbed()
     .setTitle(`${status_user} ${user.user.username} ${status_user}`)
     .setColor(user.displayHexColor)

@@ -173,7 +173,7 @@ client.on("guildMemberRemove", member => {
     "J'espère que tu as passé un bon moment avec nous au moins... Sniff :sob:"
   );
   const channel = client.channels.cache.find(
-    r => r.name === client.env.get(member.guild.id).get("welcome")
+    r => r.id === client.env.get(member.guild.id).get("welcome")
   );
   channel.send(
     `Bye bye ${member.displayName}, j'espère que tu seras heureux dans ta nouvelle vie :slight_smile:`
