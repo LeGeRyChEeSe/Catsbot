@@ -5,11 +5,9 @@ module.exports.run = (msg, args, client) => {
   const channel = client.channels.cache.find((r) => r.name === "test-catsbot");
   if (msg.member.roles.cache.find((r) => r.name === args[0])) {
     msg.member.roles.remove(role);
-    msg.delete();
     channel.send(`Le rôle ${role} a été retiré de ${msg.author}`);
   } else {
     msg.member.roles.add(role);
-    msg.delete();
     channel.send(`Le rôle ${role} a été ajouté à ${msg.author}`);
   }
 };

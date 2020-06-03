@@ -2,8 +2,6 @@ const { readFileSync } = require("fs");
 const { MessageAttachment } = require("discord.js");
 
 module.exports.run = (msg, args, client) => {
-  msg.delete();
-  
   const guild = client.env.get(msg.guild.id);
 
   const regex = /[.][a-z]*/;

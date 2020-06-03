@@ -1,37 +1,35 @@
 module.exports.run = (msg, args, client) => {
-  const channel = msg.channel.id;
-  const argument = [];
-  let search_user = [];
-  for (let mention = 0; mention < args.length; mention++) {
-    const user = args[mention];
-    if (args[mention].startsWith("<@!")) {
+  let reason = new Array();
+  let search_user = new Array();
+
+  args.forEach((argument, index) => {
+    if (argument.startsWith("<@!")) {
       search_user.push(
-        msg.channel.members.get(user.substring(3, user.length - 1))
+        msg.channel.members.get(argument.substring(3, argument.length - 1))
       );
-    } else if (args[mention].startsWith("<@")) {
+    } else if (argument.startsWith("<@")) {
       search_user.push(
-        msg.channel.members.get(user.substring(2, user.length - 1))
+        msg.channel.members.get(argument.substring(2, argument.length - 1))
       );
     } else {
-      argument.push(`**${args[mention]}**`);
+      reason.push(`${argument}`);
     }
-  }
+  });
 
-  for (const user of search_user) {
-    user.kick(argument.join(" "));
+  search_user.forEach(user => {
+    user.kick({ reason: reason.join(" ") });
     user.send(
-      `Vous avez été kick par ${
+      `Vous avez été expulsé du serveur ${msg.guild} par ${
         msg.author
-      } du serveur ${msg.guild} vous les raisons suivantes : ${argument.join(" ")}`
+      } pour les raisons suivantes :\n**${reason.join(" ")}**`
     );
-  }
+  });
 
   msg.channel.send(
-    `Le(s) membre(s) suivants ont été expulsés :\n${search_user.join(
-      "\n"
-    )}\n\n**Cause(s) :** ${argument.join(" ")}`
+    `Les membres suivants ont été expulsé :\n${search_user.join(
+      ", "
+    )}\n\nCauses : **${reason.join(" ")}**`
   );
-  msg.delete();
 };
 
 module.exports.help = {
@@ -45,6 +43,6 @@ module.exports.help = {
     admin: true,
     lieutenants: false,
     major: false,
-    membres: false,
-  },
+    membres: false
+  }
 };

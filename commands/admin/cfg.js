@@ -1,4 +1,3 @@
-const { MessageEmbed } = require("discord.js");
 const { writeFile } = require("fs");
 
 module.exports.run = (msg, args, client) => {
@@ -59,7 +58,7 @@ module.exports.help = {
   title: "Configurer Catsbot",
   description: "Configurer les variables d'environnement de Catsbot.",
   help:
-    "Variables d'environnement de Catsbot configurables via la commande ?cfg <variable> \"<valeur>\":\n\nPour lister les variables d'environnement modifiables, tapez la commande ?cfg",
+    `Variables d'environnement de Catsbot configurables via la commande \`?cfg <variable> \"<valeur>\"\`:\n\nPour lister les variables d'environnement modifiables, tapez la commande \`?cfg\``,
   syntaxe: 'cfg <variable> "<valeur>"',
   permissions: {
     admin: true,

@@ -1,5 +1,4 @@
 module.exports.run = (msg) => {
-  msg.delete();
   const { channel } = msg.member.voice;
   if (!channel)
     return msg.channel.send(
