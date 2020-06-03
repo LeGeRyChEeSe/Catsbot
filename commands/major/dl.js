@@ -1,13 +1,10 @@
-const { readFileSync } = require("fs");
-const { MessageAttachment } = require("discord.js");
-
-module.exports.run = (msg, args, client) => {
+module.exports.run = (client, msg, args) => {
   const guild = client.env.get(msg.guild.id);
 
   const regex = /[.][a-z]*/;
   const canals = {
-    mod: guild.get("modcanal"),
-    vpn: guild.get("vpncanal"),
+    mod: guild.get("modcanal").slice(2, -1),
+    vpn: guild.get("vpncanal").slice(2, -1),
   };
 
   // Si l'auteur du message est dans le canal💫modsrockstar-accounts

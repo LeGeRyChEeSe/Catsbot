@@ -91,9 +91,13 @@ client.on("message", async msg => {
   // Fonction permettant d'exécuter des commandes via le bot
   // La syntaxe d'une commande est : ?<commande> <argument>
   // Par exemple je veux m'ajouter le rôle test : ?role test
-  let prefix;
 
-  if (msg.guild) prefix = client.env.get(msg.guild.id).get("prefix");
+  // console.log(msg.content);
+
+  let prefix = "?";
+
+  if (msg.guild && client.env.has(msg.guild.id))
+    prefix = client.env.get(msg.guild.id).get("prefix");
 
   if (!msg.content.toLowerCase().startsWith(prefix) || msg.author.bot) return;
 
@@ -116,10 +120,16 @@ client.on("message", async msg => {
 
   if (msg.member.hasPermission("ADMINISTRATOR")) user_permissions = "admin";
   else if (
-    msg.member.roles.cache.find(r => r.id === envVariables.get("lieutenants"))
+    msg.member.roles.cache.find(
+      r => r.id === envVariables.get("lieutenants").slice(3, -1)
+    )
   )
     user_permissions = "lieutenants";
-  else if (msg.member.roles.cache.find(r => r.id === envVariables.get("major")))
+  else if (
+    msg.member.roles.cache.find(
+      r => r.id === envVariables.get("major").slice(3, -1)
+    )
+  )
     user_permissions = "major";
   else user_permissions = "membres";
 
@@ -135,7 +145,7 @@ client.on("message", async msg => {
         for (let [key, value] of Object.entries(commande.help.permissions)) {
           if (key === user_permissions && value === true) {
             msg.delete();
-            return commande.run(msg, args, client);
+            return commande.run(client, msg, args);
           }
         }
         msg.channel.send(
@@ -161,7 +171,7 @@ Hey ${member.displayName}, welcome to World War Of Cats :tada::smirk_cat: !
 For security reasons, thanks to write here your GTA nickname ty!
 **:point_right:  Without answers from you within 48 hours, we'll be forced to expel you from our server, thank you in advance for your understanding.**`);
   const channel = client.channels.cache.find(
-    r => r.name === client.env.get("welcome")
+    r => r.name === client.env.get(member.guild.id).get("welcome").slice(2, -1)
   );
   //channel.send(nouveau_membre);
 });
@@ -169,15 +179,11 @@ For security reasons, thanks to write here your GTA nickname ty!
 client.on("guildMemberRemove", member => {
   // Fonction permettant de notifier le départ d'un membre du serveur
 
-  member.send(
-    "J'espère que tu as passé un bon moment avec nous au moins... Sniff :sob:"
-  );
   const channel = client.channels.cache.find(
-    r => r.id === client.env.get(member.guild.id).get("welcome")
+    r => r.id === client.env.get(member.guild.id).get("welcome").slice(2, -1)
   );
-  channel.send(
-    `Bye bye ${member.displayName}, j'espère que tu seras heureux dans ta nouvelle vie :slight_smile:`
-  );
+
+  channel.send(`${member.displayName} nous a quitté !`);
 });
 
 client.login(client.config.token);

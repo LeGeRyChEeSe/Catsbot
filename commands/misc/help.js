@@ -1,6 +1,6 @@
-const { Collection, MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 
-module.exports.run = (msg, args, client) => {
+module.exports.run = (client, msg, args) => {
   const prefix = client.env.get(msg.guild.id).get("prefix");
 
   if (args.length !== 0) {
@@ -20,7 +20,7 @@ module.exports.run = (msg, args, client) => {
           embed.setColor("RANDOM");
           embed.setDescription(info.description);
           embed.setThumbnail(client.user.displayAvatarURL());
-          embed.addField("Informations supplémentaires :", info.help);
+          embed.addField("Informations supplémentaires :", info.help.toString().replace(/{prefix}/g, prefix));
           embed.addField("Syntaxe :", `\`${prefix}${info.syntaxe}\``);
           embed.setTimestamp();
           embed.setFooter(client.user.username);
@@ -32,7 +32,7 @@ module.exports.run = (msg, args, client) => {
           embed.setDescription(tabCommandes.join(", "));
           embed.setFooter(client.user.username);
           embed.setTimestamp();
-        }
+        } else return
       });
     });
     return msg.channel.send(embed);
@@ -61,7 +61,7 @@ module.exports.run = (msg, args, client) => {
   });
   embed.addField(
     "Pour plus d'informations sur une commande :",
-    `Tapez par exemple ${prefix}help p pour obtenir des informations supplémentaires sur la commande play.`
+    `Tapez par exemple \`${prefix}help musique\` pour obtenir des informations supplémentaires sur la rubrique musique. Puis \`${prefix}help p\` pour des infos sur la commande play.`
   );
   return msg.channel.send(embed);
 };
@@ -70,7 +70,7 @@ module.exports.help = {
   name: "help",
   title: "Afficher l'aide",
   description: "Renvoi la liste de toutes les commandes disponibles sur le bot",
-  help: `\`?help <commande>\` renvoi les informations supplémentaires de la commande passée en paramètre de ?help.`,
+  help: `\`{prefix}help <commande>\` renvoi les informations supplémentaires de la commande passée en paramètre de \`{prefix}help\`.`,
   syntaxe: "help <commande>",
   permissions: {
     admin: true,

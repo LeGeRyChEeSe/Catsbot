@@ -1,4 +1,4 @@
-module.exports.run = (msg, args, client) => {
+module.exports.run = (client, msg, args) => {
   let reason = new Array();
   let search_user = new Array();
 
@@ -37,7 +37,7 @@ module.exports.help = {
   title: "Kicker un membre",
   description: "Permet d'expulser un membre en le mentionnant",
   help:
-    "Expulser un membre en entrant comme argument de la commande le nom du membre en le mentionnant. Le message sera automatiquement supprimé, et un message d'alerte vous sera envoyé ainsi qu'au membre expulsé.",
+    "Expulser un membre en entrant comme argument de la commande le nom du membre en le mentionnant. On peut aussi indiquer la raison de l'expulsion après avoir mentionné les membres. Le message sera automatiquement supprimé, et un message d'alerte vous sera envoyé ainsi qu'au(x) membre(s) expulsé(s).",
   syntaxe: "kick <membre> <raison>",
   permissions: {
     admin: true,

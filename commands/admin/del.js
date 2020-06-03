@@ -1,4 +1,4 @@
-module.exports.run = (msg, args) => {
+module.exports.run = (client, msg, args) => {
   let nb_messages = parseInt(args, 10) + 1;
   if (nb_messages >= 100) nb_messages = 99;
   msg.channel

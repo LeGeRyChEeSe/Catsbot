@@ -1,4 +1,4 @@
-module.exports.run = (msg, args, client) => {
+module.exports.run = (client, msg, args) => {
   let reason = new Array();
   let days = 0;
   let search_user = new Array();
@@ -39,7 +39,7 @@ module.exports.help = {
   name: "ban",
   title: "Bannir un membre",
   description: "Permet de bannir un membre en le mentionnant",
-  help: `Bannir un membre et effacer les messages envoyés sur le serveur jusqu'à 7 jours en entrant comme argument de la commande le nom du membre en le mentionnant, ainsi que le nombre de jours de messages à supprimer. Le message sera automatiquement supprimé, et un message d'alerte vous sera envoyé ainsi qu'au membre banni.\nExemple : \`ban @xXmIcHeLXx Banni pour violation des codes morales du serveur. 7\` Pour le bannir et supprimer 7 jours de messages sur l'ensemble du serveur.`,
+  help: `Bannir un membre et effacer les messages envoyés sur le serveur jusqu'à 7 jours en entrant comme argument de la commande le nom du membre en le mentionnant, ainsi que le nombre de jours de messages à supprimer. Le message sera automatiquement supprimé, et un message d'alerte vous sera envoyé ainsi qu'au membre banni.\nExemple : \`{prefix}ban @xXmIcHeLXx Banni pour violation des codes morales du serveur. 7\` Pour le bannir et supprimer 7 jours de messages sur l'ensemble du serveur.`,
   syntaxe: "ban <membre> <raison> <durée en jours>",
   permissions: {
     admin: true,

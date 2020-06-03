@@ -1,4 +1,4 @@
-module.exports.run = (msg) => {
+module.exports.run = (client, msg, args) => {
   const { channel } = msg.member.voice;
   if (!channel)
     return msg.channel.send(

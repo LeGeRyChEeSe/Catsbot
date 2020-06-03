@@ -1,4 +1,4 @@
-module.exports.run = (msg) => {
+module.exports.run = (client, msg, args) => {
   const serverQueue = msg.client.queue.get(msg.guild.id);
   if (!serverQueue) return msg.channel.send("Aucune piste en cours.");
   return msg.channel.send(`

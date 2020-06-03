@@ -1,4 +1,4 @@
-module.exports.run = (msg, args, client) => {
+module.exports.run = (client, msg, args) => {
   const role = msg.guild.roles.cache.find((r) => r.name === args[0]);
   if (!role) return msg.channel.send(`Le rôle ${args[0]} n'existe pas !`);
 

@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 
-module.exports.run = (msg) => {
+module.exports.run = (client, msg, args) => {
   const user = msg.mentions.members.first();
   let status_user = "";
   if (user.presence.status === "offline") status_user = " :white_circle: ";

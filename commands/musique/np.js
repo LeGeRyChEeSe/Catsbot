@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 
-module.exports.run = (msg, args, client) => {
+module.exports.run = (client, msg, args) => {
   const serverQueue = msg.client.queue.get(msg.guild.id);
   if (!serverQueue)
     return msg.channel.send(
