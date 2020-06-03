@@ -1,6 +1,6 @@
 const { writeFile } = require("fs");
 
-module.exports.run = (msg, args, client) => {
+module.exports.run = (client, msg, args) => {
   const guild = client.env.get(msg.guild.id);
   const prefix = guild.get("prefix");
   const variable = guild.keyArray().find(r => r === args[0]);
@@ -57,8 +57,7 @@ module.exports.help = {
   name: "cfg",
   title: "Configurer Catsbot",
   description: "Configurer les variables d'environnement de Catsbot.",
-  help:
-    `Variables d'environnement de Catsbot configurables via la commande \`?cfg <variable> \"<valeur>\"\`:\n\nPour lister les variables d'environnement modifiables, tapez la commande \`?cfg\``,
+  help: `Variables d'environnement de Catsbot configurables via la commande \`{prefix}cfg <variable> \"<valeur>\"\`:\n\nPour lister les variables d'environnement modifiables, tapez la commande \`{prefix}cfg\``,
   syntaxe: 'cfg <variable> "<valeur>"',
   permissions: {
     admin: true,

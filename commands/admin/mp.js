@@ -1,4 +1,4 @@
-module.exports.run = (msg, args, client) => {
+module.exports.run = (client, msg, args) => {
   const channel = msg.channel.id;
   const tableau = [];
   const argument = [];
@@ -54,7 +54,7 @@ module.exports.help = {
   description:
     "Mentionne toutes les personnes mentionnées par l'utilisateur et envoi un message privé à chacune d'entre elles pour les informer de la mention, et où se situe la mention.",
   help:
-    `Nécessite de mentionner quelqu'un via **@** suivi de son nom d'utilisateur.\nPar exemple : \`?mp @LeGeRyChEeSe\`\n\nIl est aussi possible de mentionner plusieurs personnes à la fois en mettant les mentions à la suite les unes des autres.`,
+    `Nécessite de mentionner quelqu'un via **@** suivi de son nom d'utilisateur.\nPar exemple : \`{prefix}mp @LeGeRyChEeSe\`\n\nIl est aussi possible de mentionner plusieurs personnes à la fois en mettant les mentions à la suite les unes des autres.`,
   syntaxe: "mp <mention>",
   permissions: {
     admin: true,

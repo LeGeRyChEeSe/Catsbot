@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const ytdl = require("ytdl-core");
 const ytsr = require("ytsr");
 
-module.exports.run = async (msg, args, client) => {
+module.exports.run = async (client, msg, args) => {
   let choix = [];
   let songInfo = null;
   let message = null;
@@ -161,9 +161,9 @@ module.exports.help = {
   title: "Commande en développement (inachevée, p v2.0)",
   description:
     "Permet de lancer une musique sur YouTube soit via un lien, soit par recherche.",
-  help: `Veuillez indiquer un lien YouTube valide vers une musique, ou indiquez simplement le contenu de votre recherche YouTube de cette manière :\n\`c?p snoop dog\`
-puis vous verrez apparaître une liste numérotée, tapez simplement \`c?p 1\` pour la 1ère piste de la liste, \`c?p 2\` pour la 2e, etc.`,
-  syntaxe: "p <URL> ou <search>",
+  help: `Veuillez indiquer un lien YouTube valide vers une musique, ou indiquez simplement le contenu de votre recherche YouTube de cette manière :\n\`{prefix}pp snoop dog\`
+puis vous verrez apparaître une liste numérotée, tapez simplement \`{prefix}pp 1\` pour la 1ère piste de la liste, \`{prefix}pp 2\` pour la 2e, etc.`,
+  syntaxe: "pp <URL> ou <search>",
   permissions: {
     admin: true,
     lieutenants: false,
