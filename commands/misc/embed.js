@@ -40,7 +40,7 @@ module.exports.help = {
   permissions: {
     admin: true,
     lieutenants: true,
-    major: false,
-    membres: false,
+    major: true,
+    membres: true,
   },
 };

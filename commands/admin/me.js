@@ -6,7 +6,7 @@ module.exports.run = (client, msg, args) => {
       autoDestruct = true;
       return msg.channel
         .send(args.slice(0, index).join(" "))
-        .then(message => message.delete({ timeout: args[index + 1] * 1000 }));
+        .then((message) => message.delete({ timeout: args[index + 1] * 1000 }));
     }
   });
 
@@ -24,6 +24,6 @@ module.exports.help = {
     admin: true,
     lieutenants: true,
     major: false,
-    membres: false
-  }
+    membres: false,
+  },
 };

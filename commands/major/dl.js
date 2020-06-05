@@ -19,9 +19,9 @@ module.exports.run = (client, msg, args) => {
         listeMods.push(`${afile.replace(regex, "")}`);
       });
       return msg.channel.send(
-        `La liste des fichiers téléchargeables est ici :\n\`${
-          guild.get("prefix")
-        }dl ${listeMods.join("\n" + `${guild.get("prefix")}dl `)}\``
+        `La liste des fichiers téléchargeables est ici :\n\`${guild.get(
+          "prefix"
+        )}dl ${listeMods.join("\n" + `${guild.get("prefix")}dl `)}\``
       );
     }
 
@@ -32,9 +32,11 @@ module.exports.run = (client, msg, args) => {
         `Voici la dernière mise à jour de ${args[0]}`,
         getFiles.find((r) => r.name === file)
       );
-      msg.channel.send(
-        `Un message privé contenant le fichier ${file} va vous être envoyé ${msg.author} !`
-      ).then(message => message.delete({timeout : 5000}));
+      msg.channel
+        .send(
+          `Un message privé contenant le fichier ${file} va vous être envoyé ${msg.author} !`
+        )
+        .then((message) => message.delete({ timeout: 5000 }));
       return msg.guild.members
         .resolve(guild.get("logUser"))
         .send(`${msg.author} a téléchargé ${file} !`);
@@ -51,9 +53,9 @@ module.exports.run = (client, msg, args) => {
         listeVPNs.push(`${afile.replace(regex, "")}`);
       });
       return msg.channel.send(
-        `La liste des fichiers téléchargeables est ici :\n\`${
-          guild.get("prefix")
-        }dl ${listeVPNs.join("\n" + `${guild.get("prefix")}dl `)}\``
+        `La liste des fichiers téléchargeables est ici :\n\`${guild.get(
+          "prefix"
+        )}dl ${listeVPNs.join("\n" + `${guild.get("prefix")}dl `)}\``
       );
     }
 
@@ -64,9 +66,11 @@ module.exports.run = (client, msg, args) => {
         `Voici la dernière mise à jour de ${args[0]}`,
         getFiles.find((r) => r.name === file)
       );
-      msg.channel.send(
-        `Un message privé contenant le fichier ${file} va vous être envoyé ${msg.author} !`
-      ).then(message => message.delete({timeout : 5000}));
+      msg.channel
+        .send(
+          `Un message privé contenant le fichier ${file} va vous être envoyé ${msg.author} !`
+        )
+        .then((message) => message.delete({ timeout: 5000 }));
       return msg.guild.members
         .resolve(guild.get("logUser"))
         .send(`${msg.author} a téléchargé ${file} !`);
@@ -91,9 +95,9 @@ module.exports.run = (client, msg, args) => {
     }
 
     msg.author.send(
-      `Vous devez être dans l'un des canals textuels suivants pour pouvoir exécuter la commande \`${
-        guild.get("prefix")
-      }dl\` :\n${Object.values(canals_on).join("\n")}`
+      `Vous devez être dans l'un des canals textuels suivants pour pouvoir exécuter la commande \`${guild.get(
+        "prefix"
+      )}dl\` :\n${Object.values(canals_on).join("\n")}`
     );
   }
 };

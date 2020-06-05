@@ -15,7 +15,8 @@ module.exports.run = (client, msg, args) => {
 module.exports.help = {
   name: "del",
   title: "Supprimer des messages",
-  description: "Permet de supprimer un ou plusieurs messages d'un canal. (99 max)",
+  description:
+    "Permet de supprimer un ou plusieurs messages d'un canal. (99 max)",
   help:
     "Indiquez le nombre de messages que vous voulez supprimer. Les messages seront supprimés du plus récent au plus ancien dans le canal où est exécuté la commande.",
   syntaxe: "del <nombre de messages>",

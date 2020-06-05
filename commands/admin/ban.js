@@ -19,7 +19,7 @@ module.exports.run = (client, msg, args) => {
     }
   });
 
-  search_user.forEach(user => {
+  search_user.forEach((user) => {
     user.ban({ days: days, reason: reason.join(" ") });
     user.send(
       `Vous avez été banni du serveur ${msg.guild} par ${
@@ -39,12 +39,12 @@ module.exports.help = {
   name: "ban",
   title: "Bannir un membre",
   description: "Permet de bannir un membre en le mentionnant",
-  help: `Bannir un membre et effacer les messages envoyés sur le serveur jusqu'à 7 jours en entrant comme argument de la commande le nom du membre en le mentionnant, ainsi que le nombre de jours de messages à supprimer. Le message sera automatiquement supprimé, et un message d'alerte vous sera envoyé ainsi qu'au membre banni.\nExemple : \`{prefix}ban @xXmIcHeLXx Banni pour violation des codes morales du serveur. 7\` Pour le bannir et supprimer 7 jours de messages sur l'ensemble du serveur.`,
-  syntaxe: "ban <membre> <raison> <durée en jours>",
+  help: `Bannir un membre et effacer les messages envoyés sur le serveur jusqu'à 7 jours en entrant comme argument de la commande le nom du membre en le mentionnant, ainsi que le nombre de jours de messages à supprimer. Le message sera automatiquement supprimé, et un message d'alerte vous sera envoyé ainsi qu'au membre banni.\nExemple : \`{prefix}ban @xXmIcHeLXx Banni pour violation des codes moraux du serveur. 7\` Pour le bannir et supprimer 7 jours de messages sur l'ensemble du serveur.`,
+  syntaxe: "ban <membre> <raison> <jours messages à supprimer>",
   permissions: {
     admin: true,
     lieutenants: false,
     major: false,
-    membres: false
-  }
+    membres: false,
+  },
 };
