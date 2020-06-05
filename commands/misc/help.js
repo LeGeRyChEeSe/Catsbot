@@ -8,7 +8,7 @@ module.exports.run = (client, msg, args) => {
 
     // Aide d'une commmande spécifique
     client.commands.each((Commandes, Name) => {
-      Commandes.forEach(help => {
+      Commandes.forEach((help) => {
         const info = help.help;
         let tabCommandes = new Array();
 
@@ -35,7 +35,7 @@ module.exports.run = (client, msg, args) => {
           embed.setTitle(Name);
           embed.setColor("RANDOM");
           embed.setThumbnail(client.user.displayAvatarURL());
-          Commandes.forEach(name =>
+          Commandes.forEach((name) =>
             tabCommandes.push(`\`${prefix}${name.help.name}\``)
           );
           embed.setDescription(tabCommandes.join(", "));
@@ -61,7 +61,7 @@ module.exports.run = (client, msg, args) => {
   client.commands.each((Commandes, Name) => {
     let tabCommandes = new Array();
 
-    Commandes.forEach(commande => {
+    Commandes.forEach((commande) => {
       tabCommandes.push(`\`${prefix}${commande.help.name}\``);
     });
 
@@ -84,6 +84,6 @@ module.exports.help = {
     admin: true,
     lieutenants: true,
     major: true,
-    membres: true
-  }
+    membres: true,
+  },
 };

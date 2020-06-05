@@ -16,7 +16,7 @@ module.exports.run = (client, msg, args) => {
     }
   });
 
-  search_user.forEach(user => {
+  search_user.forEach((user) => {
     user.kick({ reason: reason.join(" ") });
     user.send(
       `Vous avez été expulsé du serveur ${msg.guild} par ${
@@ -43,6 +43,6 @@ module.exports.help = {
     admin: true,
     lieutenants: false,
     major: false,
-    membres: false
-  }
+    membres: false,
+  },
 };

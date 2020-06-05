@@ -4,7 +4,7 @@ const { MessageEmbed } = require("discord.js");
 module.exports.run = (client, msg, args) => {
   const guild = client.env.get(msg.guild.id);
   const prefix = guild.get("prefix");
-  const variable = guild.keyArray().find(r => r === args[0]);
+  const variable = guild.keyArray().find((r) => r === args[0]);
   let valeur = guild.get(args[0]);
   const varEmbed = new MessageEmbed();
 
@@ -60,7 +60,7 @@ module.exports.run = (client, msg, args) => {
       vpncanal: collec.get("vpncanal"),
       logUser: collec.get("logUser"),
       lieutenants: collec.get("lieutenants"),
-      major: collec.get("major")
+      major: collec.get("major"),
     });
 
     toJSON.push(envCfg);
@@ -68,7 +68,7 @@ module.exports.run = (client, msg, args) => {
 
   let configJSON = JSON.stringify(toJSON);
 
-  writeFile("./assets/struct/config.json", configJSON, err => {
+  writeFile("./assets/struct/config.json", configJSON, (err) => {
     if (err) throw err;
   });
 };
@@ -83,6 +83,6 @@ module.exports.help = {
     admin: true,
     lieutenants: false,
     major: false,
-    membres: false
-  }
+    membres: false,
+  },
 };

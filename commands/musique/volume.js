@@ -19,7 +19,7 @@ module.exports.help = {
   title: "Modifier le volume",
   description: "Permet de modifier le volume de la piste.",
   help:
-    "Modifier le volume en passant en paramètre de la commande le volume entre \`0\` et \`10\`",
+    "Modifier le volume en passant en paramètre de la commande le volume entre `0` et `10`",
   syntaxe: "volume <volume>",
   cooldown: 5,
   permissions: {
