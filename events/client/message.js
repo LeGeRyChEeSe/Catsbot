@@ -18,12 +18,14 @@ module.exports = (client, msg) => {
 
   if (!client.env.has(msg.guild.id)) {
     variablesEnv.set("prefix", "?");
-    variablesEnv.set("welcome", "<Put Canal ID here>");
-    variablesEnv.set("modcanal", "<Put Canal ID here>");
-    variablesEnv.set("vpncanal", "<Put Canal ID here>");
+    variablesEnv.set("welcome", "<Put Channel ID here>");
+    variablesEnv.set("modcanal", "<Put Channel ID here>");
+    variablesEnv.set("vpncanal", "<Put Channel ID here>");
+    variablesEnv.set("logcanal", "<Put Channel ID here>");
     variablesEnv.set("logUser", "<Put User ID here>");
     variablesEnv.set("lieutenants", "<Put Role ID here>");
     variablesEnv.set("major", "<Put Role ID here>");
+    variablesEnv.set("muterole", "<Put Role ID here>");
 
     client.env.set(msg.guild.id, variablesEnv);
   }
