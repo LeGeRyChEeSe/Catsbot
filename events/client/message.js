@@ -34,26 +34,23 @@ module.exports = (client, msg) => {
   if (msg.member.hasPermission("ADMINISTRATOR")) user_permissions = "admin";
   else if (
     msg.member.roles.cache.find(
-      r => r.id === envVariables.get("lieutenants").slice(3, -1)
+      (r) => r.id === envVariables.get("lieutenants").slice(3, -1)
     )
   )
     user_permissions = "lieutenants";
   else if (
     msg.member.roles.cache.find(
-      r => r.id === envVariables.get("major").slice(3, -1)
+      (r) => r.id === envVariables.get("major").slice(3, -1)
     )
   )
     user_permissions = "major";
   else user_permissions = "membres";
 
-  const args = msg.content
-    .slice(prefix.length)
-    .trim()
-    .split(/ +/g);
+  const args = msg.content.slice(prefix.length).trim().split(/ +/g);
   const cmd = args.shift().toLowerCase();
 
-  client.commands.each(category => {
-    category.forEach(commande => {
+  client.commands.each((category) => {
+    category.forEach((commande) => {
       if (commande.help.name === cmd) {
         for (let [key, value] of Object.entries(commande.help.permissions)) {
           if (key === user_permissions && value === true) {
@@ -67,4 +64,4 @@ module.exports = (client, msg) => {
       }
     });
   });
-}
+};

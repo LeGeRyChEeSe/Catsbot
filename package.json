@@ -15,12 +15,13 @@
   "version": "1.0.0",
   "description": "Bot pour les membres du crew Cats",
   "main": "main.js",
-  "engines": { "node": "12.8.1" },
+  "engines": {
+    "node": "12.8.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LeGeRyChEeSe/Catsbot.git"
   },
-  
   "author": "LeGeRyChEeSe <kilian.douarinou41@gmail.com>",
   "license": "MIT",
   "bugs": {
