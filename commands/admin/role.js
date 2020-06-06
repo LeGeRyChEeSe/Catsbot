@@ -22,7 +22,7 @@ module.exports.help = {
   syntaxe: "role <role>",
   permissions: {
     admin: true,
-    lieutenants: true,
+    lieutenants: false,
     major: false,
     membres: false,
   },
