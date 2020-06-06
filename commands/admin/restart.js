@@ -16,6 +16,6 @@ module.exports.help = {
     admin: true,
     lieutenants: true,
     major: false,
-    membres: false
-  }
+    membres: false,
+  },
 };

@@ -5,7 +5,8 @@ module.exports.run = (client, msg) => {
   varEmbed
     .setTitle(`Variables d'environnement de ${msg.guild.name}`)
     .setThumbnail(msg.guild.iconURL())
-    .setTimestamp().setFooter(client.user.username);
+    .setTimestamp()
+    .setFooter(client.user.username);
 
   Object.entries(msg.guild).forEach((keys, index) => {
     varEmbed.addField(keys[0], `\`${keys[1]}\``);
@@ -24,6 +25,6 @@ module.exports.help = {
     admin: true,
     lieutenants: false,
     major: false,
-    membres: false
-  }
+    membres: false,
+  },
 };
