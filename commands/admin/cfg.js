@@ -36,7 +36,7 @@ module.exports.run = (client, msg, args) => {
     varEmbed
       .setTitle(`A modifié la variable \`${args[0]}\``)
       .setAuthor(msg.member.displayName)
-      .addField("Ancienne valeur", `${args[0]} : \`${guild.get(args[0])}\``);
+      .addField("*Ancienne valeur*", `${args[0]} : \`${guild.get(args[0])}\``);
 
     guild.set(args[0], args[1]);
 
@@ -58,9 +58,11 @@ module.exports.run = (client, msg, args) => {
       welcome: collec.get("welcome"),
       modcanal: collec.get("modcanal"),
       vpncanal: collec.get("vpncanal"),
+      logcanal: collec.get("logcanal"),
       logUser: collec.get("logUser"),
       lieutenants: collec.get("lieutenants"),
       major: collec.get("major"),
+      muterole: collec.get("muterole"),
     });
 
     toJSON.push(envCfg);
