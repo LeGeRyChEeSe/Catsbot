@@ -36,7 +36,7 @@ module.exports.help = {
   description: "Renvoi la fiche d'une personne mentionnée",
   help:
     "Cette fiche permet d'afficher un petit encadré décrivant plusieurs informations concernant la personne mentionnée",
-  syntaxe: "embed <mention>",
+  syntaxe: "embed <@membre>",
   permissions: {
     admin: true,
     lieutenants: true,

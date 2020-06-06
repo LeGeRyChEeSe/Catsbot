@@ -2,7 +2,7 @@ const { readdirSync, readFileSync, readFile, writeFile } = require("fs");
 const { Collection, MessageAttachment } = require("discord.js");
 const MusicClient = require("./assets/struct/Client");
 const client = new MusicClient({
-  token: process.env.TOKEN
+  token: process.env.TOKEN,
 });
 client.files = new Collection();
 client.files.hacks = new Collection();
@@ -12,8 +12,8 @@ client.env = new Collection();
 let nouveau_membre = "";
 
 const loadCommands = (dir = "./commands/") => {
-  readdirSync(dir).forEach(dirs => {
-    const commands = readdirSync(`${dir}/${dirs}/`).filter(files =>
+  readdirSync(dir).forEach((dirs) => {
+    const commands = readdirSync(`${dir}/${dirs}/`).filter((files) =>
       files.endsWith(".js")
     );
     let commandes = new Array();
@@ -27,8 +27,8 @@ const loadCommands = (dir = "./commands/") => {
 };
 
 const loadFiles = (dir = "./assets/downloads/") => {
-  readdirSync(dir).forEach(dirs => {
-    const files = readdirSync(`${dir}/${dirs}`).filter(files =>
+  readdirSync(dir).forEach((dirs) => {
+    const files = readdirSync(`${dir}/${dirs}`).filter((files) =>
       files.endsWith(".zip")
     );
 
@@ -48,7 +48,9 @@ const loadFiles = (dir = "./assets/downloads/") => {
 
 function loadMessages(dir = "./assets/struct/") {
   let random = 0;
-  const message_onadd = readdirSync(dir).filter(file => file.endsWith(".json"));
+  const message_onadd = readdirSync(dir).filter((file) =>
+    file.endsWith(".json")
+  );
   readFile(`${dir}/${message_onadd}`, (error, message_onadd) => {
     const messages = JSON.parse(message_onadd);
 
@@ -67,7 +69,7 @@ function loadMessages(dir = "./assets/struct/") {
 }
 
 function loadEnvVariables(JSONsave = require("./assets/struct/config.json")) {
-  JSONsave.forEach(object => {
+  JSONsave.forEach((object) => {
     const envVariables = object.envVariables;
     const variablesEnv = new Collection();
 
@@ -105,8 +107,8 @@ function loadEnvVariables(JSONsave = require("./assets/struct/config.json")) {
 }
 
 const loadEvents = (dir = "./events/") => {
-  readdirSync(dir).forEach(dirs => {
-    const events = readdirSync(`${dir}/${dirs}/`).filter(files =>
+  readdirSync(dir).forEach((dirs) => {
+    const events = readdirSync(`${dir}/${dirs}/`).filter((files) =>
       files.endsWith(".js")
     );
 

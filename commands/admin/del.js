@@ -1,7 +1,7 @@
-module.exports.run = (client, msg, args) => {
+module.exports.run = async (client, msg, args) => {
   let nb_messages = parseInt(args, 10) + 1;
   if (nb_messages >= 100) nb_messages = 99;
-  msg.channel
+  await msg.channel
     .bulkDelete(nb_messages)
     .then((messages) => {
       console.log(`Vous avez supprimé ${messages.size - 1} messages.`);
