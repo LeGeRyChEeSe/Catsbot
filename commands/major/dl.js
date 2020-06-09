@@ -3,14 +3,13 @@ module.exports.run = (client, msg, args) => {
 
   const regex = /[.][a-z]*/;
   const canals = {
-    mod: guild.get("modcanal").slice(2, -1),
-    vpn: guild.get("vpncanal").slice(2, -1),
+    modcanal: guild.get("modcanal").slice(2, -1),
+    vpncanal: guild.get("vpncanal").slice(2, -1),
   };
 
-  // Si l'auteur du message est dans le canal💫modsrockstar-accounts
-  if (msg.channel.id === canals.mod) {
+  // Si l'auteur du message est dans le canal modcanal
+  if (msg.channel.id === canals.modcanal) {
     const getFiles = client.files.hacks;
-    console.log(getFiles);
 
     if (!args.length) {
       let listeMods = [];
@@ -43,9 +42,10 @@ module.exports.run = (client, msg, args) => {
     }
   }
 
-  // Si l'auteur du message est dans le canal💫vpn
-  if (msg.channel.id === canals.vpn) {
+  // Si l'auteur du message est dans le canal vpncanal
+  if (msg.channel.id === canals.vpncanal) {
     const getFiles = client.files.vpn;
+
     if (!args.length) {
       let listeVPNs = [];
       const allFiles = getFiles.each((file) => {
@@ -82,6 +82,15 @@ module.exports.run = (client, msg, args) => {
     let canals_on = new Object();
 
     for (const canal in canals) {
+      if (isNaN(canals[canal])) {
+        msg.channel.send(
+          `La variable d'environnement \`${canal}\` n'est pas spécifiée. Tapez \`${guild.get(
+            "prefix"
+          )}cfg\` pour plus d'informations (nécessite droits Admins).`
+        );
+        continue;
+      }
+
       if (
         msg.member
           .permissionsIn(

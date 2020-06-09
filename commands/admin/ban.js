@@ -1,7 +1,10 @@
+const { MessageEmbed } = require("discord.js");
+
 module.exports.run = (client, msg, args) => {
   let reason = new Array();
   let days = 0;
   let search_user = new Array();
+  const logCanal = client.env.get(msg.guild.id).get("logcanal");
 
   args.forEach((argument, index) => {
     if (argument.startsWith("<@!")) {
@@ -26,6 +29,14 @@ module.exports.run = (client, msg, args) => {
         msg.author
       } pour les raisons suivantes :\n**${reason.join(" ")}**`
     );
+    const banEmbed = new MessageEmbed()
+      .setAuthor(`${user.displayName}`)
+      .setDescription(`a été banni !\n__**Raisons**-- : ${reason.join(" ")}`)
+      .setThumbnail(user.user.avatarURL())
+      .setTimestamp()
+      .setFooter(msg.author.username, msg.author.avatarURL());
+
+    client.channels.cache.get(logCanal.slice(2, -1)).send(banEmbed);
   });
 
   msg.channel.send(
