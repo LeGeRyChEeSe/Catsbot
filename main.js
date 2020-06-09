@@ -100,7 +100,14 @@ function loadEnvVariables(JSONsave = require("./assets/struct/config.json")) {
       envVariables.lieutenants || `<Put Role ID here>`
     );
     variablesEnv.set("major", envVariables.major || `<Put Role ID here>`);
-    variablesEnv.set("muterole", envVariables.muterole || `<Put Role ID here>`);
+    variablesEnv.set(
+      "muterole",
+      envVariables.muterole || `<Put Role name here>`
+    );
+    variablesEnv.set(
+      "qrcanal",
+      envVariables.qrcanal || `<Put Channel ID here>`
+    );
 
     client.env.set(object.guildID, variablesEnv);
   });

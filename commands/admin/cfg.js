@@ -63,6 +63,7 @@ module.exports.run = (client, msg, args) => {
       lieutenants: collec.get("lieutenants"),
       major: collec.get("major"),
       muterole: collec.get("muterole"),
+      qrcanal: collec.get("qrcanal"),
     });
 
     toJSON.push(envCfg);

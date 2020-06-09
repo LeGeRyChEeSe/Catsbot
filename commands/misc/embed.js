@@ -3,6 +3,7 @@ const { MessageEmbed } = require("discord.js");
 module.exports.run = (client, msg, args) => {
   const user = msg.mentions.members.first();
   let status_user = "";
+  if (!user) return msg.reply("Veuillez mentionner un membre du serveur.");
   if (user.presence.status === "offline") status_user = " :white_circle: ";
   else if (user.presence.status === "online") status_user = " :green_circle: ";
   else if (user.presence.status === "idle") status_user = " :orange_circle: ";
@@ -14,7 +15,7 @@ module.exports.run = (client, msg, args) => {
     .setThumbnail(user.user.displayAvatarURL())
     .addFields(
       {
-        name: `Date d'arrivée dans le serveur ${user.guild.name}:`,
+        name: `Date d'arrivée dans le serveur ${user.guild.name} :`,
         value: `${user.joinedAt.getDate()}/${
           user.joinedAt.getMonth() + 1
         }/${user.joinedAt.getFullYear()}`,

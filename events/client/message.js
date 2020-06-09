@@ -1,4 +1,5 @@
 const { Collection } = require("discord.js");
+const ms = require("ms");
 
 module.exports = (client, msg) => {
   // Fonction permettant d'exécuter des commandes via le bot
@@ -8,6 +9,23 @@ module.exports = (client, msg) => {
   // console.log(msg.content);
 
   let prefix = "?";
+
+  if (
+    msg.channel.id ===
+      client.env.get(msg.guild.id).get("qrcanal").slice(2, -1) &&
+    msg.attachments.first()
+  ) {
+    console.log(
+      msg.author.username,
+      " : ",
+      msg.guild.name,
+      " : ",
+      msg.content,
+      "(Va être effacé dans 1 heure.)",
+      msg.attachments
+    );
+    msg.delete({ timeout: 60 * 60 * 1000 });
+  }
 
   if (msg.guild && client.env.has(msg.guild.id))
     prefix = client.env.get(msg.guild.id).get("prefix");
@@ -25,7 +43,8 @@ module.exports = (client, msg) => {
     variablesEnv.set("logUser", "<Put User ID here>");
     variablesEnv.set("lieutenants", "<Put Role ID here>");
     variablesEnv.set("major", "<Put Role ID here>");
-    variablesEnv.set("muterole", "<Put Role ID here>");
+    variablesEnv.set("muterole", "<Put Role name here>");
+    variablesEnv.set("qrcanal", "<Put Channel ID here>");
 
     client.env.set(msg.guild.id, variablesEnv);
   }
