@@ -1,5 +1,6 @@
 const { readdirSync, readFileSync, readFile, writeFile } = require("fs");
 const { Collection, MessageAttachment } = require("discord.js");
+require('dotenv').config()
 const MusicClient = require("./assets/struct/Client");
 const client = new MusicClient({
   token: process.env.TOKEN,

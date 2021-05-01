@@ -4,8 +4,10 @@
     "@types/mathjs": "^6.0.5",
     "bufferutil": "^4.0.1",
     "discord.js": "github:discordjs/discord.js",
+    "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.1",
     "mathjs": "^7.0.0",
+    "ms": "^2.1.3",
     "opusscript": "0.0.7",
     "ws": "^7.2.5",
     "ytdl-core": "^2.1.2",
@@ -16,7 +18,8 @@
   "description": "Bot pour les membres du crew Cats",
   "main": "main.js",
   "engines": {
-    "node": "12.8.1"
+    "node": "16.0.0",
+    "npm": "7.11.2"
   },
   "repository": {
     "type": "git",
